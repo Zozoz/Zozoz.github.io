@@ -15,7 +15,7 @@
 <meta property="og:image" content="http://7xnepc.com1.z0.glb.clouddn.com/An_example_of_HMM.png">
 <meta property="og:image" content="http://7xnepc.com1.z0.glb.clouddn.com/Viterbi_animated_demo.gif">
 <meta property="og:image" content="http://7xnepc.com1.z0.glb.clouddn.com/state_tran.png">
-<meta property="og:updated_time" content="2016-02-25T09:34:46.000Z">
+<meta property="og:updated_time" content="2016-02-25T09:41:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kleinberg">
 <meta name="twitter:description" content="预备知识马尔科夫性质马尔可夫性质(Markov property)是概率论中的一个概念, 因为俄国数学家安德雷·马尔可夫得名。当一个随机过程在给定现在状态及所有过去状态情况下, 其未来状态的条件概率分布仅依赖于当前状态；换句话说, 在给定现在状态时, 它与过去状态(即该过程的历史路径)是条件独立的, 那么此随机过程即具有马尔可夫性质。具有马尔可夫性质的过程通常称之为马尔可夫过程。数学上, 如果X(">
@@ -143,7 +143,7 @@
 <p>$ c(q\mid x) = \left(\sum_{t=0}^{n-1}\tau(i_t, i_{t+1}\right) + \left(\sum_{t=1}^n-\ln f_{i_t}(x_t)\right) $ <br></p>
 <p>令$i_0 = 0$, 所以无限状态机$ A_{s,\gamma}^*$ 从$q_0$开始. <br></p>
 <p><img src="http://7xnepc.com1.z0.glb.clouddn.com/state_tran.png" alt="An infinite-state model for bursty sequences"></p>
-<h4 id="Computing-a-minimum-cost-state-sequence"><a href="#Computing-a-minimum-cost-state-sequence" class="headerlink" title="Computing a minimum-cost state sequence"></a>Computing a minimum-cost state sequence</h4><p>已知间隔序列$x = (x_1, x_2, \cdots, x_n)$, 求状态机$ A_{s,\gamma}^* $的状态序列$ q = (q_{i_1}, q_{i_2}, \cdots, q_{i<em>n}) $，使代价<br>$c(q\ \mid\ x)$最小。并且$A\</em>{s,\gamma}^k$表示状态机只有k个状态选择。<br></p>
+<h4 id="Computing-a-minimum-cost-state-sequence"><a href="#Computing-a-minimum-cost-state-sequence" class="headerlink" title="Computing a minimum-cost state sequence"></a>Computing a minimum-cost state sequence</h4><p>已知间隔序列$x = (x_1, x_2, \cdots, x_n)$, 求状态机$ A_{s,\gamma}^* $的状态序列$ q = (q_{i_1}, q_{i_2}, \cdots, q_{i_n}) $，使代价<br>$c(q\ \mid\ x)$最小。并且$A_{s,\gamma}^k$表示状态机只有k个状态选择。<br></p>
 <h5 id="Theorem"><a href="#Theorem" class="headerlink" title="Theorem"></a>Theorem</h5><p>$\delta(x) = min_{i=1}^n x_i$ and $k = \lceil 1 + \log_s T + \log_s \delta(x)^{-1} \rceil $.<br></p>
 <p>如果$q^{*}$是状态机$A_{s,\gamma}^k$的最优状态序列，那么它也是状态机$A_{s,\gamma}^*$的最优状态序列。<br><br><br><br></p>
 <p>证明：<br><br>令$ q^<em> = (q_{l_1}, q_{l_2}, \cdots, q_{l<em>n})$为状态机$A\</em>{s,\gamma}^k$的最优状态序列，$q = (q_{i_1}, q_{i_2}, \cdots, q_{i_n})$<br>为状态机$A_{s,\gamma}^\</em>$的最优状态序列，$l_0 = i_0 = 0, l_{n+1} = i_{n+1} = 0 $.所以，我们只需证明$c(q^*\ \mid\ x) \leq c(q\ \mid\ x)$.<br>令$q^{\prime} = (q_{i^{\prime}_1}, \cdots, q_{i^{\prime}_n}), i^{\prime}_t = min(i_t, k-1)$, 显然 <br></p>
@@ -283,7 +283,7 @@ int main(int argc, char** argv){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2015/12/16/Kleinberg/" data-id="cil22q7uq0005t7jgngrxm3c5" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2015/12/16/Kleinberg/" data-id="cil22ywvu0005uxjgjq9yctvo" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BurstDetection/">BurstDetection</a></li></ul>
