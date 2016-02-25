@@ -17,7 +17,7 @@ Django是一个开放源代码的Web应用框架，由Python写成，基于MVC�
 project_name/">
 <meta property="og:image" content="http://7xnepc.com1.z0.glb.clouddn.com/流程图.png">
 <meta property="og:image" content="http://7xnepc.com1.z0.glb.clouddn.com/echarts-1.png">
-<meta property="og:updated_time" content="2016-02-25T12:48:47.000Z">
+<meta property="og:updated_time" content="2016-02-25T12:57:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Django快速搭建一个网站">
 <meta name="twitter:description" content="Django介绍参考文档：Django官方文档   官方文档中文翻译
@@ -62,7 +62,7 @@ project_name/">
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="搜尋"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://zozoz.github.io"></form>
@@ -175,18 +175,19 @@ urlpatterns = [
 </ul>
 <h4 id="模板语言"><a href="#模板语言" class="headerlink" title="模板语言"></a>模板语言</h4><p>Django的模板系统将页面的设计从Python中分离出来，前台页面只需接收后台视图传递过来的数据，动态地展示页面。<br><code>templates/navbar.html</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;html&#62;&#10;&#60;head&#62;&#60;title&#62;&#123;% block title %&#125;&#123;% endblock %&#125;&#60;/title&#62;&#60;/head&#62;&#10;&#60;body&#62;&#10;&#123;% block content %&#125;&#123;% endblock content %&#125;&#10;&#60;/body&#62;&#10;&#60;/html&#62;</span><br></pre></td></tr></table></figure></p>
 <p><code>templates/sample/show.html</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &#34;navbar.html&#34; %&#125;&#10;&#123;% block title %&#125; Sample Page &#123;% endblock %&#125;&#10;&#123;% block content %&#125;&#10;&#10;&#123;% if index %&#125;&#10;    &#60;p&#62;I am sample!&#60;/p&#62;&#10;&#123;% else%&#125;&#10;    &#123;% if value|length_is:&#34;4&#34; %&#125;&#10;        &#60;p&#62;The year is &#123;&#123; value &#125;&#125;&#60;/p&#62;&#10;    &#123;% elif value|length_is:&#34;2&#34; %&#125;&#10;        &#60;p&#62;The month is &#123;&#123; value &#125;&#125;&#60;/p&#62;&#10;    &#123;% endif %&#125;&#10;&#123;% endif %&#125;&#10;&#60;p&#62;My name is &#123;&#123; info.name &#125;&#125;, enrolled in &#123;&#123; info.enroll &#125;&#125;.&#60;/p&#62;&#10;&#123;# I am comments. #&#125;&#10;&#123;% endblock %&#125;</span><br></pre></td></tr></table></figure></p>
-
-- {{ variable }} 表示一个变量,当模版引擎遇到一个变量，它将计算这个变量，然后用结果替换掉它本身。变量的命名包括任何字母数字以及下划线 ("_")的组合。点(".") 也在会变量部分中出现，不过它有特殊的含义，当模板系统遇到点(".")，它将以这样的顺序查询：
-    - 字典查询
-    - 属性或方法查询
-    - 数字索引查询
-- {% tag %} 表示一个标签，Django自带了大约24个内置的模版标签。可以在[内置标签参考手册](http://python.usyiyi.cn/django/ref/templates/builtins.html#ref-templates-builtins-tags)中阅读全部关于它们的内容。
-- {{ value|length_is:"4" }} 表示一个过滤器,Django提供了大约六十个内置的模版过滤器。你可以在[内置过滤器参考手册](http://python.usyiyi.cn/django/ref/templates/builtins.html#ref-templates-builtins-filters)中阅读全部关于它们的信息。
-- {#  #} 表示一个单行注释， {% comment %}和{% endcomment %}表示多行注释，之间的内容会被忽略。
-- {% csrf_token %} 是一个跨站请求伪造保护标签，在提交表单中需要添加。
-- {% extends "*.html" %} 表示一个模板继承标签，当模板系统处理这个模板时，首先，它将定位父模板，并用子模板中的内容来替换父模板中的block标签中的内容。
-
-
+<ul>
+<li>{{ variable }} 表示一个变量,当模版引擎遇到一个变量，它将计算这个变量，然后用结果替换掉它本身。变量的命名包括任何字母数字以及下划线 (“_”)的组合。点(“.”) 也在会变量部分中出现，不过它有特殊的含义，当模板系统遇到点(“.”)，它将以这样的顺序查询：<ul>
+<li>字典查询</li>
+<li>属性或方法查询</li>
+<li>数字索引查询</li>
+</ul>
+</li>
+<li>Django自带了大约24个内置的模版标签。可以在<a href="http://python.usyiyi.cn/django/ref/templates/builtins.html#ref-templates-builtins-tags" target="_blank" rel="external">内置标签参考手册</a>中阅读全部关于它们的内容。</li>
+<li>{{ value|length_is:"4" }} 表示一个过滤器,Django提供了大约六十个内置的模版过滤器。你可以在<a href="http://python.usyiyi.cn/django/ref/templates/builtins.html#ref-templates-builtins-filters" target="_blank" rel="external">内置过滤器参考手册</a>中阅读全部关于它们的信息。</li>
+<li>表示一个单行注释， {% comment %}和{% endcomment %}表示多行注释，之间的内容会被忽略。</li>
+<li>{% csrf_token %} 是一个跨站请求伪造保护标签，在提交表单中需要添加。</li>
+<li>{% extends "*.html" %} 表示一个模板继承标签，当模板系统处理这个模板时，首先，它将定位父模板，并用子模板中的内容来替换父模板中的block标签中的内容。</li>
+</ul>
 <h4 id="视图模块"><a href="#视图模块" class="headerlink" title="视图模块"></a>视图模块</h4><p>一个视图函数，简称视图，是一个简单的Python 函数，它接受Web请求并且返回Web响应。响应可以是一张网页的HTML内容，一个重定向，一个404错误，一个XML文档，或者一张图片. . . 是任何东西都可以。无论视图本身包含什么逻辑，都要返回响应。代码写在哪里也无所谓，只要它在你的Python目录下面。除此之外没有更多的要求了——可以说“没有什么神奇的地方”。为了能够把代码放在某个地方，惯例是把视图放在叫做views.py的文件中，然后把它放到你的项目或者应用目录里。<br><code>sample/views.py</code></p>
 <pre><code>from django.shortcuts import render
 
@@ -374,7 +375,7 @@ myChart.setOption(option1);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2015/08/28/django快速搭建一个网站/" data-id="cil29nooo0008ujjgta7oe0wq" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2015/08/28/django快速搭建一个网站/" data-id="cil29t10k0008vtjgavbf7k9k" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/django/">django</a></li></ul>
@@ -409,7 +410,7 @@ myChart.setOption(option1);
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">標籤</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BurstDetection/">BurstDetection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NN/">NN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/">django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/运维/">运维</a></li></ul>
     </div>
@@ -419,7 +420,7 @@ myChart.setOption(option1);
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">標籤雲</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
       <a href="/tags/BurstDetection/" style="font-size: 10px;">BurstDetection</a> <a href="/tags/NN/" style="font-size: 10px;">NN</a> <a href="/tags/django/" style="font-size: 10px;">django</a> <a href="/tags/运维/" style="font-size: 10px;">运维</a>
     </div>
@@ -428,7 +429,7 @@ myChart.setOption(option1);
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">彙整</h3>
+    <h3 class="widget-title">Arkiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a></li></ul>
     </div>
@@ -438,7 +439,7 @@ myChart.setOption(option1);
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
+    <h3 class="widget-title">Siste innlegg</h3>
     <div class="widget">
       <ul>
         
