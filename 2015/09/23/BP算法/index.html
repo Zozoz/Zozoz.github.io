@@ -17,7 +17,7 @@ $ w_{kj}^l：l-1层j节点到l层k节点的权重；z_k^l: l层k节点的输入�
 $ w_{kj}^l：l-1层j节点到l层k节点的权重；z_k^l: l层k节点的输入值；\alpha_k^l: l层k节点的输出 $ $ z^l=w^la^{l-1}+b^l; a^l=\sigma(z^l) $ 
 ① BP网络前向传播计算$ z^l = w^la^{l-1}+b^l $ $ a^l = \sigma(z^l) = \frac{1}{1 + e^{-z^l}} $
 ②">
-<meta property="og:updated_time" content="2016-02-25T08:12:54.000Z">
+<meta property="og:updated_time" content="2016-02-25T08:18:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BP算法">
 <meta name="twitter:description" content="符号表示：
@@ -100,12 +100,12 @@ $ w_{kj}^l：l-1层j节点到l层k节点的权重；z_k^l: l层k节点的输入�
 <h2 id="②-BP网络后向传播求偏导"><a href="#②-BP网络后向传播求偏导" class="headerlink" title="② BP网络后向传播求偏导"></a>② BP网络后向传播求偏导</h2><p>$\partial{z^l_r}$</p>
 <p>$\partial z^l_r$</p>
 <p>$ C=\frac{1}{2n} \sum_x |y(x)-a^L(x)|^2 $</p>
-<p>$\Delta W<em>{kj}^l = \frac{\partial C}{\partial w</em>{kj}^l} = \frac{\partial C}{\partial z^l_k} * \frac{\partial z^l<em>k}{\partial w^l</em>{kj}} =<br>\delta^l_k \frac{\partial z^l<em>k}{\partial w^l</em>{kj}}$</p>
+<p>$$\Delta W<em>{kj}^l = \frac{\partial C}{\partial w</em>{kj}^l} = \frac{\partial C}{\partial z^l_k} * \frac{\partial z^l<em>k}{\partial w^l</em>{kj}} =<br>\delta^l_k \frac{\partial z^l<em>k}{\partial w^l</em>{kj}}$$</p>
 <p>其中，$\delta^l_k \equiv \frac{\partial C}{\partial z^l_k}$</p>
-<p>又,$\frac{\partial z^l<em>k}{\partial w^l</em>{kj}} = a^{l-1}_j$</p>
+<p>又, $\frac{\partial z^l<em>k}{\partial w^l</em>{kj}} = a^{l-1}_j$</p>
 <p>所以,$\Delta W^l_{kj} = \delta^l_k a^{l-1}_j$</p>
 <p>同理，$\Delta b^l_k = \delta^l_k$</p>
-<p>$ \delta^l_k = \frac{\partial C}{\partial z^l_k} = \sum_j \frac{\partial C}{\partial z^{l+1}_j} \frac{\partial z^{l+1}_j}{\partial z^l_k} =<br>\sum_j \delta^{l+1}_j \frac{\partial z^{l+1}_j}{\partial z^l_k} $</p>
+<p>$$ \delta^l_k = \frac{\partial C}{\partial z^l_k} = \sum_j \frac{\partial C}{\partial z^{l+1}_j} \frac{\partial z^{l+1}_j}{\partial z^l_k} =<br>\sum_j \delta^{l+1}_j \frac{\partial z^{l+1}_j}{\partial z^l_k} $$</p>
 <p>又，$ \frac{\partial z^{l+1}_j}{\partial z^l<em>k} = w^{l+1}</em>{jk} \sigma^\prime(z^l_k) $</p>
 <p>所以,<br>$ \delta^l_k = \sum_j \delta^{l+1}<em>j w^{l+1}</em>{jk} \sigma^\prime(z^l_k) $<br>$ \Downarrow $ vectorize<br>$ \delta^l = (w^{l+1})^T \delta^{l+1} \bigodot \sigma^\prime(z^l)  $</p>
 <p>对于最后一层L层，<br>$ \delta^L = \frac{\partial C}{\partial z^L} = (y - a^L) \bigodot a^\prime  $</p>
