@@ -17,7 +17,7 @@ $ w_{kj}^l：l-1层j节点到l层k节点的权重；z_k^l: l层k节点的输入�
 $ w_{kj}^l：l-1层j节点到l层k节点的权重；z_k^l: l层k节点的输入值；\alpha_k^l: l层k节点的输出 $ $ z^l=w^la^{l-1}+b^l; a^l=\sigma(z^l) $ 
 ① BP网络前向传播计算$ z^l = w^la^{l-1}+b^l $ $ a^l = \sigma(z^l) = \frac{1}{1 + e^{-z^l}} $
 ②">
-<meta property="og:updated_time" content="2016-02-25T08:57:11.000Z">
+<meta property="og:updated_time" content="2016-02-25T09:01:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BP算法">
 <meta name="twitter:description" content="符号表示：
@@ -97,9 +97,7 @@ $ w_{kj}^l：l-1层j节点到l层k节点的权重；z_k^l: l层k节点的输入�
         <p>符号表示：</p>
 <p>$ w_{kj}^l：l-1层j节点到l层k节点的权重；z_k^l: l层k节点的输入值；\alpha_k^l: l层k节点的输出 $ <br><br>$ z^l=w^la^{l-1}+b^l; a^l=\sigma(z^l) $ <br></p>
 <h2 id="①-BP网络前向传播计算"><a href="#①-BP网络前向传播计算" class="headerlink" title="① BP网络前向传播计算"></a>① BP网络前向传播计算</h2><p>$ z^l = w^la^{l-1}+b^l $ <br><br>$ a^l = \sigma(z^l) = \frac{1}{1 + e^{-z^l}} $</p>
-<h2 id="②-BP网络后向传播求偏导"><a href="#②-BP网络后向传播求偏导" class="headerlink" title="② BP网络后向传播求偏导"></a>② BP网络后向传播求偏导</h2><p>$\partial{z^l_r}$</p>
-<p>$\partial z^l_r$</p>
-<p>$ C=\frac{1}{2n} \sum_x |y(x)-a^L(x)|^2 $</p>
+<h2 id="②-BP网络后向传播求偏导"><a href="#②-BP网络后向传播求偏导" class="headerlink" title="② BP网络后向传播求偏导"></a>② BP网络后向传播求偏导</h2><p>$ C=\frac{1}{2n} \sum_x |y(x)-a^L(x)|^2 $</p>
 <p>$$\Delta W_{kj}^l = \frac{\partial C}{\partial w_{kj}^l} = \frac{\partial C}{\partial z^l_k} * \frac{\partial z^l_k}{\partial w^l_{kj}} =<br>\delta^l_k \frac{\partial z^l_k}{\partial w^l_{kj}}$$</p>
 <p>其中，$\delta^l_k \equiv \frac{\partial C}{\partial z^l_k}$</p>
 <p>又, $\frac{\partial z^l_k}{\partial w^l_{kj}} = a^{l-1}_j$</p>
@@ -131,11 +129,11 @@ $ w_{kj}^l：l-1层j节点到l层k节点的权重；z_k^l: l层k节点的输入�
     
 <nav id="article-nav">
   
-    <a href="/2016/02/25/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2015/12/16/Kleinberg/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          Hello World
+          Kleinberg
         
       </div>
     </a>
@@ -157,7 +155,7 @@ $ w_{kj}^l：l-1层j节点到l层k节点的权重；z_k^l: l层k节点的输入�
   <div class="widget-wrap">
     <h3 class="widget-title">標籤</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/NN/">NN</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BurstDetection/">BurstDetection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NN/">NN</a></li></ul>
     </div>
   </div>
 
@@ -167,7 +165,7 @@ $ w_{kj}^l：l-1层j节点到l层k节点的权重；z_k^l: l层k节点的输入�
   <div class="widget-wrap">
     <h3 class="widget-title">標籤雲</h3>
     <div class="widget tagcloud">
-      <a href="/tags/NN/" style="font-size: 10px;">NN</a>
+      <a href="/tags/BurstDetection/" style="font-size: 10px;">BurstDetection</a> <a href="/tags/NN/" style="font-size: 10px;">NN</a>
     </div>
   </div>
 
@@ -176,7 +174,7 @@ $ w_{kj}^l：l-1层j节点到l层k节点的权重；z_k^l: l层k节点的输入�
   <div class="widget-wrap">
     <h3 class="widget-title">彙整</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li></ul>
     </div>
   </div>
 
@@ -194,6 +192,10 @@ $ w_{kj}^l：l-1层j节点到l层k节点的权重；z_k^l: l层k节点的输入�
         
           <li>
             <a href="/2016/02/25/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/16/Kleinberg/">Kleinberg</a>
           </li>
         
           <li>
