@@ -15,7 +15,7 @@ $$\Delta W_{kj}^">
 <meta property="og:description" content="Simple inline $a = b + c$.
 $$\frac{\partial u}{\partial t}= h^2 \left( \frac{\partial^2 u}{\partial x^2} +\frac{\partial^2 u}{\partial y^2} +\frac{\partial^2 u}{\partial z^2}\right)$$
 $$\Delta W_{kj}^">
-<meta property="og:updated_time" content="2016-02-25T09:50:28.000Z">
+<meta property="og:updated_time" content="2016-02-25T09:53:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="test">
 <meta name="twitter:description" content="Simple inline $a = b + c$.
@@ -150,7 +150,7 @@ chmod-socket=664
 <pre><code>uwsgi --ini uwsgi.ini
 </code></pre><h2 id="Ubuntu-14-04-下Nginx配置"><a href="#Ubuntu-14-04-下Nginx配置" class="headerlink" title="Ubuntu 14.04 下Nginx配置"></a>Ubuntu 14.04 下Nginx配置</h2><p>1.安装Nginx</p>
 <pre><code>sudo apt-get install nginx
-</code></pre><p>2.在<code>/etc/nginx/conf.d/</code>文件夹下面创建<code>xxx.conf</code>文件</p>
+</code></pre><p>2.在<code>/etc/nginx/conf.d/</code>文件夹下面创建<code>xxx.conf</code>文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">server &#123;&#10;    listen 80; # default_server;&#10;    server_name 123.75.138.47 zsl.link;&#10;    charset utf-8;&#10;    client_max_body_size 100M;&#10;&#10;    location / &#123;&#10;        # First attempt to serve request as file, then&#10;        # as directory, then fall back to displaying a 404.&#10;        # itry_files $uri $uri/ =404;&#10;        # Uncomment to enable naxsi on this location&#10;        # include /etc/nginx/naxsi.rules&#10;        uwsgi_pass 127.0.0.1:3400;&#10;        include uwsgi_params;&#10;        add_header Cache-Control no-cache;&#10;        add_header Cache-Control private;&#10;    &#125;&#10;&#10;    location /static/ &#123;&#10;        alias /root/NUST_Visual_Platform/static/;&#10;        expires 30d;&#10;    &#125;&#10;&#10;    location /media/ &#123;&#10;        alias /root/NUST_Visual_Platform/njustmark/media/;&#10;        expires 30d;&#10;    &#125;&#10;&#10;    # Only for nginx-naxsi used with nginx-naxsi-ui : process denied requests&#10;    #location /RequestDenied &#123;&#10;    #   proxy_pass http://127.0.0.1:8080;&#10;    #&#125;&#10;&#10;    #error_page 404 /404.html;&#10;&#10;    # redirect server error pages to the static page /50x.html&#10;    #&#10;    error_page 500 502 503 504 /50x.html;&#10;    location = /50x.html &#123;&#10;        root /usr/share/nginx/html;&#10;    &#125;&#10;&#10;    # deny access to .htaccess files, if Apache&#39;s document root&#10;    # concurs with nginx&#39;s one&#10;    #&#10;    #location ~ /\.ht &#123;&#10;    #   deny all;&#10;    #&#125;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
 <p>启动Nginx</p>
 <pre><code>sudo service nginx start
 </code></pre><p>重启Nginx</p>
