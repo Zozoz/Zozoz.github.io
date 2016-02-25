@@ -15,7 +15,7 @@
 <meta property="og:image" content="http://7xnepc.com1.z0.glb.clouddn.com/An_example_of_HMM.png">
 <meta property="og:image" content="http://7xnepc.com1.z0.glb.clouddn.com/Viterbi_animated_demo.gif">
 <meta property="og:image" content="http://7xnepc.com1.z0.glb.clouddn.com/state_tran.png">
-<meta property="og:updated_time" content="2016-02-25T09:18:45.000Z">
+<meta property="og:updated_time" content="2016-02-25T09:34:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kleinberg">
 <meta name="twitter:description" content="预备知识马尔科夫性质马尔可夫性质(Markov property)是概率论中的一个概念, 因为俄国数学家安德雷·马尔可夫得名。当一个随机过程在给定现在状态及所有过去状态情况下, 其未来状态的条件概率分布仅依赖于当前状态；换句话说, 在给定现在状态时, 它与过去状态(即该过程的历史路径)是条件独立的, 那么此随机过程即具有马尔可夫性质。具有马尔可夫性质的过程通常称之为马尔可夫过程。数学上, 如果X(">
@@ -106,10 +106,10 @@
 <li>已知输出序列，寻找最可能的状态转移以及输出概率.通常使用Baum-Welch算法以及Reversed Viterbi算法解决.</li>
 </ol>
 <h3 id="维特比算法"><a href="#维特比算法" class="headerlink" title="维特比算法"></a><a href="https://zh.wikipedia.org/wiki/%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95" target="_blank" rel="external">维特比算法</a></h3><p>维特比算法(Viterbi algorithm)是一种动态规划算法。它用于寻找最有可能产生观测事件序列的-维特比路径-隐含状态序列。</p>
-<p>假设给定隐式马尔可夫模型状态空间 S，初始状态 i 的概率为 $ \pi_{i} $, 从状态 i 到状态 j 的转移概率为 $ a<em>{i,j} $.<br>令观察到的输出为 $ y\</em>{1}, \dots, y_{T}$。 产生观察结果的最有可能的状态序列 $ x_{1}, \dots, x_{T} $ 由递推关系给出：<br></p>
-<p>$ V_{1,k} = P{\big (}y_{1}\ |\ k{\big )} \cdot \pi<em>{k} $ <br><br>$ V\</em>{t,k} = P{\big (}y_{t}\ |\ k{\big )} \cdot \max_{x\in S}\left(a_{x,k} \cdot V_{t-1,x}\right) $ <br></p>
-<p>此处 $V<em>{t,k}$ 是前 t 个最终状态为 k 的观测结果最有可能对应的状态序列的概率。<br>通过保存向后指针记住在第二个等式中用到的状态 x 可以获得维特比路径。<br>声明一个函数 Ptr(k,t), 当t = 1时返回k, 当t &gt; 1, 返回$V</em>{t,k}$. 这样: <br></p>
-<p>$ x_{T} = \arg \max_{x\in S}(V<em>{T,x}) $ <br><br>$ x\</em>{t} = Ptr(x_{t},t) $ <br></p>
+<p>假设给定隐式马尔可夫模型状态空间 S，初始状态 i 的概率为 $ \pi_{i} $, 从状态 i 到状态 j 的转移概率为 $ a_{i,j} $.<br>令观察到的输出为 $ y_{1}, \dots, y_{T}$。 产生观察结果的最有可能的状态序列 $ x_{1}, \dots, x_{T} $ 由递推关系给出：<br></p>
+<p>$ V_{1,k} = P{\big (}y_{1}\ |\ k{\big )} \cdot \pi_{k} $ <br><br>$ V_{t,k} = P{\big (}y_{t}\ |\ k{\big )} \cdot \max_{x\in S}\left(a_{x,k} \cdot V_{t-1,x}\right) $ <br></p>
+<p>此处 $V_{t,k}$ 是前 t 个最终状态为 k 的观测结果最有可能对应的状态序列的概率。<br>通过保存向后指针记住在第二个等式中用到的状态 x 可以获得维特比路径。<br>声明一个函数 Ptr(k,t), 当t = 1时返回k, 当t &gt; 1, 返回$V_{t,k}$. 这样: <br></p>
+<p>$ x_{T} = \arg \max_{x\in S}(V_{T,x}) $ <br><br>$ x_{t} = Ptr(x_{t},t) $ <br></p>
 <p>这里我们使用了arg max的标准定义。<br>算法复杂度为 <br></p>
 <p>$ O(T\times \left|{S}\right|^{2}) $ <br></p>
 <h4 id="一个例子"><a href="#一个例子" class="headerlink" title="一个例子"></a>一个例子</h4><p>想象一个乡村诊所。村民有着非常理想化的特性，要么健康要么发烧。他们只有问诊所的医生的才能知道是否发烧。 聪明的医生通过询问病人的感觉诊断他们是否发烧。村民只回答他们感觉正常、头晕或冷。</p>
@@ -127,13 +127,13 @@
 <p>所以，</p>
 <p>$ F(x) = \int_0^x f(x) = 1 - e^{-\alpha x} $<br>$ E(x) = \alpha^{-1} $</p>
 <h4 id="A-two-state-model"><a href="#A-two-state-model" class="headerlink" title="A two-state model"></a>A two-state model</h4><p>假设对于事件模型有正常状态q0和突发状态q1，可以看做“低态”和“高态”。当A处在状态q0时，消息以低频率发出，连续消息的<br>间隔x有密度函数$ f_0(x) = \alpha_0 e^{-\alpha_0 x} $; 当A处在状态q1时，消息以高频发出，连续消息间隔x符合密度函数<br>$ f_1(x) = \alpha_1 e^{-\alpha_1 x}$, 显然 $\alpha_1 &gt; \alpha_0$。并且，A从q0转换到q1（从q1转换到q0）的概率$p\in(0,1)$.</p>
-<p>当给出一个消息集合的时候，我们可以用这个生成模型去寻找一个可能的状态序列。<br>假设我们知道了n+1个消息，那么可以计算出n个时间间隔$ X = (x_1, x_2, \cdots, x<em>n)$.<br>令X对应的状态序列$ q = (q</em>{i_1}, q_{i_2}, \cdots, q_{i_n}) $, 所以, <br></p>
+<p>当给出一个消息集合的时候，我们可以用这个生成模型去寻找一个可能的状态序列。<br>假设我们知道了n+1个消息，那么可以计算出n个时间间隔$ X = (x_1, x_2, \cdots, x_n)$.<br>令X对应的状态序列$ q = (q_{i_1}, q_{i_2}, \cdots, q_{i_n}) $, 所以, <br></p>
 <p>$ f_q(x_1, x_2, \cdots, x_n) = \prod_{t=1}^n f_{i_t}(x_t) $ <br></p>
 <p>令b为状态序列q中状态的转换次数，所以q的先验概率为，<br></p>
-<p>$ P(q) = (\prod_{i_t \neq i<em>{t+1}})(\prod</em>{i_t = i_{t+1}}) = p^b(1-p)^{n-b}  $ <br></p>
+<p>$ P(q) = (\prod_{i_t \neq i_{t+1}})(\prod_{i_t = i_{t+1}}) = p^b(1-p)^{n-b}  $ <br></p>
 <p>所以, <br></p>
-<p>$ P(q \mid x) = \frac{P(q)f<em>q(x)}{\sum</em>{q^{\prime}}P(q^{\prime})f_{q^{\prime}}(x)} = \frac{1}{Z}(\frac{p}{1-p})^b(1-p)^n \prod<em>{t=1}^nf</em>{i_t}(x_t) $  <br></p>
-<p>其中，$ Z = \sum<em>{q^{\prime}}P(q^{\prime})f</em>{q^{\prime}}(x) $. 对上式中两边同时取对数后取反，得 <br></p>
+<p>$ P(q \mid x) = \frac{P(q)f_q(x)}{\sum_{q^{\prime}}P(q^{\prime})f_{q^{\prime}}(x)} = \frac{1}{Z}(\frac{p}{1-p})^b(1-p)^n \prod_{t=1}^nf_{i_t}(x_t) $  <br></p>
+<p>其中，$ Z = \sum_{q^{\prime}}P(q^{\prime})f_{q^{\prime}}(x) $. 对上式中两边同时取对数后取反，得 <br></p>
 <p>$ -\ln P(q \mid x) = b\ln \left(\frac{1-p}{p}\right) + \left(\sum_{t=1}^n-\ln f_{i_t}(x_t)\right) - n\ln (1-p) + lnZ $ <br></p>
 <p>为求得最可能的状态序列，只需使等式右边最小，而等式右边后两项与状态序列q无关，所以 <br></p>
 <p>$ c(q\ \mid\ x) = b\ln \left(\frac{1-p}{p}\right) + \left(\sum_{t=1}^n-\ln f_{i_t}(x_t)\right) $ <br></p>
@@ -143,17 +143,17 @@
 <p>$ c(q\mid x) = \left(\sum_{t=0}^{n-1}\tau(i_t, i_{t+1}\right) + \left(\sum_{t=1}^n-\ln f_{i_t}(x_t)\right) $ <br></p>
 <p>令$i_0 = 0$, 所以无限状态机$ A_{s,\gamma}^*$ 从$q_0$开始. <br></p>
 <p><img src="http://7xnepc.com1.z0.glb.clouddn.com/state_tran.png" alt="An infinite-state model for bursty sequences"></p>
-<h4 id="Computing-a-minimum-cost-state-sequence"><a href="#Computing-a-minimum-cost-state-sequence" class="headerlink" title="Computing a minimum-cost state sequence"></a>Computing a minimum-cost state sequence</h4><p>已知间隔序列$x = (x_1, x_2, \cdots, x_n)$, 求状态机$ A_{s,\gamma}^* $的状态序列$ q = (q_{i_1}, q_{i_2}, \cdots, q_{i<em>n}) $，使代价<br>$c(q\ \mid\ x)$最小。并且$A</em>{s,\gamma}^k$表示状态机只有k个状态选择。<br></p>
+<h4 id="Computing-a-minimum-cost-state-sequence"><a href="#Computing-a-minimum-cost-state-sequence" class="headerlink" title="Computing a minimum-cost state sequence"></a>Computing a minimum-cost state sequence</h4><p>已知间隔序列$x = (x_1, x_2, \cdots, x_n)$, 求状态机$ A_{s,\gamma}^* $的状态序列$ q = (q_{i_1}, q_{i_2}, \cdots, q_{i<em>n}) $，使代价<br>$c(q\ \mid\ x)$最小。并且$A\</em>{s,\gamma}^k$表示状态机只有k个状态选择。<br></p>
 <h5 id="Theorem"><a href="#Theorem" class="headerlink" title="Theorem"></a>Theorem</h5><p>$\delta(x) = min_{i=1}^n x_i$ and $k = \lceil 1 + \log_s T + \log_s \delta(x)^{-1} \rceil $.<br></p>
-<p>如果$q^{*}$是状态机$A<em>{s,\gamma}^k$的最优状态序列，那么它也是状态机$A</em>{s,\gamma}^*$的最优状态序列。<br><br><br><br></p>
-<p>证明：<br><br>令$ q^<em> = (q_{l_1}, q_{l_2}, \cdots, q_{l<em>n})$为状态机$A\</em>{s,\gamma}^k$的最优状态序列，$q = (q_{i_1}, q_{i_2}, \cdots, q_{i<em>n})$<br>为状态机$A</em>{s,\gamma}^\</em>$的最优状态序列，$l_0 = i_0 = 0, l_{n+1} = i<em>{n+1} = 0 $.所以，我们只需证明$c(q^*\ \mid\ x) \leq c(q\ \mid\ x)$.<br>令$q^{\prime} = (q</em>{i^{\prime}_1}, \cdots, q_{i^{\prime}_n}), i^{\prime}_t = min(i_t, k-1)$, 显然 <br></p>
+<p>如果$q^{*}$是状态机$A_{s,\gamma}^k$的最优状态序列，那么它也是状态机$A_{s,\gamma}^*$的最优状态序列。<br><br><br><br></p>
+<p>证明：<br><br>令$ q^<em> = (q_{l_1}, q_{l_2}, \cdots, q_{l<em>n})$为状态机$A\</em>{s,\gamma}^k$的最优状态序列，$q = (q_{i_1}, q_{i_2}, \cdots, q_{i_n})$<br>为状态机$A_{s,\gamma}^\</em>$的最优状态序列，$l_0 = i_0 = 0, l_{n+1} = i_{n+1} = 0 $.所以，我们只需证明$c(q^*\ \mid\ x) \leq c(q\ \mid\ x)$.<br>令$q^{\prime} = (q_{i^{\prime}_1}, \cdots, q_{i^{\prime}_n}), i^{\prime}_t = min(i_t, k-1)$, 显然 <br></p>
 <p>$ \sum_{t=0}^{n-1} \tau(i^{\prime}_t, i^{\prime}_{t+1}) \leq \sum_{t=0}^{n-1} \tau(i_t, i_{t+1})  $ <br></p>
 <p>对于代价函数的后一项，$-\ln f_j(x_t) = \alpha_j x_t - \ln \alpha_j, 1 \leq t \leq n$ , 考虑当j为何值时其最小。</p>
 <p>而$h(\alpha) = \alpha x_t - \ln\alpha$ 在区间$(0, \infty)$上是凸函数，并且当$\alpha = x_t^{-1}$时取得全局最小值。<br>我们知道$ k = \lceil 1 + \log_s T + \log_s \delta(x)^{-1} \rceil $ , 所以， <br></p>
 <p>$<br>\alpha_{k-1} = \hat{g}^{-1}s^{k-1} = \frac{n}{T} \cdot s^{k-1} \geq \frac{1}{T} \cdot s^{\log_s^T + \log_s^{\delta(x)^{-1}}} = \frac{1}{T} \frac{T}{\delta(x)} = \frac{1}{\delta(x)}.<br>$<br><br></p>
 <p>因为对于所有的t, 有$\delta(x)^{-1} \geq x_t^{-1}$, 所以当$i_t &gt; k-1$时, 有$\alpha_{i_t} &gt; \alpha_{k-1}$, 所以,<br></p>
 <p>$<br>-\ln f_{i_t^{\prime}}(x_t) \leq -\ln f_{i_t}(x_t), i_t &gt; i_t^{\prime} = k-1<br>$<br><br><br>由此，可得，<br></p>
-<p>$<br>c(q^{\prime}\ \mid\ x) = \left(\sum_{t=0}^{n-1}\tau(i_t^{\prime}, i_{t+1}^{\prime}) \right) + \left(\sum_{t=1}^n-\ln f_{i_t^{\prime}}(x<em>t)\right)\<br>\leq \left(\sum</em>{t=0}^{n-1}\tau(i<em>t,i\</em>{t+1})\right) + \left(\sum_{t=1}^n-\ln f_{i+t}(x<em>t)\right) = c(q\ \mid\ x).<br>$<br><br>又因为$q^{\prime}$是自动机$A</em>{s,\gamma}^k$中的一个状态序列，$q^*$是自动机$A_{s,\gamma}^k$中的最优状态序列,所以有<br></p>
+<p>$<br>c(q^{\prime}\ \mid\ x) = \left(\sum_{t=0}^{n-1}\tau(i_t^{\prime}, i_{t+1}^{\prime}) \right) + \left(\sum_{t=1}^n-\ln f_{i_t^{\prime}}(x_t)\right)\<br>\leq \left(\sum_{t=0}^{n-1}\tau(i_t,i_{t+1})\right) + \left(\sum_{t=1}^n-\ln f_{i+t}(x_t)\right) = c(q\ \mid\ x).<br>$<br><br>又因为$q^{\prime}$是自动机$A_{s,\gamma}^k$中的一个状态序列，$q^*$是自动机$A_{s,\gamma}^k$中的最优状态序列,所以有<br></p>
 <p>$c(q^*\ \mid\ x) \leq c(q^{\prime}\ \mid\ x) \leq c(q\ \mid\ x).$<br></p>
 <p>得证。</p>
 <h5 id="如何计算得到最优状态序列？"><a href="#如何计算得到最优状态序列？" class="headerlink" title="如何计算得到最优状态序列？"></a>如何计算得到最优状态序列？</h5><p>令$C_j(t)$是对于输入$x_1, x_2, \cdots, x_n$以状态$q_j$结尾的最小代价值。<br>$C_j(t) = -\ln f_j(x_t) + min_l(C_l(t-1) + \tau(l,j))$, 并且$C_0(0)=0, C_j(0)=\infty\ j&gt;0$.</p>
@@ -283,7 +283,7 @@ int main(int argc, char** argv){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2015/12/16/Kleinberg/" data-id="cil228sk50000pqjgo8mw81ns" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2015/12/16/Kleinberg/" data-id="cil22q7uq0005t7jgngrxm3c5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BurstDetection/">BurstDetection</a></li></ul>
