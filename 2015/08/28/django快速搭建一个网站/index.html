@@ -17,7 +17,7 @@ Django是一个开放源代码的Web应用框架，由Python写成，基于MVC�
 project_name/">
 <meta property="og:image" content="http://7xnepc.com1.z0.glb.clouddn.com/流程图.png">
 <meta property="og:image" content="http://7xnepc.com1.z0.glb.clouddn.com/echarts-1.png">
-<meta property="og:updated_time" content="2016-02-25T12:24:31.000Z">
+<meta property="og:updated_time" content="2016-02-25T12:30:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Django快速搭建一个网站">
 <meta name="twitter:description" content="Django介绍参考文档：Django官方文档   官方文档中文翻译
@@ -175,55 +175,110 @@ urlpatterns = [
 </ul>
 <h4 id="模板语言"><a href="#模板语言" class="headerlink" title="模板语言"></a>模板语言</h4><p>Django的模板系统将页面的设计从Python中分离出来，前台页面只需接收后台视图传递过来的数据，动态地展示页面。<br><code>templates/navbar.html</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;html&#62;&#10;&#60;head&#62;&#60;title&#62;&#123;% block title %&#125;&#123;% endblock %&#125;&#60;/title&#62;&#60;/head&#62;&#10;&#60;body&#62;&#10;&#123;% block content %&#125;&#123;% endblock content %&#125;&#10;&#60;/body&#62;&#10;&#60;/html&#62;</span><br></pre></td></tr></table></figure></p>
 <p><code>templates/sample/show.html</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &#34;navbar.html&#34; %&#125;&#10;&#123;% block title %&#125; Sample Page &#123;% endblock %&#125;&#10;&#123;% block content %&#125;&#10;&#10;&#123;% if index %&#125;&#10;    &#60;p&#62;I am sample!&#60;/p&#62;&#10;&#123;% else%&#125;&#10;    &#123;% if value|length_is:&#34;4&#34; %&#125;&#10;        &#60;p&#62;The year is &#123;&#123; value &#125;&#125;&#60;/p&#62;&#10;    &#123;% elif value|length_is:&#34;2&#34; %&#125;&#10;        &#60;p&#62;The month is &#123;&#123; value &#125;&#125;&#60;/p&#62;&#10;    &#123;% endif %&#125;&#10;&#123;% endif %&#125;&#10;&#60;p&#62;My name is &#123;&#123; info.name &#125;&#125;, enrolled in &#123;&#123; info.enroll &#125;&#125;.&#60;/p&#62;&#10;&#123;# I am comments. #&#125;&#10;&#123;% endblock %&#125;</span><br></pre></td></tr></table></figure></p>
+
+- {{ variable }} 表示一个变量,当模版引擎遇到一个变量，它将计算这个变量，然后用结果替换掉它本身。变量的命名包括任何字母数字以及下划线 ("_")的组合。点(".") 也在会变量部分中出现，不过它有特殊的含义，当模板系统遇到点(".")，它将以这样的顺序查询：
+    - 字典查询
+    - 属性或方法查询
+    - 数字索引查询
+- {% tag %} 表示一个标签，Django自带了大约24个内置的模版标签。可以在[内置标签参考手册](http://python.usyiyi.cn/django/ref/templates/builtins.html#ref-templates-builtins-tags)中阅读全部关于它们的内容。
+- {{ value|length_is:"4" }} 表示一个过滤器,Django提供了大约六十个内置的模版过滤器。你可以在[内置过滤器参考手册](http://python.usyiyi.cn/django/ref/templates/builtins.html#ref-templates-builtins-filters)中阅读全部关于它们的信息。
+- {#  #} 表示一个单行注释， {% comment %}和{% endcomment %}表示多行注释，之间的内容会被忽略。
+- {% csrf_token %} 是一个跨站请求伪造保护标签，在提交表单中需要添加。
+- {% extends "*.html" %} 表示一个模板继承标签，当模板系统处理这个模板时，首先，它将定位父模板，并用子模板中的内容来替换父模板中的block标签中的内容。
+
+
+<h4 id="视图模块"><a href="#视图模块" class="headerlink" title="视图模块"></a>视图模块</h4><p>一个视图函数，简称视图，是一个简单的Python 函数，它接受Web请求并且返回Web响应。响应可以是一张网页的HTML内容，一个重定向，一个404错误，一个XML文档，或者一张图片. . . 是任何东西都可以。无论视图本身包含什么逻辑，都要返回响应。代码写在哪里也无所谓，只要它在你的Python目录下面。除此之外没有更多的要求了——可以说“没有什么神奇的地方”。为了能够把代码放在某个地方，惯例是把视图放在叫做views.py的文件中，然后把它放到你的项目或者应用目录里。<br><code>sample/views.py</code></p>
+<pre><code>from django.shortcuts import render
+
+
+def index(request):
+    return render(request, &apos;sample/show.html&apos;, {
+        &apos;index&apos;: True
+    })
+
+def show_1(request, month):
+    return render(request, &apos;sample/show.html&apos;, {
+        &apos;value&apos;: month
+    })
+
+def show_2(request, year):
+    info = {&apos;name&apos;: &apos;newbie&apos;, &apos;enroll&apos;: year}
+    return render(request, &apos;sample/show.html&apos;, {
+        &apos;value&apos;: year,
+        &apos;info&apos;: info,
+    })
+</code></pre><p>视图模块主要是进行业务逻辑的处理，然后返回一个<strong>HttpResponse</strong>对象。<br>主要介绍一下表单。</p>
+<h5 id="HTML表单"><a href="#HTML表单" class="headerlink" title="HTML表单"></a><a href="http://python.usyiyi.cn/django/topics/forms/index.html" target="_blank" rel="external">HTML表单</a></h5><p>在HTML中，表单是位于&lt;form&gt;…&lt;/form&gt; 之间的元素的集合，它们允许访问者输入文本、选择选项、操作对象和控制等等，然后将信息发送回服务器。<br>处理表单是一件很复杂的事情。考虑一下Django 的Admin 站点，不同类型的大量数据项需要在一个表单中准备好、渲染成HTML、使用一个方便的界面编辑、返回给服务器、验证并清除，然后保存或者向后继续处理。</p>
+<p>Django 的表单功能可以简化并自动化大部分这些工作，而且还可以比大部分程序员自己所编写的代码更安全。</p>
+<p>Django 会处理表单工作中的三个显著不同的部分：</p>
 <ul>
-<li> 表示一个变量,当模版引擎遇到一个变量，它将计算这个变量，然后用结果替换掉它本身。变量的命名包括任何字母数字以及下划线 (“_”)的组合。点(“.”) 也在会变量部分中出现，不过它有特殊的含义，当模板系统遇到点(“.”)，它将以这样的顺序查询：<ul>
-<li>字典查询</li>
-<li>属性或方法查询</li>
-<li>数字索引查询</li>
+<li>准备并重新构造数据</li>
+<li>为数据创建HTML 表单</li>
+<li>接收并处理客户端提交的表单和数据<br>可以手工编写代码来实现，但是Django 可以帮你完成所有这些工作。</li>
 </ul>
+<p>在Django中构建一个表单<br><code>sample/forms.py</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from django import forms&#10;&#10;&#10;class NameForm&#65288;forms.Form):&#10;    your_name = forms.CharField(label=&#39;Your name&#39;, max_length=100, required=True)&#10;    age = forms.IntegerField(initial=0)</span><br></pre></td></tr></table></figure></p>
+<p>表单系统的核心部分是Django的<a href="http://python.usyiyi.cn/django/ref/forms/fields.html" target="_blank" rel="external">Form</a>类.Django 的模型描述一个对象的逻辑结构、行为以及展现给我们的方式，与此类似，Form 类描述一个表单并决定它如何工作和展现.<br>就像模型类的属性映射到数据库的属性一样，表单类的<a href="http://python.usyiyi.cn/django/ref/forms/fields.html" target="_blank" rel="external">字段</a>会映射到HTML 的&lt;input&gt;表单的元素.<br>表单的字段本身也是类；它们管理表单的数据并在表单提交时进行验证。</p>
+<p><code>templates/sample/form.html</code></p>
+
+
+    {% extends "base.html" %}
+    {% block title %} Sample Page {% endblock %}
+    {% block content %}
+
+    <form action="{% url " sample:get_name"="" %}"="" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Submit">
+    </form>
+
+    {% endblock %}
+
+
+<p><code>sample/views.py</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from .forms import NameForm&#10;&#10;&#10;def get_name(request):&#10;    # if this is a POST request we need to process the form data&#10;    if request.method == &#39;POST&#39;:&#10;        # create a form instance and populate it with data from the request:&#10;        form = NameForm(request.POST)&#10;        # check whether it&#39;s valid:&#10;        if form.is_valid():&#10;            name = form.cleaned_data[&#39;your_name&#39;]&#10;            age = form.cleaned_data[&#39;age&#39;]&#10;            return render(request, &#39;sample/success.html&#39;, &#123;&#10;                    &#39;name&#39;: name,&#10;                    &#39;age&#39;: age&#10;                &#125;)&#10;    else:&#10;        form = NameForm()&#10;    return render(request, &#39;sample/form.html&#39;, &#123;&#39;form&#39;: form&#125;)</span><br></pre></td></tr></table></figure>
+<p><code>sample/success.html</code></p>
+
+
+    <html>
+        <head><title>Success</title>title></head>
+         <body>
+            <p>Success!</p>
+            <p>Your name is {{ name }}, aged {{ age }}.</p>
+            <a href="{% url "sample:get_name" %}">返回</a>
+         </body>
+    </html>
+
+
+<h4 id="建立数据库连接"><a href="#建立数据库连接" class="headerlink" title="建立数据库连接"></a>建立数据库连接</h4><p>由于我们需要从数据库中读取我们抓取的热点新闻信息，所以需要连接数据库，这里我们采用MYSQL.<br>在<strong>project_name/settings.py</strong>中默认的数据库是Python自带的SQLite3，所以我们需要修改一下配置.</p>
+<p><code>settings.py</code></p>
+<pre><code>DATABASES = {
+    &apos;default&apos;: {
+        &apos;ENGINE&apos;: &apos;django.db.backends.mysql&apos;, # database engine
+        &apos;NAME&apos;: &apos;nust_visual_platform&apos;, # schema name
+        &apos;USER&apos;: &apos;root&apos;, # mysql username
+        &apos;HOST&apos;: &apos;localhost&apos;, # mysql host
+        &apos;PASSWORD&apos;: &apos;&apos;, # mysql password
+        &apos;PORT&apos;: &apos;3306&apos;} # mysql port
+}
+</code></pre><p>我们需要在MYSQL中新建一个schema，剩下的所有对数据库的操作都不需要我们手动处理，Django会为我们代劳.</p>
+<p>新建一个数据库表：</p>
+<ol>
+<li><p>在<code>wangyi</code>下面新建<code>models.py</code>模型文件，然后在文件中定义我们的数据库表.</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from django.db import models&#10;&#10;&#10;class WangyiArticle&#65288;models.Model):&#10;    docid = models.CharField(primary_key=True, max_length=50)&#10;    votecount = models.IntegerField(default=0)&#10;    content = models.TextField()&#10;    ptime = models.DateTimeField()</span><br></pre></td></tr></table></figure>
 </li>
-<li><figure class="highlight"><figcaption><span>tag %&#125;``` 表示一个标签，Django自带了大约24个内置的模版标签。可以在[内置标签参考手册](http://python.usyiyi.cn/django/ref/templates/builtins.html#ref-templates-builtins-tags)中阅读全部关于它们的内容。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- &#123;&#123; value|length_is:&#34;4&#34; &#125;&#125; &#34920;&#31034;&#19968;&#20010;&#36807;&#28388;&#22120;,Django&#25552;&#20379;&#20102;&#22823;&#32422;&#20845;&#21313;&#20010;&#20869;&#32622;&#30340;&#27169;&#29256;&#36807;&#28388;&#22120;&#12290;&#20320;&#21487;&#20197;&#22312;[&#20869;&#32622;&#36807;&#28388;&#22120;&#21442;&#32771;&#25163;&#20876;](http://python.usyiyi.cn/django/ref/templates/builtins.html#ref-templates-builtins-filters)&#20013;&#38405;&#35835;&#20840;&#37096;&#20851;&#20110;&#23427;&#20204;&#30340;&#20449;&#24687;&#12290;&#10;- ```&#123;#  #&#125;``` &#34920;&#31034;&#19968;&#20010;&#21333;&#34892;&#27880;&#37322;&#65292; ```&#123;% comment %&#125;```&#21644;```&#123;% endcomment %&#125;```&#34920;&#31034;&#22810;&#34892;&#27880;&#37322;&#65292;&#20043;&#38388;&#30340;&#20869;&#23481;&#20250;&#34987;&#24573;&#30053;&#12290;&#10;- ```&#123;% csrf_token %&#125;``` &#26159;&#19968;&#20010;&#36328;&#31449;&#35831;&#27714;&#20266;&#36896;&#20445;&#25252;&#26631;&#31614;&#65292;&#22312;&#25552;&#20132;&#34920;&#21333;&#20013;&#38656;&#35201;&#28155;&#21152;&#12290;&#10;- ```&#123;% extends &#34;*.html&#34; %&#125;``` &#34920;&#31034;&#19968;&#20010;&#27169;&#26495;&#32487;&#25215;&#26631;&#31614;&#65292;&#24403;&#27169;&#26495;&#31995;&#32479;&#22788;&#29702;&#36825;&#20010;&#27169;&#26495;&#26102;&#65292;&#39318;&#20808;&#65292;&#23427;&#23558;&#23450;&#20301;&#29238;&#27169;&#26495;&#65292;&#24182;&#29992;&#23376;&#27169;&#26495;&#20013;&#30340;&#20869;&#23481;&#26469;&#26367;&#25442;&#29238;&#27169;&#26495;&#20013;&#30340;block&#26631;&#31614;&#20013;&#30340;&#20869;&#23481;&#12290;&#10;&#10;&#10;#### &#35270;&#22270;&#27169;&#22359;&#10;&#19968;&#20010;&#35270;&#22270;&#20989;&#25968;&#65292;&#31616;&#31216;&#35270;&#22270;&#65292;&#26159;&#19968;&#20010;&#31616;&#21333;&#30340;Python &#20989;&#25968;&#65292;&#23427;&#25509;&#21463;Web&#35831;&#27714;&#24182;&#19988;&#36820;&#22238;Web&#21709;&#24212;&#12290;&#21709;&#24212;&#21487;&#20197;&#26159;&#19968;&#24352;&#32593;&#39029;&#30340;HTML&#20869;&#23481;&#65292;&#19968;&#20010;&#37325;&#23450;&#21521;&#65292;&#19968;&#20010;404&#38169;&#35823;&#65292;&#19968;&#20010;XML&#25991;&#26723;&#65292;&#25110;&#32773;&#19968;&#24352;&#22270;&#29255;. . . &#26159;&#20219;&#20309;&#19996;&#35199;&#37117;&#21487;&#20197;&#12290;&#26080;&#35770;&#35270;&#22270;&#26412;&#36523;&#21253;&#21547;&#20160;&#20040;&#36923;&#36753;&#65292;&#37117;&#35201;&#36820;&#22238;&#21709;&#24212;&#12290;&#20195;&#30721;&#20889;&#22312;&#21738;&#37324;&#20063;&#26080;&#25152;&#35859;&#65292;&#21482;&#35201;&#23427;&#22312;&#20320;&#30340;Python&#30446;&#24405;&#19979;&#38754;&#12290;&#38500;&#27492;&#20043;&#22806;&#27809;&#26377;&#26356;&#22810;&#30340;&#35201;&#27714;&#20102;&#8212;&#8212;&#21487;&#20197;&#35828;&#8220;&#27809;&#26377;&#20160;&#20040;&#31070;&#22855;&#30340;&#22320;&#26041;&#8221;&#12290;&#20026;&#20102;&#33021;&#22815;&#25226;&#20195;&#30721;&#25918;&#22312;&#26576;&#20010;&#22320;&#26041;&#65292;&#24815;&#20363;&#26159;&#25226;&#35270;&#22270;&#25918;&#22312;&#21483;&#20570;views.py&#30340;&#25991;&#20214;&#20013;&#65292;&#28982;&#21518;&#25226;&#23427;&#25918;&#21040;&#20320;&#30340;&#39033;&#30446;&#25110;&#32773;&#24212;&#29992;&#30446;&#24405;&#37324;&#12290;&#10;`sample/views.py`&#10;&#10;    from django.shortcuts import render&#10;&#10;&#10;    def index(request):&#10;        return render(request, &#39;sample/show.html&#39;, &#123;&#10;            &#39;index&#39;: True&#10;        &#125;)&#10;&#10;    def show_1(request, month):&#10;        return render(request, &#39;sample/show.html&#39;, &#123;&#10;            &#39;value&#39;: month&#10;        &#125;)&#10;&#10;    def show_2(request, year):&#10;        info = &#123;&#39;name&#39;: &#39;newbie&#39;, &#39;enroll&#39;: year&#125;&#10;        return render(request, &#39;sample/show.html&#39;, &#123;&#10;            &#39;value&#39;: year,&#10;            &#39;info&#39;: info,&#10;        &#125;)&#10;&#10;&#35270;&#22270;&#27169;&#22359;&#20027;&#35201;&#26159;&#36827;&#34892;&#19994;&#21153;&#36923;&#36753;&#30340;&#22788;&#29702;&#65292;&#28982;&#21518;&#36820;&#22238;&#19968;&#20010;__HttpResponse__&#23545;&#35937;&#12290;&#10;&#20027;&#35201;&#20171;&#32461;&#19968;&#19979;&#34920;&#21333;&#12290;&#10;##### [HTML&#34920;&#21333;](http://python.usyiyi.cn/django/topics/forms/index.html)&#10;&#22312;HTML&#20013;&#65292;&#34920;&#21333;&#26159;&#20301;&#20110;&#38;lt;form&#38;gt;...&#38;lt;/form&#38;gt; &#20043;&#38388;&#30340;&#20803;&#32032;&#30340;&#38598;&#21512;&#65292;&#23427;&#20204;&#20801;&#35768;&#35775;&#38382;&#32773;&#36755;&#20837;&#25991;&#26412;&#12289;&#36873;&#25321;&#36873;&#39033;&#12289;&#25805;&#20316;&#23545;&#35937;&#21644;&#25511;&#21046;&#31561;&#31561;&#65292;&#28982;&#21518;&#23558;&#20449;&#24687;&#21457;&#36865;&#22238;&#26381;&#21153;&#22120;&#12290;&#10;&#22788;&#29702;&#34920;&#21333;&#26159;&#19968;&#20214;&#24456;&#22797;&#26434;&#30340;&#20107;&#24773;&#12290;&#32771;&#34385;&#19968;&#19979;Django &#30340;Admin &#31449;&#28857;&#65292;&#19981;&#21516;&#31867;&#22411;&#30340;&#22823;&#37327;&#25968;&#25454;&#39033;&#38656;&#35201;&#22312;&#19968;&#20010;&#34920;&#21333;&#20013;&#20934;&#22791;&#22909;&#12289;&#28210;&#26579;&#25104;HTML&#12289;&#20351;&#29992;&#19968;&#20010;&#26041;&#20415;&#30340;&#30028;&#38754;&#32534;&#36753;&#12289;&#36820;&#22238;&#32473;&#26381;&#21153;&#22120;&#12289;&#39564;&#35777;&#24182;&#28165;&#38500;&#65292;&#28982;&#21518;&#20445;&#23384;&#25110;&#32773;&#21521;&#21518;&#32487;&#32493;&#22788;&#29702;&#12290;&#10;&#10;Django &#30340;&#34920;&#21333;&#21151;&#33021;&#21487;&#20197;&#31616;&#21270;&#24182;&#33258;&#21160;&#21270;&#22823;&#37096;&#20998;&#36825;&#20123;&#24037;&#20316;&#65292;&#32780;&#19988;&#36824;&#21487;&#20197;&#27604;&#22823;&#37096;&#20998;&#31243;&#24207;&#21592;&#33258;&#24049;&#25152;&#32534;&#20889;&#30340;&#20195;&#30721;&#26356;&#23433;&#20840;&#12290;&#10;&#10;Django &#20250;&#22788;&#29702;&#34920;&#21333;&#24037;&#20316;&#20013;&#30340;&#19977;&#20010;&#26174;&#33879;&#19981;&#21516;&#30340;&#37096;&#20998;&#65306;&#10;&#10;- &#20934;&#22791;&#24182;&#37325;&#26032;&#26500;&#36896;&#25968;&#25454;&#10;- &#20026;&#25968;&#25454;&#21019;&#24314;HTML &#34920;&#21333;&#10;- &#25509;&#25910;&#24182;&#22788;&#29702;&#23458;&#25143;&#31471;&#25552;&#20132;&#30340;&#34920;&#21333;&#21644;&#25968;&#25454;&#10;&#21487;&#20197;&#25163;&#24037;&#32534;&#20889;&#20195;&#30721;&#26469;&#23454;&#29616;&#65292;&#20294;&#26159;Django &#21487;&#20197;&#24110;&#20320;&#23436;&#25104;&#25152;&#26377;&#36825;&#20123;&#24037;&#20316;&#12290;&#10;&#10;&#22312;Django&#20013;&#26500;&#24314;&#19968;&#20010;&#34920;&#21333;&#10;`sample/forms.py`</span><br></pre></td></tr></table></figure>
-<p>  from django import forms</p>
-</li>
-</ul>
-<pre><code>class NameForm（forms.Form):
-    your_name = forms.CharField(label=&apos;Your name&apos;, max_length=100, required=True)
-    age = forms.IntegerField(initial=0)
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;&#34920;&#21333;&#31995;&#32479;&#30340;&#26680;&#24515;&#37096;&#20998;&#26159;Django&#30340;[Form](http://python.usyiyi.cn/django/ref/forms/fields.html)&#31867;.Django &#30340;&#27169;&#22411;&#25551;&#36848;&#19968;&#20010;&#23545;&#35937;&#30340;&#36923;&#36753;&#32467;&#26500;&#12289;&#34892;&#20026;&#20197;&#21450;&#23637;&#29616;&#32473;&#25105;&#20204;&#30340;&#26041;&#24335;&#65292;&#19982;&#27492;&#31867;&#20284;&#65292;Form &#31867;&#25551;&#36848;&#19968;&#20010;&#34920;&#21333;&#24182;&#20915;&#23450;&#23427;&#22914;&#20309;&#24037;&#20316;&#21644;&#23637;&#29616;.&#10;&#23601;&#20687;&#27169;&#22411;&#31867;&#30340;&#23646;&#24615;&#26144;&#23556;&#21040;&#25968;&#25454;&#24211;&#30340;&#23646;&#24615;&#19968;&#26679;&#65292;&#34920;&#21333;&#31867;&#30340;[&#23383;&#27573;](http://python.usyiyi.cn/django/ref/forms/fields.html)&#20250;&#26144;&#23556;&#21040;HTML &#30340;&#38;lt;input&#38;gt;&#34920;&#21333;&#30340;&#20803;&#32032;.&#10;&#34920;&#21333;&#30340;&#23383;&#27573;&#26412;&#36523;&#20063;&#26159;&#31867;&#65307;&#23427;&#20204;&#31649;&#29702;&#34920;&#21333;&#30340;&#25968;&#25454;&#24182;&#22312;&#34920;&#21333;&#25552;&#20132;&#26102;&#36827;&#34892;&#39564;&#35777;&#12290;&#10;&#10;`templates/sample/form.html`&#10;&#10;&#123;% raw %&#125;&#10;&#10;    &#123;% extends &#34;base.html&#34; %&#125;&#10;    &#123;% block title %&#125; Sample Page &#123;% endblock %&#125;&#10;    &#123;% block content %&#125;&#10;&#10;    &#60;form action=&#34;&#123;% url &#39;sample:get_name&#39; %&#125;&#34; method=&#34;post&#34;&#62;&#10;        &#123;% csrf_token %&#125;&#10;        &#123;&#123; form &#125;&#125;&#10;        &#60;input type=&#34;submit&#34; value=&#34;Submit&#34; /&#62;&#10;    &#60;/form&#62;&#10;&#10;    &#123;% endblock %&#125;&#10;&#10;&#123;% endraw %&#125;&#10;&#10;`sample/views.py`</span><br></pre></td></tr></table></figure>
-<pre><code>from .forms import NameForm
-
-
-def get_name(request):
-    # if this is a POST request we need to process the form data
-    if request.method == &apos;POST&apos;:
-        # create a form instance and populate it with data from the request:
-        form = NameForm(request.POST)
-        # check whether it&apos;s valid:
-        if form.is_valid():
-            name = form.cleaned_data[&apos;your_name&apos;]
-            age = form.cleaned_data[&apos;age&apos;]
-            return render(request, &apos;sample/success.html&apos;, {
-                    &apos;name&apos;: name,
-                    &apos;age&apos;: age
-                })
-    else:
-        form = NameForm()
-    return render(request, &apos;sample/form.html&apos;, {&apos;form&apos;: form})
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;`sample/success.html`&#10;&#10;&#123;% raw %&#125;&#10;&#10;    &#60;html&#62;&#10;        &#60;head&#62;&#60;title&#62;Success&#60;/title&#62;title&#62;&#60;/head&#62;&#10;         &#60;body&#62;&#10;            &#60;p&#62;Success!&#60;/p&#62;&#10;            &#60;p&#62;Your name is &#123;&#123; name &#125;&#125;, aged &#123;&#123; age &#125;&#125;.&#60;/p&#62;&#10;            &#60;a href=&#39;&#123;% url &#39;sample:get_name&#39; %&#125;&#39;&#62;&#36820;&#22238;&#60;/a&#62;&#10;         &#60;/body&#62;&#10;    &#60;/html&#62;&#10;&#10;&#123;% endraw %&#125;&#10;&#10;&#10;&#10;#### &#24314;&#31435;&#25968;&#25454;&#24211;&#36830;&#25509;&#10;&#30001;&#20110;&#25105;&#20204;&#38656;&#35201;&#20174;&#25968;&#25454;&#24211;&#20013;&#35835;&#21462;&#25105;&#20204;&#25235;&#21462;&#30340;&#28909;&#28857;&#26032;&#38395;&#20449;&#24687;&#65292;&#25152;&#20197;&#38656;&#35201;&#36830;&#25509;&#25968;&#25454;&#24211;&#65292;&#36825;&#37324;&#25105;&#20204;&#37319;&#29992;MYSQL.&#10;&#22312;__project_name/settings.py__&#20013;&#40664;&#35748;&#30340;&#25968;&#25454;&#24211;&#26159;Python&#33258;&#24102;&#30340;SQLite3&#65292;&#25152;&#20197;&#25105;&#20204;&#38656;&#35201;&#20462;&#25913;&#19968;&#19979;&#37197;&#32622;.&#10;&#10;`settings.py`&#10;&#10;    DATABASES = &#123;&#10;        &#39;default&#39;: &#123;&#10;            &#39;ENGINE&#39;: &#39;django.db.backends.mysql&#39;, # database engine&#10;            &#39;NAME&#39;: &#39;nust_visual_platform&#39;, # schema name&#10;            &#39;USER&#39;: &#39;root&#39;, # mysql username&#10;            &#39;HOST&#39;: &#39;localhost&#39;, # mysql host&#10;            &#39;PASSWORD&#39;: &#39;&#39;, # mysql password&#10;            &#39;PORT&#39;: &#39;3306&#39;&#125; # mysql port&#10;    &#125;&#10;&#10;&#25105;&#20204;&#38656;&#35201;&#22312;MYSQL&#20013;&#26032;&#24314;&#19968;&#20010;schema&#65292;&#21097;&#19979;&#30340;&#25152;&#26377;&#23545;&#25968;&#25454;&#24211;&#30340;&#25805;&#20316;&#37117;&#19981;&#38656;&#35201;&#25105;&#20204;&#25163;&#21160;&#22788;&#29702;&#65292;Django&#20250;&#20026;&#25105;&#20204;&#20195;&#21171;.&#10;&#10;&#26032;&#24314;&#19968;&#20010;&#25968;&#25454;&#24211;&#34920;&#65306;&#10;1. &#22312;`wangyi`&#19979;&#38754;&#26032;&#24314;`models.py`&#27169;&#22411;&#25991;&#20214;&#65292;&#28982;&#21518;&#22312;&#25991;&#20214;&#20013;&#23450;&#20041;&#25105;&#20204;&#30340;&#25968;&#25454;&#24211;&#34920;.</span><br></pre></td></tr></table></figure>
-<pre><code>from django.db import models
-
-
-class WangyiArticle（models.Model):
-    docid = models.CharField(primary_key=True, max_length=50)
-    votecount = models.IntegerField(default=0)
-    content = models.TextField()
-    ptime = models.DateTimeField()
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#20855;&#20307;&#32454;&#33410;&#21487;&#26597;&#30475;Django&#25552;&#20379;&#30340;&#20840;&#37096;&#27169;&#22411;&#23383;&#27573;&#30340;[&#23383;&#27573;&#36873;&#39033;](http://python.usyiyi.cn/django/ref/models/fields.html#field-options)&#21644;[&#23383;&#27573;&#31867;&#22411;](http://python.usyiyi.cn/django/ref/models/fields.html#field-types)&#30340;API&#12290;&#10;&#10;2.&#36816;&#34892;&#21629;&#20196;&#26469;&#29983;&#25104;&#20135;&#29983;&#25968;&#25454;&#34920;&#30340;SQL&#20195;&#30721;.</span><br></pre></td></tr></table></figure>
-</code></pre><p>python manage.py makemigrations wangyi<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#10;&#25105;&#20204;&#21487;&#20197;&#30475;&#21040;&#31867;&#20284;&#19979;&#38754;&#30340;&#20449;&#24687;&#65306;&#10;&#10;    Migrations for &#39;wangyi&#39;:&#10;        0001_initial.py:&#10;            - Create model WangyiArticle&#10;&#10;3.&#22312;&#25968;&#25454;&#24211;&#20013;&#29983;&#25104;&#25968;&#25454;&#34920;</span><br></pre></td></tr></table></figure></p>
-<p>python manage.py migrate wangyi<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#22914;&#26524;&#20320;&#30340;&#25968;&#25454;&#24211;&#20013;&#20854;&#23454;&#24050;&#32463;&#26377;&#36825;&#24352;&#34920;&#23384;&#22312;&#20102;&#65292;&#23601;&#19981;&#35201;&#25191;&#34892;SQL&#21435;&#25913;&#21464;&#25968;&#25454;&#34920;&#65292;&#36825;&#26102;&#38656;&#35201;&#36816;&#34892;</span><br></pre></td></tr></table></figure></p>
-<p>python manage.py migrate wangyi –fake-initial<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4.&#23545;&#25968;&#25454;&#34920;&#36827;&#34892;URD&#25805;&#20316;&#10;&#23545;&#25968;&#25454;&#34920;&#30340;&#25805;&#20316;&#21487;&#20197;&#22312;`models.py`&#20013;&#20063;&#21487;&#20197;&#22312;`views.py`&#20013;&#65292;&#36825;&#37324;&#25105;&#20204;&#21482;&#20171;&#32461;&#22914;&#20309;&#22312;`views.py`&#20013;&#25805;&#20316;&#25968;&#25454;&#34920;.&#10;&#36941;&#21382;&#25968;&#25454;&#34920;&#65306;</span><br></pre></td></tr></table></figure></p>
-<p>WangyiArticle.objects<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#23545;&#33719;&#21462;&#30340;&#25968;&#25454;&#36827;&#34892;&#31579;&#36873;&#65306;</span><br></pre></td></tr></table></figure></p>
-<p>WangyiArticle.objects.filter(ptime<strong>lt=today)<br>                     .filter(mtime</strong>gel=yesterday)<br>                     .filter(parent_id=’’)<br>                     .order_by(‘-votecount’)[:10]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Django&#30340;ORM(Object Relational Mapping)&#21151;&#33021;&#24456;&#24378;&#22823;&#65292;&#20855;&#20307;&#30340;&#20854;&#20182;&#32454;&#33410;&#21487;&#20197;&#21442;&#32771;[&#23448;&#26041;&#25991;&#26723;](https://docs.djangoproject.com/en/1.8/topics/db/)&#10;&#10;&#10;#### &#33258;&#21160;&#20998;&#39029;&#21151;&#33021;&#10;&#10;##### 1. &#23433;&#35013;&#10;```shell&#10; pip install python-pagination</span><br></pre></td></tr></table></figure></p>
+</ol>
+<p>具体细节可查看Django提供的全部模型字段的<a href="http://python.usyiyi.cn/django/ref/models/fields.html#field-options" target="_blank" rel="external">字段选项</a>和<a href="http://python.usyiyi.cn/django/ref/models/fields.html#field-types" target="_blank" rel="external">字段类型</a>的API。</p>
+<p>2.运行命令来生成产生数据表的SQL代码.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py makemigrations wangyi</span><br></pre></td></tr></table></figure></p>
+<p>我们可以看到类似下面的信息：</p>
+<pre><code>Migrations for &apos;wangyi&apos;:
+    0001_initial.py:
+        - Create model WangyiArticle
+</code></pre><p>3.在数据库中生成数据表<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py migrate wangyi</span><br></pre></td></tr></table></figure></p>
+<p>如果你的数据库中其实已经有这张表存在了，就不要执行SQL去改变数据表，这时需要运行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py migrate wangyi --fake-initial</span><br></pre></td></tr></table></figure></p>
+<p>4.对数据表进行URD操作<br>对数据表的操作可以在<code>models.py</code>中也可以在<code>views.py</code>中，这里我们只介绍如何在<code>views.py</code>中操作数据表.<br>遍历数据表：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WangyiArticle.objects</span><br></pre></td></tr></table></figure></p>
+<p>对获取的数据进行筛选：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WangyiArticle.objects.filter(ptime__lt=today)&#10;                     .filter(mtime__gel=yesterday)&#10;                     .filter(parent_id=&#39;&#39;)&#10;                     .order_by(&#39;-votecount&#39;)[:10]</span><br></pre></td></tr></table></figure></p>
+<p>Django的ORM(Object Relational Mapping)功能很强大，具体的其他细节可以参考<a href="https://docs.djangoproject.com/en/1.8/topics/db/" target="_blank" rel="external">官方文档</a></p>
+<h4 id="自动分页功能"><a href="#自动分页功能" class="headerlink" title="自动分页功能"></a>自动分页功能</h4><h5 id="1-安装"><a href="#1-安装" class="headerlink" title="1. 安装"></a>1. 安装</h5><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install python-pagination</span><br></pre></td></tr></table></figure>
 <h5 id="2-配置"><a href="#2-配置" class="headerlink" title="2. 配置"></a>2. 配置</h5><p><a href="https://pypi.python.org/pypi/django-pagination" target="_blank" rel="external">参考官方文档</a></p>
 <p>说明：django1.4开始，<code>TEMPLATE_CONTEXT_PROCESSORS</code>不显示在<code>settings.py</code>文件中，此时需要自己添加<br>在<code>settings.py</code>开头添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import django.conf.global_settings as DEFAULT_SETTINGS</span><br></pre></td></tr></table></figure></p>
 <p>在配置最后添加<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + (</span><br><span class="line">    <span class="string">"django.contrib.auth.context_processors.auth"</span>,</span><br><span class="line">    <span class="string">"django.core.context_processors.debug"</span>,</span><br><span class="line">    <span class="string">"django.core.context_processors.i18n"</span>,</span><br><span class="line">    <span class="string">"django.core.context_processors.media"</span>,</span><br><span class="line">    <span class="string">"django.core.context_processors.request"</span>,</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
