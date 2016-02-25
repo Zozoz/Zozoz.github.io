@@ -93,6 +93,12 @@
 <h3 id="Ni"><a href="#Ni" class="headerlink" title="Ni"></a>Ni</h3><p>ppppp</p>
 <pre><code>sudo install
 </code></pre><p>qqqq<code>in.txt</code></p>
+<h2 id="Ubuntu下使用ssh-keygen设置SHH无密码登录"><a href="#Ubuntu下使用ssh-keygen设置SHH无密码登录" class="headerlink" title="Ubuntu下使用ssh-keygen设置SHH无密码登录"></a>Ubuntu下使用ssh-keygen设置SHH无密码登录</h2><h4 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h4><p>1.安装<code>openssh-server</code>和<code>openssh-client</code>(只按server即可)</p>
+<pre><code>sudo apt-get install openssh-client openssh-server
+</code></pre><p>2.在<code>~/.ssh</code>下新建文件<code>authorized_keys</code></p>
+<h4 id="客户机"><a href="#客户机" class="headerlink" title="客户机"></a>客户机</h4><p>1.生成公钥和私钥</p>
+<pre><code>ssh-keygen -t rsa
+</code></pre><p>2.只需把本机上生成的公钥加到需要登录的服务器的<code>~/.ssh/authorized_keys</code>中</p>
 
       
     </div>
