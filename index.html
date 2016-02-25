@@ -103,7 +103,7 @@ $$\Delta W\_{kj}^l = \frac{\partial C}{\partial w_{kj}^l} * \delta^l_k$$
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2016/02/25/test/" data-id="cil29agyl0006svjgk1nomt8v" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2016/02/25/test/" data-id="cil29nooa0006ujjgham2wxhd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -148,7 +148,7 @@ $$\Delta W\_{kj}^l = \frac{\partial C}{\partial w_{kj}^l} * \delta^l_k$$
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2016/02/25/hello-world/" data-id="cil29agyp0007svjg633h6mmw" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2016/02/25/hello-world/" data-id="cil29noof0007ujjgibp1ufd4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -374,7 +374,7 @@ int main(int argc, char** argv){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2015/12/16/Kleinberg/" data-id="cil29agyx000bsvjgbz34glit" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2015/12/16/Kleinberg/" data-id="cil29noor000bujjgr1c8z7qx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BurstDetection/">BurstDetection</a></li></ul>
@@ -500,7 +500,7 @@ sudo pip install pymongo
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2015/10/20/安装配置/" data-id="cil29agy20003svjgnemvww7r" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2015/10/20/安装配置/" data-id="cil29noo70003ujjg5hsoz6aj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/运维/">运维</a></li></ul>
@@ -558,7 +558,7 @@ sudo pip install pymongo
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2015/09/23/BP算法/" data-id="cil29agwp0000svjg7wf2z2mg" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2015/09/23/BP算法/" data-id="cil29non70000ujjg3ig147k6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NN/">NN</a></li></ul>
@@ -719,108 +719,7 @@ def show_2(request, year):
 <p>表单系统的核心部分是Django的<a href="http://python.usyiyi.cn/django/ref/forms/fields.html" target="_blank" rel="external">Form</a>类.Django 的模型描述一个对象的逻辑结构、行为以及展现给我们的方式，与此类似，Form 类描述一个表单并决定它如何工作和展现.<br>就像模型类的属性映射到数据库的属性一样，表单类的<a href="http://python.usyiyi.cn/django/ref/forms/fields.html" target="_blank" rel="external">字段</a>会映射到HTML 的&lt;input&gt;表单的元素.<br>表单的字段本身也是类；它们管理表单的数据并在表单提交时进行验证。</p>
 <p><code>templates/sample/form.html</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &#34;base.html&#34; %&#125;&#10;&#123;% block title %&#125; Sample Page &#123;% endblock %&#125;&#10;&#123;% block content %&#125;&#10;&#10;&#60;form action=&#34;&#123;% url &#39;sample:get_name&#39; %&#125;&#34; method=&#34;post&#34;&#62;&#10;    &#123;% csrf_token %&#125;&#10;    &#123;&#123; form &#125;&#125;&#10;    &#60;input type=&#34;submit&#34; value=&#34;Submit&#34; /&#62;&#10;&#60;/form&#62;&#10;&#10;&#123;% endblock %&#125;</span><br></pre></td></tr></table></figure></p>
 <p><code>sample/views.py</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from .forms import NameForm&#10;&#10;&#10;def get_name(request):&#10;    # if this is a POST request we need to process the form data&#10;    if request.method == &#39;POST&#39;:&#10;        # create a form instance and populate it with data from the request:&#10;        form = NameForm(request.POST)&#10;        # check whether it&#39;s valid:&#10;        if form.is_valid():&#10;            name = form.cleaned_data[&#39;your_name&#39;]&#10;            age = form.cleaned_data[&#39;age&#39;]&#10;            return render(request, &#39;sample/success.html&#39;, &#123;&#10;                    &#39;name&#39;: name,&#10;                    &#39;age&#39;: age&#10;                &#125;)&#10;    else:&#10;        form = NameForm()&#10;    return render(request, &#39;sample/form.html&#39;, &#123;&#39;form&#39;: form&#125;)</span><br></pre></td></tr></table></figure></p>
-<p><code>sample/success.html</code><br>
-
-    <html>
-        <head><title>Success</title>title></head>
-         <body>
-            <p>Success!</p>
-            <p>Your name is {{ name }}, aged {{ age }}.</p>
-            <a href="{% url "sample:get_name" %}">返回</a>
-         <!-- mathjax config similar to math.stackexchange -->
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      processEscapes: true
-    }
-  });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-<!-- mathjax config similar to math.stackexchange -->
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      processEscapes: true
-    }
-  });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-<!-- mathjax config similar to math.stackexchange -->
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      processEscapes: true
-    }
-  });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-</body>
-    </html>
-
-</p>
+<p><code>sample/success.html</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;html&#62;&#10;    &#60;head&#62;&#60;title&#62;Success&#60;/title&#62;title&#62;&#60;/head&#62;&#10;     &#60;body&#62;&#10;        &#60;p&#62;Success!&#60;/p&#62;&#10;        &#60;p&#62;Your name is &#123;&#123; name &#125;&#125;, aged &#123;&#123; age &#125;&#125;.&#60;/p&#62;&#10;        &#60;a href=&#39;&#123;% url &#39;sample:get_name&#39; %&#125;&#39;&#62;&#36820;&#22238;&#60;/a&#62;&#10;     &#60;/body&#62;&#10;&#60;/html&#62;</span><br></pre></td></tr></table></figure></p>
 <h4 id="建立数据库连接"><a href="#建立数据库连接" class="headerlink" title="建立数据库连接"></a>建立数据库连接</h4><p>由于我们需要从数据库中读取我们抓取的热点新闻信息，所以需要连接数据库，这里我们采用MYSQL.<br>在<strong>project_name/settings.py</strong>中默认的数据库是Python自带的SQLite3，所以我们需要修改一下配置.</p>
 <p><code>settings.py</code></p>
 <pre><code>DATABASES = {
@@ -858,23 +757,7 @@ def show_2(request, year):
 <h5 id="4-参阅资料"><a href="#4-参阅资料" class="headerlink" title="4. 参阅资料"></a>4. 参阅资料</h5><p><a href="http://www.django-china.cn/topic/53/" target="_blank" rel="external">七部教你实现Django网站列表自动分页</a></p>
 <h2 id="Bootstrap"><a href="#Bootstrap" class="headerlink" title="Bootstrap"></a>Bootstrap</h2><p><a href="http://v3.bootcss.com/" target="_blank" rel="external">中文文档</a> <a href="http://getbootstrap.com/" target="_blank" rel="external">英文文档</a></p>
 <p>Bootstrap，来自 Twitter，是目前很受欢迎的前端框架。Bootstrap 是基于 HTML、CSS、JAVASCRIPT 的，它简洁灵活，使得 Web 开发更加快捷,是非专业网站开发人员优雅展示自己成果的利器。<br>Bootstrap是基于HTML5和CSS3开发的，它在jQuery的基础上进行了更为个性化和人性化的完善，形成一套自己独有的网站风格，并兼容大部分jQuery插件。<br>Bootstrap中包含了丰富的Web组件，根据这些组件，可以快速的搭建一个漂亮、功能完备的网站。其中包括以下组件：<br>下拉菜单、按钮组、按钮下拉菜单、导航、导航条、路径导航、分页、排版、缩略图、警告对话框、进度条、媒体对象等。</p>
-<p>我们可以很方便的把Bootstrap加入到我们的网站之中，以上面的项目为例。<br><code>templates/base.html</code></p>
-
-
-    <html>
-        <head>
-            <title>{% block title %}{% endblock %}</title>
-            {% load staticfiles %}
-            <link rel="stylesheet" type="text/css" href="{% static " base="" css="" bootstrap.min.css"="" %}"="">
-            <script src="{% static " base="" js="" jquery-2.1.4.min.js"="" %}"=""></script>
-            <script src="{% static " base="" js="" bootstrap.min.js"="" %}"=""></script>
-        </head>
-        <body>
-            {% block content %}{% endblock content %}
-        </body>
-    
-
-
+<p>我们可以很方便的把Bootstrap加入到我们的网站之中，以上面的项目为例。<br><code>templates/base.html</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;html&#62;&#10;    &#60;head&#62;&#10;        &#60;title&#62;&#123;% block title %&#125;&#123;% endblock %&#125;&#60;/title&#62;&#10;        &#123;% load staticfiles %&#125;&#10;        &#60;link rel=&#34;stylesheet&#34; type=&#34;text/css&#34; href=&#34;&#123;% static &#39;base/css/bootstrap.min.css&#39; %&#125;&#34;/&#62;&#10;        &#60;script src=&#34;&#123;% static &#39;base/js/jquery-2.1.4.min.js&#39; %&#125;&#34;&#62;&#60;/script&#62;&#10;        &#60;script src=&#34;&#123;% static &#39;base/js/bootstrap.min.js&#39; %&#125;&#34;&#62;&#60;/script&#62;&#10;    &#60;/head&#62;&#10;    &#60;body&#62;&#10;        &#123;% block content %&#125;&#123;% endblock content %&#125;&#10;    &#60;/body&#62;&#10;&#60;/head&#62;</span><br></pre></td></tr></table></figure></p>
 <p>只需要把bootstrap的css文件引入HTML中就可以使用它的CSS样式，但是必须在引入bootstrap.js文件之前先引入jQuery文件才能使用javascript插件。</p>
 <p>在这里说一下Django的<a href="http://python.usyiyi.cn/django/intro/tutorial06.html" target="_blank" rel="external">静态文件</a>。<br>除了由服务器生成的HTML文件外，网页应用一般需要提供其它必要的文件 —— 比如图片文件、JavaScript脚本和CSS样式表 —— 来为用户呈现出一个完整的网站。 在Django中，我们将这些文件称为“静态文件”。<br>首先在mysite中创建一个static目录.Django将在那里查找静态文件，这与Django是如何在<code>templates</code>中寻找对应的模板文件的方式是一致的.需要在配置文件中设置静态文件查找目录.<br><code>settings.py</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">STATIC_URL = &#39;/static/&#39;&#10;STATICFILES_DIRS = (&#10;        os.getcwd() + &#39;/static/&#39;,&#10;)</span><br></pre></td></tr></table></figure></p>
 
@@ -986,11 +869,11 @@ var myChart = echarts.init(document.getElementById('main1'));
 myChart.setOption(option1);
 </script>
 
-</html>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2015/08/28/django快速搭建一个网站/" data-id="cil29agyt0008svjgvco20p2j" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2015/08/28/django快速搭建一个网站/" data-id="cil29nooo0008ujjgta7oe0wq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/django/">django</a></li></ul>
@@ -1102,5 +985,35 @@ myChart.setOption(option1);
 <script src="/js/script.js" type="text/javascript"></script>
 
   </div>
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 </body>
 </html>
