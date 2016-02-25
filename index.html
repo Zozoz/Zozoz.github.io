@@ -99,7 +99,20 @@
 <h4 id="客户机"><a href="#客户机" class="headerlink" title="客户机"></a>客户机</h4><p>1.生成公钥和私钥</p>
 <pre><code>ssh-keygen -t rsa
 </code></pre><p>2.只需把本机上生成的公钥加到需要登录的服务器的<code>~/.ssh/authorized_keys</code>中</p>
-
+<h2 id="配置uwsgi"><a href="#配置uwsgi" class="headerlink" title="配置uwsgi"></a>配置uwsgi</h2><p><code>uwsgi.ini</code>文件</p>
+<pre><code>[uwsgi]
+socket=127.0.0.1:3400
+chdir=/root/NUST_Visual_Platform
+module=NUST_Visual_Platform.wsgi:application
+master=True
+processes=2
+#home=/root/NUST_Visual_Platform/
+max-requests=5000
+vacuum=True
+chmod-socket=664
+</code></pre><p>启动</p>
+<pre><code>uwsgi --ini uwsgi.ini
+</code></pre>
       
     </div>
     <footer class="article-footer">
