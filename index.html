@@ -465,6 +465,132 @@ int main(int argc, char** argv){
 
 
   
+    <article id="post-安装配置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/10/20/安装配置/" class="article-date">
+  <time datetime="2015-10-20T11:26:54.000Z" itemprop="datePublished">2015-10-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/20/安装配置/">安装配置</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Ubuntu下使用ssh-keygen设置SHH无密码登录"><a href="#Ubuntu下使用ssh-keygen设置SHH无密码登录" class="headerlink" title="Ubuntu下使用ssh-keygen设置SHH无密码登录"></a>Ubuntu下使用ssh-keygen设置SHH无密码登录</h2><h4 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h4><p>1.安装<code>openssh-server</code>和<code>openssh-client</code>(只按server即可)</p>
+<pre><code>sudo apt-get install openssh-client openssh-server
+</code></pre><p>2.在<code>~/.ssh</code>下新建文件<code>authorized_keys</code></p>
+<h4 id="客户机"><a href="#客户机" class="headerlink" title="客户机"></a>客户机</h4><p>1.生成公钥和私钥</p>
+<pre><code>ssh-keygen -t rsa
+</code></pre><p>2.只需把本机上生成的公钥加到需要登录的服务器的<code>~/.ssh/authorized_keys</code>中</p>
+<p>3.登录</p>
+<pre><code>ssh server_name@server_ip
+</code></pre><p>4.用别名登录</p>
+<p>在本地<code>~/.ssh/config</code>中添加:</p>
+<pre><code>HOST vps1
+HostName *.*.*.*
+User *
+Port *(一般是22)
+IdentityFile ~/.ssh/id_rsa
+ForwardAgent yes
+</code></pre><p>以后就可以直接用<code>ssh vps1</code>登录了</p>
+<h4 id="服务器和客户机之间文件拷贝"><a href="#服务器和客户机之间文件拷贝" class="headerlink" title="服务器和客户机之间文件拷贝"></a>服务器和客户机之间文件拷贝</h4><p>1.客户机-&gt;服务器</p>
+<pre><code>scp [-r] local_file server_name@server_ip:server_path
+</code></pre><p>2.服务器-&gt;客户机</p>
+<pre><code>scp [-r] server_name@server_ip:server_file local_path
+</code></pre><h2 id="Ubuntu-14-04-下安装Scrapy"><a href="#Ubuntu-14-04-下安装Scrapy" class="headerlink" title="Ubuntu 14.04 下安装Scrapy"></a>Ubuntu 14.04 下安装Scrapy</h2><pre><code>sudo apt-get install python-pip
+
+sudo apt-get install python-dev libxml2-dev libxslt-dev
+
+sudo apt-get install python-lxml
+
+sudo apt-get install libffi-dev
+
+sudo apt-get install libssl-dev
+
+sudo pip install scrapy
+</code></pre><h2 id="Ubuntu-14-04-下安装MySQL"><a href="#Ubuntu-14-04-下安装MySQL" class="headerlink" title="Ubuntu 14.04 下安装MySQL"></a>Ubuntu 14.04 下安装MySQL</h2><pre><code>sudo apt-get install mysql-server
+sudo apt-get install mysql-client
+sudo apt-get install mysql-workbench
+sudo apt-get install libmysqlclient-dev
+sudo pip install MySQL-python
+</code></pre><h3 id="配置MySQL支持远程访问"><a href="#配置MySQL支持远程访问" class="headerlink" title="配置MySQL支持远程访问"></a>配置MySQL支持远程访问</h3><p>修改配置文件<code>sudo vim /etc/mysql/my.cnf</code><br>将<code>bind 127.0.0.1</code>注释掉<br>添加授权<code>mysql -u root -p</code></p>
+<pre><code>GRANT ALL PRIVILEGES ON *.* TO &apos;root&apos;@&apos;%&apos; IDENTIFIED BY &apos;YOURPASSWORD&apos; WITH GRANT OPTION;
+</code></pre><p>自行替换上句中的IP地址和密码<br>重启MySQL<code>sudo service mysql restart</code></p>
+<h2 id="配置uwsgi"><a href="#配置uwsgi" class="headerlink" title="配置uwsgi"></a>配置uwsgi</h2><p><code>uwsgi.ini</code>文件</p>
+<pre><code>[uwsgi]
+socket=127.0.0.1:3400
+chdir=/root/NUST_Visual_Platform
+module=NUST_Visual_Platform.wsgi:application
+master=True
+processes=2
+#home=/root/NUST_Visual_Platform/
+max-requests=5000
+vacuum=True
+chmod-socket=664
+</code></pre><p>启动</p>
+<pre><code>uwsgi --ini uwsgi.ini
+</code></pre><h2 id="Ubuntu-14-04-下Nginx配置"><a href="#Ubuntu-14-04-下Nginx配置" class="headerlink" title="Ubuntu 14.04 下Nginx配置"></a>Ubuntu 14.04 下Nginx配置</h2><p>1.安装Nginx</p>
+<pre><code>sudo apt-get install nginx
+</code></pre><p>2.在<code>/etc/nginx/conf.d/</code>文件夹下面创建<code>xxx.conf</code>文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">server &#123;&#10;    listen 80; # default_server;&#10;    server_name 123.75.138.47 zsl.link;&#10;    charset utf-8;&#10;    client_max_body_size 100M;&#10;&#10;    location / &#123;&#10;        # First attempt to serve request as file, then&#10;        # as directory, then fall back to displaying a 404.&#10;        # itry_files $uri $uri/ =404;&#10;        # Uncomment to enable naxsi on this location&#10;        # include /etc/nginx/naxsi.rules&#10;        uwsgi_pass 127.0.0.1:3400;&#10;        include uwsgi_params;&#10;        add_header Cache-Control no-cache;&#10;        add_header Cache-Control private;&#10;    &#125;&#10;&#10;    location /static/ &#123;&#10;        alias /root/NUST_Visual_Platform/static/;&#10;        expires 30d;&#10;    &#125;&#10;&#10;    location /media/ &#123;&#10;        alias /root/NUST_Visual_Platform/njustmark/media/;&#10;        expires 30d;&#10;    &#125;&#10;&#10;    # Only for nginx-naxsi used with nginx-naxsi-ui : process denied requests&#10;    #location /RequestDenied &#123;&#10;    #   proxy_pass http://127.0.0.1:8080;&#10;    #&#125;&#10;&#10;    #error_page 404 /404.html;&#10;&#10;    # redirect server error pages to the static page /50x.html&#10;    #&#10;    error_page 500 502 503 504 /50x.html;&#10;    location = /50x.html &#123;&#10;        root /usr/share/nginx/html;&#10;    &#125;&#10;&#10;    # deny access to .htaccess files, if Apache&#39;s document root&#10;    # concurs with nginx&#39;s one&#10;    #&#10;    #location ~ /\.ht &#123;&#10;    #   deny all;&#10;    #&#125;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>启动Nginx</p>
+<pre><code>sudo service nginx start
+</code></pre><p>重启Nginx</p>
+<pre><code>sudo service nginx restart
+</code></pre><p>停止Nginx</p>
+<pre><code>sudo service nginx stop
+</code></pre><p>重新加载配置文件</p>
+<pre><code>sudo nginx -s reload
+</code></pre><h2 id="配置supervisor"><a href="#配置supervisor" class="headerlink" title="配置supervisor"></a>配置supervisor</h2><p>安装</p>
+<pre><code>pip install supervisor
+</code></pre><p>生成配置文件</p>
+<pre><code>echo_supervisord_cong &gt; supervisord.conf
+</code></pre><p>添加uWSGI的启动配置</p>
+<pre><code>[program:django_web]
+command=uwsgi --ini /root/NUST_Visual_Platform/uwsgi.ini
+stopsignal=QUIT
+autostart=true
+autorestart=true
+stdout_logfile=/root/NUST_Visual_Platform/uwsgi.log
+redirect_stderr=true
+</code></pre><p>在配置文件目录下启动</p>
+<pre><code>sudo supervisord -c supervisord.conf
+</code></pre><p>手动启动</p>
+<pre><code>sudo supervisorctl start xxx
+</code></pre><p>停止</p>
+<pre><code>sudo supervisorctl stop xxx
+</code></pre><p>查看状态</p>
+<pre><code>sudo supervisorctl status
+</code></pre><h2 id="安装redis"><a href="#安装redis" class="headerlink" title="安装redis"></a>安装redis</h2><pre><code>sudo apt-get install redis-server
+sudo pip install redis
+</code></pre><h2 id="安装mongodb"><a href="#安装mongodb" class="headerlink" title="安装mongodb"></a>安装mongodb</h2><pre><code>sudo apt-get install mongodb
+sudo pip install pymongo
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zozoz.github.io/2015/10/20/安装配置/" data-id="cil23gfz800005kjg3qf6z0xx" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/运维/">运维</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-BP算法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/09/23/BP算法/" class="article-date">
@@ -535,7 +661,7 @@ int main(int argc, char** argv){
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BurstDetection/">BurstDetection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NN/">NN</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BurstDetection/">BurstDetection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NN/">NN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/运维/">运维</a></li></ul>
     </div>
   </div>
 
@@ -545,7 +671,7 @@ int main(int argc, char** argv){
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/BurstDetection/" style="font-size: 10px;">BurstDetection</a> <a href="/tags/NN/" style="font-size: 10px;">NN</a>
+      <a href="/tags/BurstDetection/" style="font-size: 10px;">BurstDetection</a> <a href="/tags/NN/" style="font-size: 10px;">NN</a> <a href="/tags/运维/" style="font-size: 10px;">运维</a>
     </div>
   </div>
 
@@ -554,7 +680,7 @@ int main(int argc, char** argv){
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li></ul>
     </div>
   </div>
 
@@ -576,6 +702,10 @@ int main(int argc, char** argv){
         
           <li>
             <a href="/2015/12/16/Kleinberg/">Kleinberg</a>
+          </li>
+        
+          <li>
+            <a href="/2015/10/20/安装配置/">安装配置</a>
           </li>
         
           <li>
