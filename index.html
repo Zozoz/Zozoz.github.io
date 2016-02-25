@@ -103,7 +103,7 @@ $$\Delta W\_{kj}^l = \frac{\partial C}{\partial w_{kj}^l} * \delta^l_k$$
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2016/02/25/test/" data-id="cil294zd70006rfjg5bt6ev00" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2016/02/25/test/" data-id="cil29agyl0006svjgk1nomt8v" class="article-share-link">Share</a>
       
       
     </footer>
@@ -148,7 +148,7 @@ $$\Delta W\_{kj}^l = \frac{\partial C}{\partial w_{kj}^l} * \delta^l_k$$
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2016/02/25/hello-world/" data-id="cil294zd90007rfjgr3umzhxq" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2016/02/25/hello-world/" data-id="cil29agyp0007svjg633h6mmw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -374,7 +374,7 @@ int main(int argc, char** argv){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2015/12/16/Kleinberg/" data-id="cil294zde000brfjgckmmxd5v" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2015/12/16/Kleinberg/" data-id="cil29agyx000bsvjgbz34glit" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BurstDetection/">BurstDetection</a></li></ul>
@@ -500,7 +500,7 @@ sudo pip install pymongo
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2015/10/20/安装配置/" data-id="cil294zd30003rfjg3tgvhub6" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2015/10/20/安装配置/" data-id="cil29agy20003svjgnemvww7r" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/运维/">运维</a></li></ul>
@@ -558,7 +558,7 @@ sudo pip install pymongo
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2015/09/23/BP算法/" data-id="cil294zcg0000rfjgcqlkzg2x" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2015/09/23/BP算法/" data-id="cil29agwp0000svjg7wf2z2mg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NN/">NN</a></li></ul>
@@ -717,15 +717,9 @@ def show_2(request, year):
 </ul>
 <p>在Django中构建一个表单<br><code>sample/forms.py</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from django import forms&#10;&#10;&#10;class NameForm&#65288;forms.Form):&#10;    your_name = forms.CharField(label=&#39;Your name&#39;, max_length=100, required=True)&#10;    age = forms.IntegerField(initial=0)</span><br></pre></td></tr></table></figure></p>
 <p>表单系统的核心部分是Django的<a href="http://python.usyiyi.cn/django/ref/forms/fields.html" target="_blank" rel="external">Form</a>类.Django 的模型描述一个对象的逻辑结构、行为以及展现给我们的方式，与此类似，Form 类描述一个表单并决定它如何工作和展现.<br>就像模型类的属性映射到数据库的属性一样，表单类的<a href="http://python.usyiyi.cn/django/ref/forms/fields.html" target="_blank" rel="external">字段</a>会映射到HTML 的&lt;input&gt;表单的元素.<br>表单的字段本身也是类；它们管理表单的数据并在表单提交时进行验证。</p>
-<p><code>templates/sample/form.html</code></p>
-
-<!--￼10-->
-
-
-<p><code>sample/views.py</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from .forms import NameForm&#10;&#10;&#10;def get_name(request):&#10;    # if this is a POST request we need to process the form data&#10;    if request.method == &#39;POST&#39;:&#10;        # create a form instance and populate it with data from the request:&#10;        form = NameForm(request.POST)&#10;        # check whether it&#39;s valid:&#10;        if form.is_valid():&#10;            name = form.cleaned_data[&#39;your_name&#39;]&#10;            age = form.cleaned_data[&#39;age&#39;]&#10;            return render(request, &#39;sample/success.html&#39;, &#123;&#10;                    &#39;name&#39;: name,&#10;                    &#39;age&#39;: age&#10;                &#125;)&#10;    else:&#10;        form = NameForm()&#10;    return render(request, &#39;sample/form.html&#39;, &#123;&#39;form&#39;: form&#125;)</span><br></pre></td></tr></table></figure>
-<p><code>sample/success.html</code></p>
-
+<p><code>templates/sample/form.html</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &#34;base.html&#34; %&#125;&#10;&#123;% block title %&#125; Sample Page &#123;% endblock %&#125;&#10;&#123;% block content %&#125;&#10;&#10;&#60;form action=&#34;&#123;% url &#39;sample:get_name&#39; %&#125;&#34; method=&#34;post&#34;&#62;&#10;    &#123;% csrf_token %&#125;&#10;    &#123;&#123; form &#125;&#125;&#10;    &#60;input type=&#34;submit&#34; value=&#34;Submit&#34; /&#62;&#10;&#60;/form&#62;&#10;&#10;&#123;% endblock %&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>sample/views.py</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from .forms import NameForm&#10;&#10;&#10;def get_name(request):&#10;    # if this is a POST request we need to process the form data&#10;    if request.method == &#39;POST&#39;:&#10;        # create a form instance and populate it with data from the request:&#10;        form = NameForm(request.POST)&#10;        # check whether it&#39;s valid:&#10;        if form.is_valid():&#10;            name = form.cleaned_data[&#39;your_name&#39;]&#10;            age = form.cleaned_data[&#39;age&#39;]&#10;            return render(request, &#39;sample/success.html&#39;, &#123;&#10;                    &#39;name&#39;: name,&#10;                    &#39;age&#39;: age&#10;                &#125;)&#10;    else:&#10;        form = NameForm()&#10;    return render(request, &#39;sample/form.html&#39;, &#123;&#39;form&#39;: form&#125;)</span><br></pre></td></tr></table></figure></p>
+<p><code>sample/success.html</code><br>
 
     <html>
         <head><title>Success</title>title></head>
@@ -826,7 +820,7 @@ def show_2(request, year):
 </body>
     </html>
 
-
+</p>
 <h4 id="建立数据库连接"><a href="#建立数据库连接" class="headerlink" title="建立数据库连接"></a>建立数据库连接</h4><p>由于我们需要从数据库中读取我们抓取的热点新闻信息，所以需要连接数据库，这里我们采用MYSQL.<br>在<strong>project_name/settings.py</strong>中默认的数据库是Python自带的SQLite3，所以我们需要修改一下配置.</p>
 <p><code>settings.py</code></p>
 <pre><code>DATABASES = {
@@ -996,7 +990,7 @@ myChart.setOption(option1);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2015/08/28/django快速搭建一个网站/" data-id="cil294zdb0008rfjgr1hxekut" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2015/08/28/django快速搭建一个网站/" data-id="cil29agyt0008svjgvco20p2j" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/django/">django</a></li></ul>
