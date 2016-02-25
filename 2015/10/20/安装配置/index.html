@@ -5,31 +5,40 @@
   
   <title>安装配置 | Newbie</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Ubuntu下使用ssh-keygen设置SHH无密码登录服务器1.安装openssh-server和openssh-client(只按server即可)
-sudo apt-get install openssh-client openssh-server
-2.在~/.ssh下新建文件authorized_keys
-客户机1.生成公钥和私钥
-ssh-keygen -t rsa
-2.只需把本机上生成">
+  <meta name="description" content="Hexo搭建个人博客安装hexonpm install -g hexo-cli
+支持用Mathjax渲染数学公式npm install hexo-math --save
+在_config.yml中添加:
+plugins:
+- hexo-math
+部署到githubnpm install hexo-deployer-git --save
+配置_config.yml：
+deplay:
+  type:">
 <meta property="og:type" content="article">
 <meta property="og:title" content="安装配置">
 <meta property="og:url" content="http://zozoz.github.io/2015/10/20/安装配置/index.html">
 <meta property="og:site_name" content="Newbie">
-<meta property="og:description" content="Ubuntu下使用ssh-keygen设置SHH无密码登录服务器1.安装openssh-server和openssh-client(只按server即可)
-sudo apt-get install openssh-client openssh-server
-2.在~/.ssh下新建文件authorized_keys
-客户机1.生成公钥和私钥
-ssh-keygen -t rsa
-2.只需把本机上生成">
-<meta property="og:updated_time" content="2016-02-25T09:55:10.000Z">
+<meta property="og:description" content="Hexo搭建个人博客安装hexonpm install -g hexo-cli
+支持用Mathjax渲染数学公式npm install hexo-math --save
+在_config.yml中添加:
+plugins:
+- hexo-math
+部署到githubnpm install hexo-deployer-git --save
+配置_config.yml：
+deplay:
+  type:">
+<meta property="og:updated_time" content="2016-02-25T13:17:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="安装配置">
-<meta name="twitter:description" content="Ubuntu下使用ssh-keygen设置SHH无密码登录服务器1.安装openssh-server和openssh-client(只按server即可)
-sudo apt-get install openssh-client openssh-server
-2.在~/.ssh下新建文件authorized_keys
-客户机1.生成公钥和私钥
-ssh-keygen -t rsa
-2.只需把本机上生成">
+<meta name="twitter:description" content="Hexo搭建个人博客安装hexonpm install -g hexo-cli
+支持用Mathjax渲染数学公式npm install hexo-math --save
+在_config.yml中添加:
+plugins:
+- hexo-math
+部署到githubnpm install hexo-deployer-git --save
+配置_config.yml：
+deplay:
+  type:">
   
     <link rel="alternate" href="/atom.xml" title="Newbie" type="application/atom+xml">
   
@@ -100,7 +109,19 @@ ssh-keygen -t rsa
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Ubuntu下使用ssh-keygen设置SHH无密码登录"><a href="#Ubuntu下使用ssh-keygen设置SHH无密码登录" class="headerlink" title="Ubuntu下使用ssh-keygen设置SHH无密码登录"></a>Ubuntu下使用ssh-keygen设置SHH无密码登录</h2><h4 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h4><p>1.安装<code>openssh-server</code>和<code>openssh-client</code>(只按server即可)</p>
+        <h2 id="Hexo搭建个人博客"><a href="#Hexo搭建个人博客" class="headerlink" title="Hexo搭建个人博客"></a>Hexo搭建个人博客</h2><h3 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h3><pre><code>npm install -g hexo-cli
+</code></pre><h3 id="支持用Mathjax渲染数学公式"><a href="#支持用Mathjax渲染数学公式" class="headerlink" title="支持用Mathjax渲染数学公式"></a>支持用Mathjax渲染数学公式</h3><pre><code>npm install hexo-math --save
+</code></pre><p>在<code>_config.yml</code>中添加:</p>
+<pre><code>plugins:
+- hexo-math
+</code></pre><h3 id="部署到github"><a href="#部署到github" class="headerlink" title="部署到github"></a>部署到github</h3><pre><code>npm install hexo-deployer-git --save
+</code></pre><p>配置<code>_config.yml</code>：</p>
+<pre><code>deplay:
+  type: git
+  message: &quot;g&quot;
+  repo: git@github.com:Zozoz/Zozoz.github.io
+</code></pre><h2 id="Ubuntu下使用ssh-keygen设置SHH无密码登录"><a href="#Ubuntu下使用ssh-keygen设置SHH无密码登录" class="headerlink" title="Ubuntu下使用ssh-keygen设置SHH无密码登录"></a>Ubuntu下使用ssh-keygen设置SHH无密码登录</h2><a id="more"></a>
+<h4 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h4><p>1.安装<code>openssh-server</code>和<code>openssh-client</code>(只按server即可)</p>
 <pre><code>sudo apt-get install openssh-client openssh-server
 </code></pre><p>2.在<code>~/.ssh</code>下新建文件<code>authorized_keys</code></p>
 <h4 id="客户机"><a href="#客户机" class="headerlink" title="客户机"></a>客户机</h4><p>1.生成公钥和私钥</p>
@@ -270,10 +291,6 @@ sudo pip install pymongo
           </li>
         
           <li>
-            <a href="/2016/02/25/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
             <a href="/2015/12/16/Kleinberg/">Kleinberg</a>
           </li>
         
@@ -283,6 +300,10 @@ sudo pip install pymongo
         
           <li>
             <a href="/2015/09/23/BP算法/">BP算法</a>
+          </li>
+        
+          <li>
+            <a href="/2015/08/28/django快速搭建一个网站/">Django快速搭建一个网站</a>
           </li>
         
       </ul>

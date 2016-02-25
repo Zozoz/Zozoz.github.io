@@ -5,20 +5,20 @@
   
   <title>Kleinberg | Newbie</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="预备知识马尔科夫性质马尔可夫性质(Markov property)是概率论中的一个概念, 因为俄国数学家安德雷·马尔可夫得名。当一个随机过程在给定现在状态及所有过去状态情况下, 其未来状态的条件概率分布仅依赖于当前状态；换句话说, 在给定现在状态时, 它与过去状态(即该过程的历史路径)是条件独立的, 那么此随机过程即具有马尔可夫性质。具有马尔可夫性质的过程通常称之为马尔可夫过程。数学上, 如果X(">
+  <meta name="description" content="预备知识">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Kleinberg">
 <meta property="og:url" content="http://zozoz.github.io/2015/12/16/Kleinberg/index.html">
 <meta property="og:site_name" content="Newbie">
-<meta property="og:description" content="预备知识马尔科夫性质马尔可夫性质(Markov property)是概率论中的一个概念, 因为俄国数学家安德雷·马尔可夫得名。当一个随机过程在给定现在状态及所有过去状态情况下, 其未来状态的条件概率分布仅依赖于当前状态；换句话说, 在给定现在状态时, 它与过去状态(即该过程的历史路径)是条件独立的, 那么此随机过程即具有马尔可夫性质。具有马尔可夫性质的过程通常称之为马尔可夫过程。数学上, 如果X(">
+<meta property="og:description" content="预备知识">
 <meta property="og:image" content="http://7xnepc.com1.z0.glb.clouddn.com/HMM.png">
 <meta property="og:image" content="http://7xnepc.com1.z0.glb.clouddn.com/An_example_of_HMM.png">
 <meta property="og:image" content="http://7xnepc.com1.z0.glb.clouddn.com/Viterbi_animated_demo.gif">
 <meta property="og:image" content="http://7xnepc.com1.z0.glb.clouddn.com/state_tran.png">
-<meta property="og:updated_time" content="2016-02-25T09:41:28.000Z">
+<meta property="og:updated_time" content="2016-02-25T13:06:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kleinberg">
-<meta name="twitter:description" content="预备知识马尔科夫性质马尔可夫性质(Markov property)是概率论中的一个概念, 因为俄国数学家安德雷·马尔可夫得名。当一个随机过程在给定现在状态及所有过去状态情况下, 其未来状态的条件概率分布仅依赖于当前状态；换句话说, 在给定现在状态时, 它与过去状态(即该过程的历史路径)是条件独立的, 那么此随机过程即具有马尔可夫性质。具有马尔可夫性质的过程通常称之为马尔可夫过程。数学上, 如果X(">
+<meta name="twitter:description" content="预备知识">
   
     <link rel="alternate" href="/atom.xml" title="Newbie" type="application/atom+xml">
   
@@ -89,7 +89,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h2><h3 id="马尔科夫性质"><a href="#马尔科夫性质" class="headerlink" title="马尔科夫性质"></a><a href="https://zh.wikipedia.org/wiki/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E6%80%A7%E8%B4%A8" target="_blank" rel="external">马尔科夫性质</a></h3><p>马尔可夫性质(Markov property)是概率论中的一个概念, 因为俄国数学家安德雷·马尔可夫得名。<br>当一个随机过程在给定现在状态及所有过去状态情况下, 其未来状态的条件概率分布仅依赖于当前状态；<br>换句话说, 在给定现在状态时, 它与过去状态(即该过程的历史路径)是条件独立的, 那么此随机过程即具有马尔可夫性质。<br>具有马尔可夫性质的过程通常称之为马尔可夫过程。<br>数学上, 如果X(t), t &gt; 0为一个随机过程, 则马尔科夫性质就是指</p>
+        <h2 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h2><a id="more"></a>
+<h3 id="马尔科夫性质"><a href="#马尔科夫性质" class="headerlink" title="马尔科夫性质"></a><a href="https://zh.wikipedia.org/wiki/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E6%80%A7%E8%B4%A8" target="_blank" rel="external">马尔科夫性质</a></h3><p>马尔可夫性质(Markov property)是概率论中的一个概念, 因为俄国数学家安德雷·马尔可夫得名。<br>当一个随机过程在给定现在状态及所有过去状态情况下, 其未来状态的条件概率分布仅依赖于当前状态；<br>换句话说, 在给定现在状态时, 它与过去状态(即该过程的历史路径)是条件独立的, 那么此随机过程即具有马尔可夫性质。<br>具有马尔可夫性质的过程通常称之为马尔可夫过程。<br>数学上, 如果X(t), t &gt; 0为一个随机过程, 则马尔科夫性质就是指</p>
 <p>P(X(t+h) = y | X(s) = x(s), s &lt;= t) = P(X(t+h) = y | X(t) = x(t)),   h &gt; 0</p>
 <h3 id="马尔科夫链"><a href="#马尔科夫链" class="headerlink" title="马尔科夫链"></a><a href="https://zh.wikipedia.org/wiki/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE" target="_blank" rel="external">马尔科夫链</a></h3><p>马尔科夫链是满足马尔科夫性质的随机变量的序列$ X_1 $, $ X_2 $, …, 即给出当前状态，将来状态和过去状态是相互独立的。<br>从形式上看，如果两边的条件分布有定义(即如果$ P(X_1 = x_1, …, X_n = x_n) &gt; 0 $), 则</p>
 <p>$ P(X_{n+1} = x | X_1 = x_1, X_2 = x_2, …, X_n = x_n) = P(X_{n+1} = x | X_n = x_n) $ <br></p>
@@ -294,11 +295,11 @@ int main(int argc, char** argv){
     
 <nav id="article-nav">
   
-    <a href="/2016/02/25/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2016/02/25/test/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          Hello World
+          test
         
       </div>
     </a>
@@ -361,10 +362,6 @@ int main(int argc, char** argv){
           </li>
         
           <li>
-            <a href="/2016/02/25/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
             <a href="/2015/12/16/Kleinberg/">Kleinberg</a>
           </li>
         
@@ -374,6 +371,10 @@ int main(int argc, char** argv){
         
           <li>
             <a href="/2015/09/23/BP算法/">BP算法</a>
+          </li>
+        
+          <li>
+            <a href="/2015/08/28/django快速搭建一个网站/">Django快速搭建一个网站</a>
           </li>
         
       </ul>

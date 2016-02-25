@@ -113,51 +113,6 @@ $$\Delta W\_{kj}^l = \frac{\partial C}{\partial w_{kj}^l} * \delta^l_k$$
 
 
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/02/25/hello-world/" class="article-date">
-  <time datetime="2016-02-25T07:02:00.000Z" itemprop="datePublished">2016-02-25</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/25/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2016/02/25/hello-world/" data-id="cil2a6m1a000705jgesmlvqvd" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
     <article id="post-Kleinberg" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/12/16/Kleinberg/" class="article-date">
@@ -180,197 +135,12 @@ $$\Delta W\_{kj}^l = \frac{\partial C}{\partial w_{kj}^l} * \delta^l_k$$
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h2><h3 id="马尔科夫性质"><a href="#马尔科夫性质" class="headerlink" title="马尔科夫性质"></a><a href="https://zh.wikipedia.org/wiki/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E6%80%A7%E8%B4%A8" target="_blank" rel="external">马尔科夫性质</a></h3><p>马尔可夫性质(Markov property)是概率论中的一个概念, 因为俄国数学家安德雷·马尔可夫得名。<br>当一个随机过程在给定现在状态及所有过去状态情况下, 其未来状态的条件概率分布仅依赖于当前状态；<br>换句话说, 在给定现在状态时, 它与过去状态(即该过程的历史路径)是条件独立的, 那么此随机过程即具有马尔可夫性质。<br>具有马尔可夫性质的过程通常称之为马尔可夫过程。<br>数学上, 如果X(t), t &gt; 0为一个随机过程, 则马尔科夫性质就是指</p>
-<p>P(X(t+h) = y | X(s) = x(s), s &lt;= t) = P(X(t+h) = y | X(t) = x(t)),   h &gt; 0</p>
-<h3 id="马尔科夫链"><a href="#马尔科夫链" class="headerlink" title="马尔科夫链"></a><a href="https://zh.wikipedia.org/wiki/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%93%BE" target="_blank" rel="external">马尔科夫链</a></h3><p>马尔科夫链是满足马尔科夫性质的随机变量的序列$ X_1 $, $ X_2 $, …, 即给出当前状态，将来状态和过去状态是相互独立的。<br>从形式上看，如果两边的条件分布有定义(即如果$ P(X_1 = x_1, …, X_n = x_n) &gt; 0 $), 则</p>
-<p>$ P(X_{n+1} = x | X_1 = x_1, X_2 = x_2, …, X_n = x_n) = P(X_{n+1} = x | X_n = x_n) $ <br></p>
-<p>$ X_i $的可能值构成的可数集S叫做该链的”状态空间”。</p>
-<p>m-阶马尔科夫链(记忆为m的马尔科夫链), 其中m有限, 满足</p>
-<p>$ P(X_n = x_n | X_{n-1} = x_{n-1}, X_{n-2} = x_{n-2}, …, X_1 = x_1)<br>= P(X_n = x_n | X_{n-1} = x_{n-1}, X_{n-2} = x_{n-2}, …, X_{n-m} = x_{n-m}), n &gt; m<br>$<br></p>
-<p>的过程。换句话说, 未来状态取决于其前m个状态。</p>
-<h3 id="隐马尔科夫模型"><a href="#隐马尔科夫模型" class="headerlink" title="隐马尔科夫模型"></a><a href="https://zh.wikipedia.org/wiki/%E9%9A%90%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E6%A8%A1%E5%9E%8B" target="_blank" rel="external">隐马尔科夫模型</a></h3><p>隐马尔可夫模型(Hidden Markov Model, HMM)是统计模型，它用来描述一个含有隐含未知参数的马尔可夫过程。<br>其难点是从可观察的参数中确定该过程的隐含参数。</p>
-<p><img src="http://7xnepc.com1.z0.glb.clouddn.com/HMM.png" alt="隐马尔可夫模型状态变迁图"><br>x — 隐含状态<br>y — 可观察的输出<br>a — 转换概率(transition probabilities)<br>b — 输出概率(output probabilities)</p>
-<p>上图展示了HMM的演化过程，图中箭头方向表示不同状态的关联性，x(t)只由x(t-1)决定，y(t)只由x(t)决定。</p>
-<h4 id="HMM有三个典型的问题"><a href="#HMM有三个典型的问题" class="headerlink" title="HMM有三个典型的问题"></a>HMM有三个典型的问题</h4><ol>
-<li>已知模型参数，计算某一特定输出序列的概率.通常使用forward算法解决.</li>
-<li>已知模型参数，寻找最可能的能产生某一特定输出序列的隐含状态的序列.通常使用Viterbi算法解决.</li>
-<li>已知输出序列，寻找最可能的状态转移以及输出概率.通常使用Baum-Welch算法以及Reversed Viterbi算法解决.</li>
-</ol>
-<h3 id="维特比算法"><a href="#维特比算法" class="headerlink" title="维特比算法"></a><a href="https://zh.wikipedia.org/wiki/%E7%BB%B4%E7%89%B9%E6%AF%94%E7%AE%97%E6%B3%95" target="_blank" rel="external">维特比算法</a></h3><p>维特比算法(Viterbi algorithm)是一种动态规划算法。它用于寻找最有可能产生观测事件序列的-维特比路径-隐含状态序列。</p>
-<p>假设给定隐式马尔可夫模型状态空间 S，初始状态 i 的概率为 $ \pi_{i} $, 从状态 i 到状态 j 的转移概率为 $ a_{i,j} $.<br>令观察到的输出为 $ y_{1}, \dots, y_{T}$。 产生观察结果的最有可能的状态序列 $ x_{1}, \dots, x_{T} $ 由递推关系给出：<br></p>
-<p>$ V_{1,k} = P{\big (}y_{1}\ |\ k{\big )} \cdot \pi_{k} $ <br><br>$ V_{t,k} = P{\big (}y_{t}\ |\ k{\big )} \cdot \max_{x\in S}\left(a_{x,k} \cdot V_{t-1,x}\right) $ <br></p>
-<p>此处 $V_{t,k}$ 是前 t 个最终状态为 k 的观测结果最有可能对应的状态序列的概率。<br>通过保存向后指针记住在第二个等式中用到的状态 x 可以获得维特比路径。<br>声明一个函数 Ptr(k,t), 当t = 1时返回k, 当t &gt; 1, 返回$V_{t,k}$. 这样: <br></p>
-<p>$ x_{T} = \arg \max_{x\in S}(V_{T,x}) $ <br><br>$ x_{t} = Ptr(x_{t},t) $ <br></p>
-<p>这里我们使用了arg max的标准定义。<br>算法复杂度为 <br></p>
-<p>$ O(T\times \left|{S}\right|^{2}) $ <br></p>
-<h4 id="一个例子"><a href="#一个例子" class="headerlink" title="一个例子"></a>一个例子</h4><p>想象一个乡村诊所。村民有着非常理想化的特性，要么健康要么发烧。他们只有问诊所的医生的才能知道是否发烧。 聪明的医生通过询问病人的感觉诊断他们是否发烧。村民只回答他们感觉正常、头晕或冷。</p>
-<p>假设一个病人每天来到诊所并告诉医生他的感觉。医生相信病人的健康状况如同一个离散马尔可夫链。病人的状态有两种“健康”和“发烧”，但医生不能直接观察到，这意味着状态对他是“隐含”的。每天病人会告诉医生自己有以下几种由他的健康状态决定的感觉的一种：正常、冷或头晕。这些是观察结果。 整个系统为一个隐马尔可夫模型(HMM)。</p>
-<p><img src="http://7xnepc.com1.z0.glb.clouddn.com/An_example_of_HMM.png" alt="一个例子"></p>
-<p>我们假设观察结果序列为{“Normal”, “Cold”, “Dizzy”}, 那么计算过程如下：</p>
-<p><img src="http://7xnepc.com1.z0.glb.clouddn.com/Viterbi_animated_demo.gif" alt="计算过程"></p>
-<p>由图可见，最有可能由状态序列{“Healthy”, “Healthy”, “Fever”}产生。</p>
-<h1 id="突发事件检测"><a href="#突发事件检测" class="headerlink" title="突发事件检测"></a>突发事件检测</h1><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>微博空间充斥着海量的短信息,用户无法通过阅读大量微博来获取实时的突发话题,对微博中的海量信息进行挖掘,发现实时发生的突发事件可以有效地帮助用户找到自己感兴趣的话题,改善用户体验; 另一方面,随着近年来的迅猛发展,微博在舆情分析、观点挖掘等领域起到了重要作用,而突发事件检测作为网络舆情分析的重要分支,也逐步受到了国内外学者的关注。因此,研 究在微博空间中的海量信息中挖掘突发事件,具有重要意义。</p>
-<p>按照突发特征识别的顺序,突发事件识别可以分为以文本为中心的方法和以突发特征为中心的方法。前者是先进行文本聚类,再在类中抽取出突发特征,进行突发事件的识别; 后者是先抽取出突发特征,再对突发特征进行分组,使用突发特征组进行突发事件的识别。</p>
-<h2 id="相关论文研究"><a href="#相关论文研究" class="headerlink" title="相关论文研究"></a>相关论文研究</h2><h3 id="Bursty-and-Hierarchical-Structure-in-Streams-Jon-Kleinburg"><a href="#Bursty-and-Hierarchical-Structure-in-Streams-Jon-Kleinburg" class="headerlink" title="Bursty and Hierarchical Structure in Streams, Jon Kleinburg"></a><a href="https://www.cs.cornell.edu/home/kleinber/bhs.pdf" target="_blank" rel="external">Bursty and Hierarchical Structure in Streams, Jon Kleinburg</a></h3><p>This work appears in the Proceedings of the 8th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining, 2002.</p>
-<p>虽然作者提出的方法当时主要是为了发现长文本中的突发事件，但是对我们处理微博这样的短文本有重要的借鉴意义。</p>
-<p>或许生成一个消息到达时间序列的最简单随机模型是基于指数分布的：消息以一定的概率模式发出，所以两个相邻消息i和i+1的间隔x有指数分布密度函数</p>
-<p>$ f(x) = \alpha e^{-\alpha x}, \alpha &gt; 0 $</p>
-<p>所以，</p>
-<p>$ F(x) = \int_0^x f(x) = 1 - e^{-\alpha x} $<br>$ E(x) = \alpha^{-1} $</p>
-<h4 id="A-two-state-model"><a href="#A-two-state-model" class="headerlink" title="A two-state model"></a>A two-state model</h4><p>假设对于事件模型有正常状态q0和突发状态q1，可以看做“低态”和“高态”。当A处在状态q0时，消息以低频率发出，连续消息的<br>间隔x有密度函数$ f_0(x) = \alpha_0 e^{-\alpha_0 x} $; 当A处在状态q1时，消息以高频发出，连续消息间隔x符合密度函数<br>$ f_1(x) = \alpha_1 e^{-\alpha_1 x}$, 显然 $\alpha_1 &gt; \alpha_0$。并且，A从q0转换到q1（从q1转换到q0）的概率$p\in(0,1)$.</p>
-<p>当给出一个消息集合的时候，我们可以用这个生成模型去寻找一个可能的状态序列。<br>假设我们知道了n+1个消息，那么可以计算出n个时间间隔$ X = (x_1, x_2, \cdots, x_n)$.<br>令X对应的状态序列$ q = (q_{i_1}, q_{i_2}, \cdots, q_{i_n}) $, 所以, <br></p>
-<p>$ f_q(x_1, x_2, \cdots, x_n) = \prod_{t=1}^n f_{i_t}(x_t) $ <br></p>
-<p>令b为状态序列q中状态的转换次数，所以q的先验概率为，<br></p>
-<p>$ P(q) = (\prod_{i_t \neq i_{t+1}})(\prod_{i_t = i_{t+1}}) = p^b(1-p)^{n-b}  $ <br></p>
-<p>所以, <br></p>
-<p>$ P(q \mid x) = \frac{P(q)f_q(x)}{\sum_{q^{\prime}}P(q^{\prime})f_{q^{\prime}}(x)} = \frac{1}{Z}(\frac{p}{1-p})^b(1-p)^n \prod_{t=1}^nf_{i_t}(x_t) $  <br></p>
-<p>其中，$ Z = \sum_{q^{\prime}}P(q^{\prime})f_{q^{\prime}}(x) $. 对上式中两边同时取对数后取反，得 <br></p>
-<p>$ -\ln P(q \mid x) = b\ln \left(\frac{1-p}{p}\right) + \left(\sum_{t=1}^n-\ln f_{i_t}(x_t)\right) - n\ln (1-p) + lnZ $ <br></p>
-<p>为求得最可能的状态序列，只需使等式右边最小，而等式右边后两项与状态序列q无关，所以 <br></p>
-<p>$ c(q\ \mid\ x) = b\ln \left(\frac{1-p}{p}\right) + \left(\sum_{t=1}^n-\ln f_{i_t}(x_t)\right) $ <br></p>
-<p>现在只需使$ c(q \mid x) $最小。从直觉上，使状态变化次数尽量少，同时使状态序列适应时间间隔x的值。具体的解决方法在下面详细介绍。</p>
-<h4 id="An-infinite-state-model"><a href="#An-infinite-state-model" class="headerlink" title="An infinite-state model"></a>An infinite-state model</h4><p>已知n+1个消息的时间序列，总时长为T，令时间间隔的估计量$ \hat{g} = \frac{T}{n} $。相比于上面的两状态，我们在这里把状态扩展到多个，<br>即状态序列$ q = (q_{i_1}, q_{i_2}, \cdots, q_{i_n})$中的每一个状态都有可能属于多个状态中的一个。并令$ \alpha_0 = \hat{g}^{-1} = \frac{n}{T} $,<br>对于i &gt; 0, $ \alpha_i = \alpha_0 s^i $.<br>令代价公式为$ \tau(\cdot, \cdot)$, 表示从低密度状态转换到高密度状态的代价。当q从i转换到j时$(f_i(x) &lt; f_j(x))$，</p>
-<p>$\tau(i, j) = (j - i)\gamma \ln n, \gamma &gt; 0 $. 特别地，如果$f_j(x) &lt; f_i(x)$, 代价为0。 <br></p>
-<p>$ c(q\mid x) = \left(\sum_{t=0}^{n-1}\tau(i_t, i_{t+1}\right) + \left(\sum_{t=1}^n-\ln f_{i_t}(x_t)\right) $ <br></p>
-<p>令$i_0 = 0$, 所以无限状态机$ A_{s,\gamma}^*$ 从$q_0$开始. <br></p>
-<p><img src="http://7xnepc.com1.z0.glb.clouddn.com/state_tran.png" alt="An infinite-state model for bursty sequences"></p>
-<h4 id="Computing-a-minimum-cost-state-sequence"><a href="#Computing-a-minimum-cost-state-sequence" class="headerlink" title="Computing a minimum-cost state sequence"></a>Computing a minimum-cost state sequence</h4><p>已知间隔序列$x = (x_1, x_2, \cdots, x_n)$, 求状态机$ A_{s,\gamma}^* $的状态序列$ q = (q_{i_1}, q_{i_2}, \cdots, q_{i_n}) $，使代价<br>$c(q\ \mid\ x)$最小。并且$A_{s,\gamma}^k$表示状态机只有k个状态选择。<br></p>
-<h5 id="Theorem"><a href="#Theorem" class="headerlink" title="Theorem"></a>Theorem</h5><p>$\delta(x) = min_{i=1}^n x_i$ and $k = \lceil 1 + \log_s T + \log_s \delta(x)^{-1} \rceil $.<br></p>
-<p>如果$q^{*}$是状态机$A_{s,\gamma}^k$的最优状态序列，那么它也是状态机$A_{s,\gamma}^*$的最优状态序列。<br><br><br><br></p>
-<p>证明：<br><br>令$ q^<em> = (q_{l_1}, q_{l_2}, \cdots, q_{l<em>n})$为状态机$A\</em>{s,\gamma}^k$的最优状态序列，$q = (q_{i_1}, q_{i_2}, \cdots, q_{i_n})$<br>为状态机$A_{s,\gamma}^\</em>$的最优状态序列，$l_0 = i_0 = 0, l_{n+1} = i_{n+1} = 0 $.所以，我们只需证明$c(q^*\ \mid\ x) \leq c(q\ \mid\ x)$.<br>令$q^{\prime} = (q_{i^{\prime}_1}, \cdots, q_{i^{\prime}_n}), i^{\prime}_t = min(i_t, k-1)$, 显然 <br></p>
-<p>$ \sum_{t=0}^{n-1} \tau(i^{\prime}_t, i^{\prime}_{t+1}) \leq \sum_{t=0}^{n-1} \tau(i_t, i_{t+1})  $ <br></p>
-<p>对于代价函数的后一项，$-\ln f_j(x_t) = \alpha_j x_t - \ln \alpha_j, 1 \leq t \leq n$ , 考虑当j为何值时其最小。</p>
-<p>而$h(\alpha) = \alpha x_t - \ln\alpha$ 在区间$(0, \infty)$上是凸函数，并且当$\alpha = x_t^{-1}$时取得全局最小值。<br>我们知道$ k = \lceil 1 + \log_s T + \log_s \delta(x)^{-1} \rceil $ , 所以， <br></p>
-<p>$<br>\alpha_{k-1} = \hat{g}^{-1}s^{k-1} = \frac{n}{T} \cdot s^{k-1} \geq \frac{1}{T} \cdot s^{\log_s^T + \log_s^{\delta(x)^{-1}}} = \frac{1}{T} \frac{T}{\delta(x)} = \frac{1}{\delta(x)}.<br>$<br><br></p>
-<p>因为对于所有的t, 有$\delta(x)^{-1} \geq x_t^{-1}$, 所以当$i_t &gt; k-1$时, 有$\alpha_{i_t} &gt; \alpha_{k-1}$, 所以,<br></p>
-<p>$<br>-\ln f_{i_t^{\prime}}(x_t) \leq -\ln f_{i_t}(x_t), i_t &gt; i_t^{\prime} = k-1<br>$<br><br><br>由此，可得，<br></p>
-<p>$<br>c(q^{\prime}\ \mid\ x) = \left(\sum_{t=0}^{n-1}\tau(i_t^{\prime}, i_{t+1}^{\prime}) \right) + \left(\sum_{t=1}^n-\ln f_{i_t^{\prime}}(x_t)\right)\<br>\leq \left(\sum_{t=0}^{n-1}\tau(i_t,i_{t+1})\right) + \left(\sum_{t=1}^n-\ln f_{i+t}(x_t)\right) = c(q\ \mid\ x).<br>$<br><br>又因为$q^{\prime}$是自动机$A_{s,\gamma}^k$中的一个状态序列，$q^*$是自动机$A_{s,\gamma}^k$中的最优状态序列,所以有<br></p>
-<p>$c(q^*\ \mid\ x) \leq c(q^{\prime}\ \mid\ x) \leq c(q\ \mid\ x).$<br></p>
-<p>得证。</p>
-<h5 id="如何计算得到最优状态序列？"><a href="#如何计算得到最优状态序列？" class="headerlink" title="如何计算得到最优状态序列？"></a>如何计算得到最优状态序列？</h5><p>令$C_j(t)$是对于输入$x_1, x_2, \cdots, x_n$以状态$q_j$结尾的最小代价值。<br>$C_j(t) = -\ln f_j(x_t) + min_l(C_l(t-1) + \tau(l,j))$, 并且$C_0(0)=0, C_j(0)=\infty\ j&gt;0$.</p>
-<p>源代码：</p>
-<pre><code>#include &lt;iostream&gt;
-#include &lt;algorithm&gt;
-#include &lt;fstream&gt;
-#include &lt;vector&gt;
-#include &lt;fstream&gt;
-#include &lt;string&gt;
-#include &lt;boost/lexical_cast.hpp&gt;
-#include &lt;boost/algorithm/string/trim.hpp&gt;
-
-using namespace std;
-
-struct Node {
-    int const state;
-    double const w;
-    Node *parent;
-    Node(int s, Node *p, double w): state(s), parent(p), w(w) {}
-};
-
-double logf(vector&lt;double&gt; const&amp; alpha, vector&lt;double&gt; const&amp; ln_alpha, int i, double x){
-    return ln_alpha[i] - alpha[i] * x;
-}
-
-double tou(double gammalogn, int i, int j){
-    return i &gt;= j ? 0.0 :(j - i) * gammalogn;
-}
-
-vector&lt;int&gt; kleinberg_algorithm(vector&lt;double&gt; timeseries, double alpha0, double const s=2, double const gamma=1.0){
-    // The number of events.
-    size_t N = timeseries.size();
-
-    // Calculate time intervals between successive events.
-    vector&lt;double&gt; intervals(N-1);
-    for(size_t i=0; i&lt;intervals.size(); i++){
-        intervals[i] = timeseries[i+1] - timeseries[i];
-    }
-
-    // The minimum interval.
-    double const delta = *min_element(intervals.begin(), intervals.end());
-
-    // The time length of the whole timeseries.
-    double const T = timeseries.back() - timeseries.front();
-
-    // The upper limit of burst levels.
-    int const K = int(ceil(1 + log(T/delta) / log(s)));
-    // int const K = 2;
-
-    // Set alpha and ln_alpha
-    vector&lt;double&gt; alpha(K);
-    vector&lt;double&gt; ln_alpha(K);
-    alpha[0] = N / T;
-    // alpha[0] = alpha0;
-    ln_alpha[0] = log(alpha[0]);
-    for(int i=1; i&lt;K; i++){
-        alpha[i] = s * alpha[i-1];
-        ln_alpha[i] = log(alpha[i]);
-    }
-
-    double const gammalogn = gamma * log(double(N));
-
-    vector&lt;Node*&gt; q(K);
-    for(auto &amp;it : q){
-        it = NULL;
-    }
-    vector&lt;double&gt; C(K, numeric_limits&lt;double&gt;::infinity());
-    C[0] = 0;
-
-    // Start optimization.
-    for(auto it : intervals){
-        double interval = it;
-        vector&lt;Node*&gt; q_new(K);
-        vector&lt;double&gt; C_new(K);
-        for(int i=0; i&lt;K; i++){
-            vector&lt;double&gt; c(K);
-            for(int j=0; j&lt;K; j++){
-                c[j] = C[j] + tou(gammalogn, j, i);
-            }
-            size_t const j_min = min_element(c.begin(), c.end()) - c.begin();
-            C_new[i] = -logf(alpha, ln_alpha, i, interval) + c[j_min];
-            q_new[i] = new Node(i, q[j_min], C_new[i]);
-        }
-
-        q_new.swap(q);
-        C_new.swap(C);
-    }
-
-    size_t const seq_min = min_element(C.begin(), C.end()) - C.begin();
-    vector&lt;int&gt; bursts(N);
-    size_t count = 0;
-    for(Node* p=q[seq_min]; p!=NULL; p=p-&gt;parent){
-        bursts[N - ++count] = p-&gt;state;
-        // cout &lt;&lt; p-&gt;state &lt;&lt; &quot; : &quot; &lt;&lt; p-&gt;w &lt;&lt; endl;
-    }
-
-    return bursts;
-}
-int main(int argc, char** argv){
-    if(argc &lt; 4){
-        cerr &lt;&lt; &quot;Usage: a.out s gamma time-stamp-file&quot; &lt;&lt; endl;
-        exit(1);
-    }
-
-    double const s = boost::lexical_cast&lt;double&gt;(argv[1]);
-    double const gamma = boost::lexical_cast&lt;double&gt;(argv[2]);
-    double alpha0 = boost::lexical_cast&lt;double&gt;(argv[3]);
-    ifstream ifs(argv[4]);
-
-    vector&lt;double&gt; timeseries;
-
-    for(string line; getline(ifs, line);){
-        boost::trim(line);
-        timeseries.push_back(boost::lexical_cast&lt;double&gt;(line));
-    }
-
-    vector&lt;int&gt; bursts = kleinberg_algorithm(timeseries, alpha0, s, gamma);
-
-    for(auto it : bursts){
-        cout &lt;&lt; it &lt;&lt; endl;
-    }
-
-}
-</code></pre><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>1.<a href="https://zh.wikipedia.org/wiki/Wikipedia:%E9%A6%96%E9%A1%B5" target="_blank" rel="external">维基百科</a><br>2.<a href="http://dencity.jp/misc/kleinberg_burst/" target="_blank" rel="external">Kleinberg’s Burst Detection Algorithm</a><br>3.<a href="http://iv.slis.indiana.edu/sw/burst.html" target="_blank" rel="external">http://iv.slis.indiana.edu/sw/burst.html</a><br>4.<a href="https://www.cs.cornell.edu/home/kleinber/bhs.pdf" target="_blank" rel="external">https://www.cs.cornell.edu/home/kleinber/bhs.pdf</a></p>
-
+        <h2 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h2>
+        
+          <p class="article-more-link">
+            <a href="/2015/12/16/Kleinberg/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
@@ -408,95 +178,23 @@ int main(int argc, char** argv){
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Ubuntu下使用ssh-keygen设置SHH无密码登录"><a href="#Ubuntu下使用ssh-keygen设置SHH无密码登录" class="headerlink" title="Ubuntu下使用ssh-keygen设置SHH无密码登录"></a>Ubuntu下使用ssh-keygen设置SHH无密码登录</h2><h4 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h4><p>1.安装<code>openssh-server</code>和<code>openssh-client</code>(只按server即可)</p>
-<pre><code>sudo apt-get install openssh-client openssh-server
-</code></pre><p>2.在<code>~/.ssh</code>下新建文件<code>authorized_keys</code></p>
-<h4 id="客户机"><a href="#客户机" class="headerlink" title="客户机"></a>客户机</h4><p>1.生成公钥和私钥</p>
-<pre><code>ssh-keygen -t rsa
-</code></pre><p>2.只需把本机上生成的公钥加到需要登录的服务器的<code>~/.ssh/authorized_keys</code>中</p>
-<p>3.登录</p>
-<pre><code>ssh server_name@server_ip
-</code></pre><p>4.用别名登录</p>
-<p>在本地<code>~/.ssh/config</code>中添加:</p>
-<pre><code>HOST vps1
-HostName *.*.*.*
-User *
-Port *(一般是22)
-IdentityFile ~/.ssh/id_rsa
-ForwardAgent yes
-</code></pre><p>以后就可以直接用<code>ssh vps1</code>登录了</p>
-<h4 id="服务器和客户机之间文件拷贝"><a href="#服务器和客户机之间文件拷贝" class="headerlink" title="服务器和客户机之间文件拷贝"></a>服务器和客户机之间文件拷贝</h4><p>1.客户机-&gt;服务器</p>
-<pre><code>scp [-r] local_file server_name@server_ip:server_path
-</code></pre><p>2.服务器-&gt;客户机</p>
-<pre><code>scp [-r] server_name@server_ip:server_file local_path
-</code></pre><h2 id="Ubuntu-14-04-下安装Scrapy"><a href="#Ubuntu-14-04-下安装Scrapy" class="headerlink" title="Ubuntu 14.04 下安装Scrapy"></a>Ubuntu 14.04 下安装Scrapy</h2><pre><code>sudo apt-get install python-pip
-
-sudo apt-get install python-dev libxml2-dev libxslt-dev
-
-sudo apt-get install python-lxml
-
-sudo apt-get install libffi-dev
-
-sudo apt-get install libssl-dev
-
-sudo pip install scrapy
-</code></pre><h2 id="Ubuntu-14-04-下安装MySQL"><a href="#Ubuntu-14-04-下安装MySQL" class="headerlink" title="Ubuntu 14.04 下安装MySQL"></a>Ubuntu 14.04 下安装MySQL</h2><pre><code>sudo apt-get install mysql-server
-sudo apt-get install mysql-client
-sudo apt-get install mysql-workbench
-sudo apt-get install libmysqlclient-dev
-sudo pip install MySQL-python
-</code></pre><h3 id="配置MySQL支持远程访问"><a href="#配置MySQL支持远程访问" class="headerlink" title="配置MySQL支持远程访问"></a>配置MySQL支持远程访问</h3><p>修改配置文件<code>sudo vim /etc/mysql/my.cnf</code><br>将<code>bind 127.0.0.1</code>注释掉<br>添加授权<code>mysql -u root -p</code></p>
-<pre><code>GRANT ALL PRIVILEGES ON *.* TO &apos;root&apos;@&apos;%&apos; IDENTIFIED BY &apos;YOURPASSWORD&apos; WITH GRANT OPTION;
-</code></pre><p>自行替换上句中的IP地址和密码<br>重启MySQL<code>sudo service mysql restart</code></p>
-<h2 id="配置uwsgi"><a href="#配置uwsgi" class="headerlink" title="配置uwsgi"></a>配置uwsgi</h2><p><code>uwsgi.ini</code>文件</p>
-<pre><code>[uwsgi]
-socket=127.0.0.1:3400
-chdir=/root/NUST_Visual_Platform
-module=NUST_Visual_Platform.wsgi:application
-master=True
-processes=2
-#home=/root/NUST_Visual_Platform/
-max-requests=5000
-vacuum=True
-chmod-socket=664
-</code></pre><p>启动</p>
-<pre><code>uwsgi --ini uwsgi.ini
-</code></pre><h2 id="Ubuntu-14-04-下Nginx配置"><a href="#Ubuntu-14-04-下Nginx配置" class="headerlink" title="Ubuntu 14.04 下Nginx配置"></a>Ubuntu 14.04 下Nginx配置</h2><p>1.安装Nginx</p>
-<pre><code>sudo apt-get install nginx
-</code></pre><p>2.在<code>/etc/nginx/conf.d/</code>文件夹下面创建<code>xxx.conf</code>文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">server &#123;&#10;    listen 80; # default_server;&#10;    server_name 123.75.138.47 zsl.link;&#10;    charset utf-8;&#10;    client_max_body_size 100M;&#10;&#10;    location / &#123;&#10;        # First attempt to serve request as file, then&#10;        # as directory, then fall back to displaying a 404.&#10;        # itry_files $uri $uri/ =404;&#10;        # Uncomment to enable naxsi on this location&#10;        # include /etc/nginx/naxsi.rules&#10;        uwsgi_pass 127.0.0.1:3400;&#10;        include uwsgi_params;&#10;        add_header Cache-Control no-cache;&#10;        add_header Cache-Control private;&#10;    &#125;&#10;&#10;    location /static/ &#123;&#10;        alias /root/NUST_Visual_Platform/static/;&#10;        expires 30d;&#10;    &#125;&#10;&#10;    location /media/ &#123;&#10;        alias /root/NUST_Visual_Platform/njustmark/media/;&#10;        expires 30d;&#10;    &#125;&#10;&#10;    # Only for nginx-naxsi used with nginx-naxsi-ui : process denied requests&#10;    #location /RequestDenied &#123;&#10;    #   proxy_pass http://127.0.0.1:8080;&#10;    #&#125;&#10;&#10;    #error_page 404 /404.html;&#10;&#10;    # redirect server error pages to the static page /50x.html&#10;    #&#10;    error_page 500 502 503 504 /50x.html;&#10;    location = /50x.html &#123;&#10;        root /usr/share/nginx/html;&#10;    &#125;&#10;&#10;    # deny access to .htaccess files, if Apache&#39;s document root&#10;    # concurs with nginx&#39;s one&#10;    #&#10;    #location ~ /\.ht &#123;&#10;    #   deny all;&#10;    #&#125;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
-<p>启动Nginx</p>
-<pre><code>sudo service nginx start
-</code></pre><p>重启Nginx</p>
-<pre><code>sudo service nginx restart
-</code></pre><p>停止Nginx</p>
-<pre><code>sudo service nginx stop
-</code></pre><p>重新加载配置文件</p>
-<pre><code>sudo nginx -s reload
-</code></pre><h2 id="配置supervisor"><a href="#配置supervisor" class="headerlink" title="配置supervisor"></a>配置supervisor</h2><p>安装</p>
-<pre><code>pip install supervisor
-</code></pre><p>生成配置文件</p>
-<pre><code>echo_supervisord_cong &gt; supervisord.conf
-</code></pre><p>添加uWSGI的启动配置</p>
-<pre><code>[program:django_web]
-command=uwsgi --ini /root/NUST_Visual_Platform/uwsgi.ini
-stopsignal=QUIT
-autostart=true
-autorestart=true
-stdout_logfile=/root/NUST_Visual_Platform/uwsgi.log
-redirect_stderr=true
-</code></pre><p>在配置文件目录下启动</p>
-<pre><code>sudo supervisord -c supervisord.conf
-</code></pre><p>手动启动</p>
-<pre><code>sudo supervisorctl start xxx
-</code></pre><p>停止</p>
-<pre><code>sudo supervisorctl stop xxx
-</code></pre><p>查看状态</p>
-<pre><code>sudo supervisorctl status
-</code></pre><h2 id="安装redis"><a href="#安装redis" class="headerlink" title="安装redis"></a>安装redis</h2><pre><code>sudo apt-get install redis-server
-sudo pip install redis
-</code></pre><h2 id="安装mongodb"><a href="#安装mongodb" class="headerlink" title="安装mongodb"></a>安装mongodb</h2><pre><code>sudo apt-get install mongodb
-sudo pip install pymongo
-</code></pre>
+        <h2 id="Hexo搭建个人博客"><a href="#Hexo搭建个人博客" class="headerlink" title="Hexo搭建个人博客"></a>Hexo搭建个人博客</h2><h3 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h3><pre><code>npm install -g hexo-cli
+</code></pre><h3 id="支持用Mathjax渲染数学公式"><a href="#支持用Mathjax渲染数学公式" class="headerlink" title="支持用Mathjax渲染数学公式"></a>支持用Mathjax渲染数学公式</h3><pre><code>npm install hexo-math --save
+</code></pre><p>在<code>_config.yml</code>中添加:</p>
+<pre><code>plugins:
+- hexo-math
+</code></pre><h3 id="部署到github"><a href="#部署到github" class="headerlink" title="部署到github"></a>部署到github</h3><pre><code>npm install hexo-deployer-git --save
+</code></pre><p>配置<code>_config.yml</code>：</p>
+<pre><code>deplay:
+  type: git
+  message: &quot;g&quot;
+  repo: git@github.com:Zozoz/Zozoz.github.io
+</code></pre><h2 id="Ubuntu下使用ssh-keygen设置SHH无密码登录"><a href="#Ubuntu下使用ssh-keygen设置SHH无密码登录" class="headerlink" title="Ubuntu下使用ssh-keygen设置SHH无密码登录"></a>Ubuntu下使用ssh-keygen设置SHH无密码登录</h2>
+        
+          <p class="article-more-link">
+            <a href="/2015/10/20/安装配置/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
@@ -536,25 +234,11 @@ sudo pip install pymongo
       
         <p>符号表示：</p>
 <p>$ w_{kj}^l：l-1层j节点到l层k节点的权重；z_k^l: l层k节点的输入值；\alpha_k^l: l层k节点的输出 $ <br><br>$ z^l=w^la^{l-1}+b^l; a^l=\sigma(z^l) $ <br></p>
-<h2 id="①-BP网络前向传播计算"><a href="#①-BP网络前向传播计算" class="headerlink" title="① BP网络前向传播计算"></a>① BP网络前向传播计算</h2><p>$ z^l = w^la^{l-1}+b^l $ <br><br>$ a^l = \sigma(z^l) = \frac{1}{1 + e^{-z^l}} $</p>
-<h2 id="②-BP网络后向传播求偏导"><a href="#②-BP网络后向传播求偏导" class="headerlink" title="② BP网络后向传播求偏导"></a>② BP网络后向传播求偏导</h2><p>$ C=\frac{1}{2n} \sum_x |y(x)-a^L(x)|^2 $</p>
-<p>$$\Delta W_{kj}^l = \frac{\partial C}{\partial w_{kj}^l} = \frac{\partial C}{\partial z^l_k} * \frac{\partial z^l_k}{\partial w^l_{kj}} =<br>\delta^l_k \frac{\partial z^l_k}{\partial w^l_{kj}}$$</p>
-<p>其中，$\delta^l_k \equiv \frac{\partial C}{\partial z^l_k}$</p>
-<p>又, $\frac{\partial z^l_k}{\partial w^l_{kj}} = a^{l-1}_j$</p>
-<p>所以,$\Delta W^l_{kj} = \delta^l_k a^{l-1}_j$</p>
-<p>同理，$\Delta b^l_k = \delta^l_k$</p>
-<p>$$ \delta^l_k = \frac{\partial C}{\partial z^l_k} = \sum_j \frac{\partial C}{\partial z^{l+1}_j} \frac{\partial z^{l+1}_j}{\partial z^l_k} =<br>\sum_j \delta^{l+1}_j \frac{\partial z^{l+1}_j}{\partial z^l_k} $$</p>
-<p>又，$ \frac{\partial z^{l+1}_j}{\partial z^l_k} = w^{l+1}_{jk} \sigma^\prime(z^l_k) $</p>
-<p>所以,<br>$ \delta^l_k = \sum_j \delta^{l+1}_j w^{l+1}_{jk} \sigma^\prime(z^l_k) $<br>$ \Downarrow $ vectorize<br>$ \delta^l = (w^{l+1})^T \delta^{l+1} \bigodot \sigma^\prime(z^l)  $</p>
-<p>对于最后一层L层，<br>$ \delta^L = \frac{\partial C}{\partial z^L} = (y - a^L) \bigodot a^\prime  $</p>
-<h2 id="Backpropagation-Algorithm"><a href="#Backpropagation-Algorithm" class="headerlink" title="Backpropagation Algorithm"></a>Backpropagation Algorithm</h2><ol>
-<li>Input x: Set the corresponding activetion $a$ for the input layer.</li>
-<li>Feedforward： For each l=2, 3, …, L compute $z^l = w^la^{l-1} + b^l$ and $a^l = \sigma(z^l)$.</li>
-<li>Output Error $\delta^L$: Compute the vector $\delta^L = \Delta_aC \bigodot \sigma\prime(z^L)$.</li>
-<li>Backpropagate the error: For each l=L-1, L-2, …, 2 compute $\delta^l = (w^{l+1})^T \delta^{l+1} \bigodot \sigma\prime(z^l)$.</li>
-<li>Output: The gradient of the cost function in given by $\frac{\partial C}{\partial w_{kj}^l} = a^{l-1}_j \delta_k^l$ and $ \frac{\partial C}{\partial b_k^l} = \delta_k^l$.</li>
-</ol>
-
+        
+          <p class="article-more-link">
+            <a href="/2015/09/23/BP算法/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
@@ -661,10 +345,6 @@ sudo pip install pymongo
           </li>
         
           <li>
-            <a href="/2016/02/25/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
             <a href="/2015/12/16/Kleinberg/">Kleinberg</a>
           </li>
         
@@ -674,6 +354,10 @@ sudo pip install pymongo
         
           <li>
             <a href="/2015/09/23/BP算法/">BP算法</a>
+          </li>
+        
+          <li>
+            <a href="/2015/08/28/django快速搭建一个网站/">Django快速搭建一个网站</a>
           </li>
         
       </ul>
