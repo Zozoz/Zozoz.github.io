@@ -17,7 +17,7 @@ Django是一个开放源代码的Web应用框架，由Python写成，基于MVC�
 project_name/">
 <meta property="og:image" content="http://7xnepc.com1.z0.glb.clouddn.com/流程图.png">
 <meta property="og:image" content="http://7xnepc.com1.z0.glb.clouddn.com/echarts-1.png">
-<meta property="og:updated_time" content="2016-02-25T12:30:44.000Z">
+<meta property="og:updated_time" content="2016-02-25T12:34:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Django快速搭建一个网站">
 <meta name="twitter:description" content="Django介绍参考文档：Django官方文档   官方文档中文翻译
@@ -62,7 +62,7 @@ project_name/">
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+        <a id="nav-search-btn" class="nav-icon" title="搜尋"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://zozoz.github.io"></form>
@@ -220,18 +220,7 @@ def show_2(request, year):
 <p>表单系统的核心部分是Django的<a href="http://python.usyiyi.cn/django/ref/forms/fields.html" target="_blank" rel="external">Form</a>类.Django 的模型描述一个对象的逻辑结构、行为以及展现给我们的方式，与此类似，Form 类描述一个表单并决定它如何工作和展现.<br>就像模型类的属性映射到数据库的属性一样，表单类的<a href="http://python.usyiyi.cn/django/ref/forms/fields.html" target="_blank" rel="external">字段</a>会映射到HTML 的&lt;input&gt;表单的元素.<br>表单的字段本身也是类；它们管理表单的数据并在表单提交时进行验证。</p>
 <p><code>templates/sample/form.html</code></p>
 
-
-    {% extends "base.html" %}
-    {% block title %} Sample Page {% endblock %}
-    {% block content %}
-
-    <form action="{% url " sample:get_name"="" %}"="" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Submit">
-    </form>
-
-    {% endblock %}
+<!--￼10-->
 
 
 <p><code>sample/views.py</code></p>
@@ -418,7 +407,7 @@ myChart.setOption(option1);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2015/08/28/django快速搭建一个网站/" data-id="cil23nc9u00008rjgm1ruxq7j" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2015/08/28/django快速搭建一个网站/" data-id="cil294zdb0008rfjgr1hxekut" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/django/">django</a></li></ul>
@@ -453,7 +442,7 @@ myChart.setOption(option1);
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
+    <h3 class="widget-title">標籤</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BurstDetection/">BurstDetection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NN/">NN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/">django</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/运维/">运维</a></li></ul>
     </div>
@@ -463,7 +452,7 @@ myChart.setOption(option1);
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
+    <h3 class="widget-title">標籤雲</h3>
     <div class="widget tagcloud">
       <a href="/tags/BurstDetection/" style="font-size: 10px;">BurstDetection</a> <a href="/tags/NN/" style="font-size: 10px;">NN</a> <a href="/tags/django/" style="font-size: 10px;">django</a> <a href="/tags/运维/" style="font-size: 10px;">运维</a>
     </div>
@@ -472,7 +461,7 @@ myChart.setOption(option1);
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
+    <h3 class="widget-title">彙整</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a></li></ul>
     </div>
