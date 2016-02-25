@@ -177,14 +177,14 @@
 <h2 id="②-BP网络后向传播求偏导"><a href="#②-BP网络后向传播求偏导" class="headerlink" title="② BP网络后向传播求偏导"></a>② BP网络后向传播求偏导</h2><p>$\partial{z^l_r}$</p>
 <p>$\partial z^l_r$</p>
 <p>$ C=\frac{1}{2n} \sum_x |y(x)-a^L(x)|^2 $</p>
-<p>$$\Delta W_{kj}^l = \frac{\partial C}{\partial w_{kj}^l} = \frac{\partial C}{\partial z^l_k} * \frac{\partial z^l<em>k}{\partial w^l</em>{kj}} =<br>\delta^l_k \frac{\partial z^l<em>k}{\partial w^l</em>{kj}}$$</p>
+<p>$$\Delta W_{kj}^l = \frac{\partial C}{\partial w_{kj}^l} = \frac{\partial C}{\partial z^l_k} * \frac{\partial z^l_k}{\partial w^l_{kj}} =<br>\delta^l_k \frac{\partial z^l_k}{\partial w^l_{kj}}$$</p>
 <p>其中，$\delta^l_k \equiv \frac{\partial C}{\partial z^l_k}$</p>
 <p>又, $\frac{\partial z^l_k}{\partial w^l_{kj}} = a^{l-1}_j$</p>
 <p>所以,$\Delta W^l_{kj} = \delta^l_k a^{l-1}_j$</p>
 <p>同理，$\Delta b^l_k = \delta^l_k$</p>
 <p>$$ \delta^l_k = \frac{\partial C}{\partial z^l_k} = \sum_j \frac{\partial C}{\partial z^{l+1}_j} \frac{\partial z^{l+1}_j}{\partial z^l_k} =<br>\sum_j \delta^{l+1}_j \frac{\partial z^{l+1}_j}{\partial z^l_k} $$</p>
-<p>又，$ \frac{\partial z^{l+1}_j}{\partial z^l<em>k} = w^{l+1}</em>{jk} \sigma^\prime(z^l_k) $</p>
-<p>所以,<br>$ \delta^l_k = \sum_j \delta^{l+1}<em>j w^{l+1}</em>{jk} \sigma^\prime(z^l_k) $<br>$ \Downarrow $ vectorize<br>$ \delta^l = (w^{l+1})^T \delta^{l+1} \bigodot \sigma^\prime(z^l)  $</p>
+<p>又，$ \frac{\partial z^{l+1}_j}{\partial z^l_k} = w^{l+1}_{jk} \sigma^\prime(z^l_k) $</p>
+<p>所以,<br>$ \delta^l_k = \sum_j \delta^{l+1}_j w^{l+1}_{jk} \sigma^\prime(z^l_k) $<br>$ \Downarrow $ vectorize<br>$ \delta^l = (w^{l+1})^T \delta^{l+1} \bigodot \sigma^\prime(z^l)  $</p>
 <p>对于最后一层L层，<br>$ \delta^L = \frac{\partial C}{\partial z^L} = (y - a^L) \bigodot a^\prime  $</p>
 <h2 id="Backpropagation-Algorithm"><a href="#Backpropagation-Algorithm" class="headerlink" title="Backpropagation Algorithm"></a>Backpropagation Algorithm</h2><ol>
 <li>Input x: Set the corresponding activetion $a$ for the input layer.</li>
