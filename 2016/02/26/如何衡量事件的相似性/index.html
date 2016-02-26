@@ -5,19 +5,16 @@
   
   <title>如何衡量事件的相似性 | Newbie</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="衡量聚类效果对数据进行聚类之后，需要验证一下聚类的效果，常用的验证方法包括entropy、purity、precious、F-measure、Recall。
-Entropy对于一个聚类i，首先计算$P_{ij}$。$P_{ij}$指的是聚类i中的成员（member）属于类（class）j的概率，$P_{ij} = \frac{m_{ij}}{m_i}$。其中$m_i$是聚类i中所有成员的个数，$m">
+  <meta name="description" content="衡量聚类效果">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何衡量事件的相似性">
 <meta property="og:url" content="http://zozoz.github.io/2016/02/26/如何衡量事件的相似性/index.html">
 <meta property="og:site_name" content="Newbie">
-<meta property="og:description" content="衡量聚类效果对数据进行聚类之后，需要验证一下聚类的效果，常用的验证方法包括entropy、purity、precious、F-measure、Recall。
-Entropy对于一个聚类i，首先计算$P_{ij}$。$P_{ij}$指的是聚类i中的成员（member）属于类（class）j的概率，$P_{ij} = \frac{m_{ij}}{m_i}$。其中$m_i$是聚类i中所有成员的个数，$m">
-<meta property="og:updated_time" content="2016-02-26T03:29:25.000Z">
+<meta property="og:description" content="衡量聚类效果">
+<meta property="og:updated_time" content="2016-02-26T03:35:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何衡量事件的相似性">
-<meta name="twitter:description" content="衡量聚类效果对数据进行聚类之后，需要验证一下聚类的效果，常用的验证方法包括entropy、purity、precious、F-measure、Recall。
-Entropy对于一个聚类i，首先计算$P_{ij}$。$P_{ij}$指的是聚类i中的成员（member）属于类（class）j的概率，$P_{ij} = \frac{m_{ij}}{m_i}$。其中$m_i$是聚类i中所有成员的个数，$m">
+<meta name="twitter:description" content="衡量聚类效果">
   
     <link rel="alternate" href="/atom.xml" title="Newbie" type="application/atom+xml">
   
@@ -57,7 +54,7 @@ Entropy对于一个聚类i，首先计算$P_{ij}$。$P_{ij}$指的是聚类i中�
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="搜尋"></a>
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://zozoz.github.io"></form>
@@ -88,8 +85,8 @@ Entropy对于一个聚类i，首先计算$P_{ij}$。$P_{ij}$指的是聚类i中�
     
     <div class="article-entry" itemprop="articleBody">
       
-        <a id="more"></a>
-<h2 id="衡量聚类效果"><a href="#衡量聚类效果" class="headerlink" title="衡量聚类效果"></a>衡量聚类效果</h2><p>对数据进行聚类之后，需要验证一下聚类的效果，常用的验证方法包括entropy、purity、precious、F-measure、Recall。</p>
+        <h2 id="衡量聚类效果"><a href="#衡量聚类效果" class="headerlink" title="衡量聚类效果"></a>衡量聚类效果</h2><a id="more"></a>
+<p>对数据进行聚类之后，需要验证一下聚类的效果，常用的验证方法包括entropy、purity、precious、F-measure、Recall。</p>
 <h3 id="Entropy"><a href="#Entropy" class="headerlink" title="Entropy"></a>Entropy</h3><p>对于一个聚类i，首先计算$P_{ij}$。$P_{ij}$指的是聚类i中的成员（member）属于类（class）j的概率，<br>$P_{ij} = \frac{m_{ij}}{m_i}$。其中$m_i$是聚类i中所有成员的个数，$m_{ij}$是聚类i中的成员属于<br>类j的个数。每个聚类的entropy可以表示为$e_i = - \sum_{j=1}^L P_{ij} \log_2 P_{ij}$，其中L是<br>类（class）的个数。整个聚类划分的entropy为$e = \sum_{i=1}^K \frac{m_i}{m}e_i$，其中K是聚类（cluster）<br>的数目，m是整个聚类划分所涉及到的成员个数。</p>
 <h3 id="Purity"><a href="#Purity" class="headerlink" title="Purity"></a>Purity</h3><p>使用上述Entropy中的$P_{ij}$定义，我们将聚类i的purity定义为$p_i = \max(p_{ij})$。整个聚类划分的purity为<br>$purity = \sum_{i=1}^K \frac{m_i}{m} P_i$，其中K是聚类（cluster）的数目，m是整个聚类划分所涉及到的成员个数。</p>
 
@@ -127,7 +124,7 @@ Entropy对于一个聚类i，首先计算$P_{ij}$。$P_{ij}$指的是聚类i中�
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">標籤</h3>
+    <h3 class="widget-title">标签</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BurstDetection/">BurstDetection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/">ML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NN/">NN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/运维/">运维</a></li></ul>
     </div>
@@ -137,7 +134,7 @@ Entropy对于一个聚类i，首先计算$P_{ij}$。$P_{ij}$指的是聚类i中�
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">標籤雲</h3>
+    <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
       <a href="/tags/BurstDetection/" style="font-size: 10px;">BurstDetection</a> <a href="/tags/ML/" style="font-size: 10px;">ML</a> <a href="/tags/NN/" style="font-size: 10px;">NN</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/运维/" style="font-size: 10px;">运维</a>
     </div>
@@ -146,7 +143,7 @@ Entropy对于一个聚类i，首先计算$P_{ij}$。$P_{ij}$指的是聚类i中�
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">彙整</h3>
+    <h3 class="widget-title">归档</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a></li></ul>
     </div>
