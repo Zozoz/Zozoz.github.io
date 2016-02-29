@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://zozoz.github.io/2016/02/26/如何衡量事件的相似性/index.html">
 <meta property="og:site_name" content="Newbie">
 <meta property="og:description" content="衡量聚类效果">
-<meta property="og:updated_time" content="2016-02-26T03:35:35.000Z">
+<meta property="og:updated_time" content="2016-02-29T09:26:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何衡量事件的相似性">
 <meta name="twitter:description" content="衡量聚类效果">
@@ -89,6 +89,18 @@
 <p>对数据进行聚类之后，需要验证一下聚类的效果，常用的验证方法包括entropy、purity、precious、F-measure、Recall。</p>
 <h3 id="Entropy"><a href="#Entropy" class="headerlink" title="Entropy"></a>Entropy</h3><p>对于一个聚类i，首先计算$P_{ij}$。$P_{ij}$指的是聚类i中的成员（member）属于类（class）j的概率，<br>$P_{ij} = \frac{m_{ij}}{m_i}$。其中$m_i$是聚类i中所有成员的个数，$m_{ij}$是聚类i中的成员属于<br>类j的个数。每个聚类的entropy可以表示为$e_i = - \sum_{j=1}^L P_{ij} \log_2 P_{ij}$，其中L是<br>类（class）的个数。整个聚类划分的entropy为$e = \sum_{i=1}^K \frac{m_i}{m}e_i$，其中K是聚类（cluster）<br>的数目，m是整个聚类划分所涉及到的成员个数。</p>
 <h3 id="Purity"><a href="#Purity" class="headerlink" title="Purity"></a>Purity</h3><p>使用上述Entropy中的$P_{ij}$定义，我们将聚类i的purity定义为$p_i = \max(p_{ij})$。整个聚类划分的purity为<br>$purity = \sum_{i=1}^K \frac{m_i}{m} P_i$，其中K是聚类（cluster）的数目，m是整个聚类划分所涉及到的成员个数。</p>
+<h2 id="相似性度量"><a href="#相似性度量" class="headerlink" title="相似性度量"></a>相似性度量</h2><ol>
+<li><p>欧氏距离（Euclidean Distance）<br>欧氏距离是最易于理解的一种距离计算方法，源自欧式空间中两点间的距离公式。<br>$d_{12} = \sqrt{\sum_{k=1}^n (x_{1k} - x_{2k})^2}$</p>
+</li>
+<li><p>曼哈顿距离（Manhattan Distance）<br>曼哈顿距离也称为城市街区距离（City Block Distance）<br>$ d_{12} = \sum_{k=1}^n \mid x_{1k} - x_{2k}\mid $</p>
+</li>
+<li><p>切比雪夫距离（Chebyshev Distance）<br>$ d_{12} = \max_i(\mid x_{1i} - x_{2i}\mid) $<br>另一种形式为：<br>$ d_{12} = \lim_{k \rightarrow \infty} {\left( \sum_{i=1}^n {\mid x_{1i} - x_{2i} \mid}^k  \right)}^{\frac{1}{k}} $</p>
+</li>
+<li><p>闵可夫斯基距离（Minkowski Distance）<br>闵可夫斯基距离不是一种距离，而是一组距离的定义。<br>$ d_{12} = \sqrt[p]{\sum_{k=1}^n {\mid x_{1k} - x_{2k} \mid}^p}$<br>其中p是一个参数。<br>当p=1时，就是曼哈顿距离；<br>当p=2时，就是欧氏距离；<br>当p=3时，就是切比雪夫距离。<br>根据变参数的不同，闵氏距离可以表示一类的距离。<br><strong>闵氏距离的缺点</strong><br>闵氏距离，包括曼哈顿距离、欧氏距离和切比雪夫距离都存在明显的缺点。<br>举个例子：二维样本（身高，体重），有三个样本：a(180, 50), b(190, 50), c(180, 60)。那么a与b直觉的闵氏距离等于a与c之间<br>的闵氏距离，但是身高的10cm真的等价于体重的10kg么？因此用闵氏距离来衡量这些样本间的相似度很有问题。<br>简单来说，闵氏距离的缺点主要有两个：<br>(1) 将各个分量的量纲(scale), 也就是“单位”当做相同的看待了；<br>(2) 没考虑各个分量的分布(期望，方差等)可能是不同的。</p>
+</li>
+<li><p>标准化欧氏距离（Standardized Euclidean Distance）<br>标准化欧氏距离是针对简单欧氏距离的缺点而作的一种改进方案。标注欧氏距离的思路：既然数据各维分量的分布不一样，那么先将<br>各个分量都标准化到均值、方差相等。假设样本集X的均值(mean)为m，标准差(standard deviation)为s。样本集的标准化过程用公式<br>描述就是：<br>$X^* = \frac{X-m}{s} $<br>标准化后的值 = (标准化前的值 - 分量的均值) / 分量的标准差<br>经过简单的推导就可以得到两个n维变量$a(x_{11}, x-{12}, \ldots, x_{1n})$与$b(x_{21}, x_{22}, \ldots, x_{2n})$间的<br>标准化欧氏距离的公式：<br>$ d_{12} = \sqrt{\sum_{k=1}^n {\left( \frac{x_{1k} - x_{2k}}{s_{k}}  \right)}^2} $<br>如果将方差的倒数看成是一个权重，这个公式可以看成是一种加权欧氏距离(Weighted Euclidean Distance)。</p>
+</li>
+</ol>
 
       
     </div>
