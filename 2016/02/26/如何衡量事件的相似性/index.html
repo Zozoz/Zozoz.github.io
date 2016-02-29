@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://zozoz.github.io/2016/02/26/如何衡量事件的相似性/index.html">
 <meta property="og:site_name" content="Newbie">
 <meta property="og:description" content="衡量聚类效果">
-<meta property="og:updated_time" content="2016-02-29T09:26:15.000Z">
+<meta property="og:updated_time" content="2016-02-29T12:41:04.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何衡量事件的相似性">
 <meta name="twitter:description" content="衡量聚类效果">
@@ -54,7 +54,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+        <a id="nav-search-btn" class="nav-icon" title="搜尋"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://zozoz.github.io"></form>
@@ -98,14 +98,27 @@
 </li>
 <li><p>闵可夫斯基距离（Minkowski Distance）<br>闵可夫斯基距离不是一种距离，而是一组距离的定义。<br>$ d_{12} = \sqrt[p]{\sum_{k=1}^n {\mid x_{1k} - x_{2k} \mid}^p}$<br>其中p是一个参数。<br>当p=1时，就是曼哈顿距离；<br>当p=2时，就是欧氏距离；<br>当p=3时，就是切比雪夫距离。<br>根据变参数的不同，闵氏距离可以表示一类的距离。<br><strong>闵氏距离的缺点</strong><br>闵氏距离，包括曼哈顿距离、欧氏距离和切比雪夫距离都存在明显的缺点。<br>举个例子：二维样本（身高，体重），有三个样本：a(180, 50), b(190, 50), c(180, 60)。那么a与b直觉的闵氏距离等于a与c之间<br>的闵氏距离，但是身高的10cm真的等价于体重的10kg么？因此用闵氏距离来衡量这些样本间的相似度很有问题。<br>简单来说，闵氏距离的缺点主要有两个：<br>(1) 将各个分量的量纲(scale), 也就是“单位”当做相同的看待了；<br>(2) 没考虑各个分量的分布(期望，方差等)可能是不同的。</p>
 </li>
-<li><p>标准化欧氏距离（Standardized Euclidean Distance）<br>标准化欧氏距离是针对简单欧氏距离的缺点而作的一种改进方案。标注欧氏距离的思路：既然数据各维分量的分布不一样，那么先将<br>各个分量都标准化到均值、方差相等。假设样本集X的均值(mean)为m，标准差(standard deviation)为s。样本集的标准化过程用公式<br>描述就是：<br>$X^* = \frac{X-m}{s} $<br>标准化后的值 = (标准化前的值 - 分量的均值) / 分量的标准差<br>经过简单的推导就可以得到两个n维变量$a(x_{11}, x-{12}, \ldots, x_{1n})$与$b(x_{21}, x_{22}, \ldots, x_{2n})$间的<br>标准化欧氏距离的公式：<br>$ d_{12} = \sqrt{\sum_{k=1}^n {\left( \frac{x_{1k} - x_{2k}}{s_{k}}  \right)}^2} $<br>如果将方差的倒数看成是一个权重，这个公式可以看成是一种加权欧氏距离(Weighted Euclidean Distance)。</p>
+<li><p>标准化欧氏距离（Standardized Euclidean Distance）<br>标准化欧氏距离是针对简单欧氏距离的缺点而作的一种改进方案。标注欧氏距离的思路：既然数据各维分量的分布不一样，那么先<br>将各个分量都标准化到均值、方差相等。假设样本集X的均值(mean)为m，标准差(standard deviation)为s。样本集的标准化过程用<br>公式描述就是：<br>$X^* = \frac{X-m}{s} $<br>标准化后的值 = (标准化前的值 - 分量的均值) / 分量的标准差<br>经过简单的推导就可以得到两个n维变量$a(x_{11}, x-{12}, \ldots, x_{1n})$与$b(x_{21}, x_{22}, \ldots, x_{2n})$间的<br>标准化欧氏距离的公式：<br>$ d_{12} = \sqrt{\sum_{k=1}^n {\left( \frac{x_{1k} - x_{2k}}{s_{k}}  \right)}^2} $<br>如果将方差的倒数看成是一个权重，这个公式可以看成是一种加权欧氏距离(Weighted Euclidean Distan</p>
+</li>
+<li><p>马氏距离（Mahalanobis Distance）<br>有M个样本向量$X_1~X_m$，协方差矩阵记为S，均值记为向量$\mu$，则其中样本向量X到$\mu$的马氏距离表示为：<br>$ D(X) = \sqrt{(X_i-X_j)^T S^{-1} (X_i - X_j)}$<br>而其中向量$X_i$与$X_j$之间的马氏距离定义为：<br>$ D(X_i, X_j) = \sqrt{(X_i - X_j)^T S^{-1} (X_i - X_j)}$<br>若协方差矩阵是单位矩阵（各个样本向量之间独立同分布），则公式就成了：<br>$ D(X_i, X_j) = \sqrt{(X_i - X_j)^T (X_i - X_j)}$<br>也就是欧氏距离了。<br>若协方差矩阵是对角矩阵，公式变成了标准化欧氏距离。<br><strong>马氏距离的优点：量纲无关，排除变量之间的相关性的干扰。</strong></p>
+</li>
+<li><p>夹角余弦（Cosine）<br>$ \cos(\theta) = \frac{\sum_{k=1}^n x_{1k} x_{2k}}{\sqrt{\sum_{k=1}^n {x_{1k}}^2} \sqrt{\sum_{k=1}^n {x_{2k}}^2}} $<br>夹角余弦取值范围为[-1,1]。夹角余弦越大表示两个向量的夹角越小，夹角余弦越小表示两向量的夹角越大。当两个向量的方向<br>重合时夹角余弦取最大值1，当两个向量的方向完全相反时夹角余弦取最小值-1。</p>
+</li>
+<li><p>汉明距离（Hamming Distance）<br>两个等长字符串s1与s2之间的汉明距离定义为将其中一个变为另外一个所需要做的最小替换次数。例如字符串“1111”与“1001”之间<br>的汉明距离为2。<br>应用：信息编码（为了增强容错性，应使得编码间的最小汉明距离尽可能大）。</p>
+</li>
+<li><p>杰卡德相似系数（Jaccard Similarity Coefficient）<br>(1) 杰卡德相似系数<br>两个集合A和B的交集元素在A、B的并集中所占的比例，称为两个集合的杰卡德相似系数：<br>$ J(A,B) = \frac{\mid A \bigcap B \mid}{\mid A \bigcup B \mid} $<br>(2) 杰卡德距离<br>$ J_{\delta}(A,B) = 1 - J(A,B) = \frac{\mid A \bigcup B \mid - \mid A \bigcap B \mid}{\mid A \bigcup B \mid}$<br>(3) 杰卡德相似系数与杰卡德距离的应用<br>样本A与样本B是两个n维向量，并且所有维度的取值都是0或1.例如：A(0, 1, 1, 1), B(1, 0, 1, 1)。我们将样本看成一个集合，<br>1表示集合包含该元素，0表示集合不包含该元素。<br>p : 样本A与B都是1的维度的个数；<br>q : 样本A是1，样本B是0的维度的个数；<br>r : 样本A是0，样本B是1的维度的个数；<br>s ：样本A与B都是0的维度的个数。<br>p+q+r可以理解为A与B的并集的元素的个数，而p是A与B的交集的元素个数。<br>$ J = \frac{p}{p+q+r} $</p>
+</li>
+<li><p>相关系数（Correlation Coefficient）与相关距离（Correlation Distance）<br>(1) 相关系数的定义<br>$\rho_{XY} = \frac{Cov(X,Y)}{\sqrt{D(X)} \sqrt{D(Y)}} = \frac{E((X-EX)(Y-EY))}{\sqrt{D(X)} \sqrt{D(Y)}} $<br>相关系数是衡量随机变量X与Y相关程度的一种方法，相关系数的取值范围是[-1,1]。相关系数的绝对值越大，则表明X与Y相关度<br>越高。当X与Y线性相关时，相关系数取值为1（正线性相关）或-1（负线性相关）。<br>(2) 相关距离的定义<br>$D_{XY} = 1 - \rho_{XY}$</p>
+</li>
+<li><p>信息熵（Information Entropy）<br>信息熵并不属于一种相似性度量。信息熵是衡量分布的混乱程度或分散程度的一种度量。分布越分散（或者说分布越平均），信息熵<br>就越大；分布越有序（或者分布越集中），信息熵就越小。<br>计算给定的样本集X的信息熵的公式：<br>$ Entropy(X) = \sum_{i=1}^n -p_i \log_2 p_i$<br>参数的含义：<br>n : 样本集X的分类数；<br>$p_i$ : X中第i类元素出现的概率<br>信息熵越大表明样本集S分类越分散，信息熵越小则表明样本集X分类越集中。当S中n个分类出现的概率一样大时（都是$\frac{1}{n}$)，<br>信息熵取最大值$ \log_2(n)$。当X只有一个分类时，信息熵取最小值0。</p>
 </li>
 </ol>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a href="http://www.cnblogs.com/heaad/archive/2011/03/08/1977733.html" target="_blank" rel="external">机器学习中的相似性度量</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2016/02/26/如何衡量事件的相似性/" data-id="cil3546bl0006cijgz5ovi4zv" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2016/02/26/如何衡量事件的相似性/" data-id="cil7wp70p0006xfjg126e2jto" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ML/">ML</a></li></ul>
@@ -136,7 +149,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
+    <h3 class="widget-title">標籤</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BurstDetection/">BurstDetection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/">ML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NN/">NN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/运维/">运维</a></li></ul>
     </div>
@@ -146,7 +159,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
+    <h3 class="widget-title">標籤雲</h3>
     <div class="widget tagcloud">
       <a href="/tags/BurstDetection/" style="font-size: 10px;">BurstDetection</a> <a href="/tags/ML/" style="font-size: 10px;">ML</a> <a href="/tags/NN/" style="font-size: 10px;">NN</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/运维/" style="font-size: 10px;">运维</a>
     </div>
@@ -155,7 +168,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
+    <h3 class="widget-title">彙整</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a></li></ul>
     </div>
