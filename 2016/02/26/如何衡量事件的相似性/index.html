@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://zozoz.github.io/2016/02/26/如何衡量事件的相似性/index.html">
 <meta property="og:site_name" content="Newbie">
 <meta property="og:description" content="聚类性能度量">
-<meta property="og:updated_time" content="2016-03-01T08:52:52.000Z">
+<meta property="og:updated_time" content="2016-03-13T12:33:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何衡量事件的相似性">
 <meta name="twitter:description" content="聚类性能度量">
@@ -136,6 +136,7 @@
 <li>VDM(Value Difference Metric)<br>令$m_{\mu,a}$表示在属性$\mu$上取值为a的样本数，$m_{\mu,a,i}$表示在第i个样本簇中在属性$\mu$上取值为a的样本数，<br>k为样本簇数，则属性$\mu$上两个离散值a与b之间的VDM距离为:<br>$ VDM_p(a,b) = \sum_{i=1}^k {\mid \frac{m_{\mu,a,i}}{m_{\mu,a}} - \frac{m_{\mu,b,i}}{m_{\mu,b}} \mid}^p $</li>
 </ol>
 <p>于是，将闵可夫斯基距离和VDM结合即可处理混合属性。假定有$n_c$个有序属性、$n-n_c$个无序属性，不失一般性，令有序<br>属性排在无序属性之前，则<br>$ MinkovDM_p(x_i,x_j) = {\left( \sum_{\mu=1}^{n_c} {\mid x_{i \mu} - x_{j \mu} \mid}^p + \sum_{\mu = n_c + 1}^n VDM_p (x_{i \mu}, x_{j \mu}) \right) }^{\frac{1}{p}} $</p>
+<h3 id="黑科技"><a href="#黑科技" class="headerlink" title="黑科技"></a>黑科技</h3><h4 id="SimHash-汉明距离"><a href="#SimHash-汉明距离" class="headerlink" title="SimHash + 汉明距离"></a>SimHash + 汉明距离</h4><p>simhash是谷歌发明的算法，据说很nb，可以将一个文档转换成64位的字节，然后我们可以通过判断两个字节的汉明距离就知道是否相似了。<br>汉明距离是以理查德·卫斯里·汉明的名字命名的。在信息论中，两个等长字符串之间的汉明距离是两个字符串对应位置的不同字符的个数。换句话说，它就是将一个字符串变换成另外一个字符串所需要替换的字符个数。例如：<br>1011101 与 1001001 之间的汉明距离是 2。<br>“toned” 与 “roses” 之间的汉明距离是 3。<br>首先我们来计算SimHash：<br>① 提取文档关键词得到[word,weight]这样一个数组。（举例 [美国，4]）<br>② 用hash算法将word转为固定长度的二进制值的字符串[hash(word),weight]。（举例 [100101，4]）<br>③ word的hash从左到右与权重相乘，如果为1则乘以1 ，如果是0则曾以-1。（举例4,-4,-4,4,-4,4）<br>④ 接着计算下个数，直到将所有分词得出的词计算完，然后将每个词第三步得出的数组中的每一个值相加。（举例美国和51区，[4,-4,-4,4,-4,4]和[5 -5 5 -5 5 5]得到[9 -9 1 -1 1 9]）<br>⑤ 对第四步得到的数组中每一个值进行判断，如果＞0记为1，如果＜0记为0。（举例[101011]）<br>第四步得出的就是这个文档的SimHash。<br>这样我们就能将两个不同长度的文档转换为同样长度的SimHash值，so，我们现在可以计算第一个文档的值和第二个文档的汉明距离（一般&lt;3就是相似度高的）。<br>SimHash本质上是局部敏感性的hash（如果是两个相似的句子，那么只会有部分不同），和md5之类的不一样。 正因为它的局部敏感性，所以我们可以使用海明距离来衡量SimHash值的相似度。<br>如果想要小数形式的可以这么做：1 - 汉明距离 / 最长关键词数组长度。</p>
 <h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a href="http://www.cnblogs.com/heaad/archive/2011/03/08/1977733.html" target="_blank" rel="external">机器学习中的相似性度量</a><br>机器学习：第九章 聚类—周志华</p>
 
       
