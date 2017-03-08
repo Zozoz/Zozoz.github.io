@@ -3,21 +3,24 @@
 <head>
   <meta charset="utf-8">
   
-  <title>BP算法 | Newbie</title>
+  <title>常用激活函数优劣对比 | Newbie</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="符号表示：
-$ w_{kj}^l：l-1层j节点到l层k节点的权重；z_k^l: l层k节点的输入值；\alpha_k^l: l层k节点的输出 $ $ z^l=w^la^{l-1}+b^l; a^l=\sigma(z^l) $">
+  <meta name="description" content="为什么要引入非线性激活函数(non-linear active function)？增加神经网络模型的非线性映射。如果不用激活函数，那么每一层的输出与上一层都是线性相关，可以证明无论多少层神经网络，输出都是输入的线性组合，只能模拟线性函数。所以通过使用非线性激活函数来使神经网络可以拟合任意函数。
+常见的激活函数有 sigmoid、tanh、ReLU 等，下面来分别讨论一下不同激活函数的优劣势。
+s">
 <meta property="og:type" content="article">
-<meta property="og:title" content="BP算法">
-<meta property="og:url" content="http://zozoz.github.io/2015/09/23/BP算法/index.html">
+<meta property="og:title" content="常用激活函数优劣对比">
+<meta property="og:url" content="http://zozoz.github.io/2017/03/08/常用激活函数优劣对比/index.html">
 <meta property="og:site_name" content="Newbie">
-<meta property="og:description" content="符号表示：
-$ w_{kj}^l：l-1层j节点到l层k节点的权重；z_k^l: l层k节点的输入值；\alpha_k^l: l层k节点的输出 $ $ z^l=w^la^{l-1}+b^l; a^l=\sigma(z^l) $">
-<meta property="og:updated_time" content="2016-02-25T13:06:08.000Z">
+<meta property="og:description" content="为什么要引入非线性激活函数(non-linear active function)？增加神经网络模型的非线性映射。如果不用激活函数，那么每一层的输出与上一层都是线性相关，可以证明无论多少层神经网络，输出都是输入的线性组合，只能模拟线性函数。所以通过使用非线性激活函数来使神经网络可以拟合任意函数。
+常见的激活函数有 sigmoid、tanh、ReLU 等，下面来分别讨论一下不同激活函数的优劣势。
+s">
+<meta property="og:updated_time" content="2017-03-08T12:49:06.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="BP算法">
-<meta name="twitter:description" content="符号表示：
-$ w_{kj}^l：l-1层j节点到l层k节点的权重；z_k^l: l层k节点的输入值；\alpha_k^l: l层k节点的输出 $ $ z^l=w^la^{l-1}+b^l; a^l=\sigma(z^l) $">
+<meta name="twitter:title" content="常用激活函数优劣对比">
+<meta name="twitter:description" content="为什么要引入非线性激活函数(non-linear active function)？增加神经网络模型的非线性映射。如果不用激活函数，那么每一层的输出与上一层都是线性相关，可以证明无论多少层神经网络，输出都是输入的线性组合，只能模拟线性函数。所以通过使用非线性激活函数来使神经网络可以拟合任意函数。
+常见的激活函数有 sigmoid、tanh、ReLU 等，下面来分别讨论一下不同激活函数的优劣势。
+s">
   
     <link rel="alternate" href="/atom.xml" title="Newbie" type="application/atom+xml">
   
@@ -66,10 +69,10 @@ $ w_{kj}^l：l-1层j节点到l层k节点的权重；z_k^l: l层k节点的输入�
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-BP算法" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-常用激活函数优劣对比" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/09/23/BP算法/" class="article-date">
-  <time datetime="2015-09-23T06:18:06.000Z" itemprop="datePublished">2015-09-23</time>
+    <a href="/2017/03/08/常用激活函数优劣对比/" class="article-date">
+  <time datetime="2017-03-08T11:51:43.000Z" itemprop="datePublished">2017-03-08</time>
 </a>
     
   </div>
@@ -80,7 +83,7 @@ $ w_{kj}^l：l-1层j节点到l层k节点的权重；z_k^l: l层k节点的输入�
         
   
     <h1 class="article-title" itemprop="name">
-      BP算法
+      常用激活函数优劣对比
     </h1>
   
 
@@ -88,32 +91,22 @@ $ w_{kj}^l：l-1层j节点到l层k节点的权重；z_k^l: l层k节点的输入�
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>符号表示：</p>
-<p>$ w_{kj}^l：l-1层j节点到l层k节点的权重；z_k^l: l层k节点的输入值；\alpha_k^l: l层k节点的输出 $ <br><br>$ z^l=w^la^{l-1}+b^l; a^l=\sigma(z^l) $ <br></p>
-<a id="more"></a>
-<h2 id="①-BP网络前向传播计算"><a href="#①-BP网络前向传播计算" class="headerlink" title="① BP网络前向传播计算"></a>① BP网络前向传播计算</h2><p>$ z^l = w^la^{l-1}+b^l $ <br><br>$ a^l = \sigma(z^l) = \frac{1}{1 + e^{-z^l}} $</p>
-<h2 id="②-BP网络后向传播求偏导"><a href="#②-BP网络后向传播求偏导" class="headerlink" title="② BP网络后向传播求偏导"></a>② BP网络后向传播求偏导</h2><p>$ C=\frac{1}{2n} \sum_x |y(x)-a^L(x)|^2 $</p>
-<p>$$\Delta W_{kj}^l = \frac{\partial C}{\partial w_{kj}^l} = \frac{\partial C}{\partial z^l_k} * \frac{\partial z^l_k}{\partial w^l_{kj}} =<br>\delta^l_k \frac{\partial z^l_k}{\partial w^l_{kj}}$$</p>
-<p>其中，$\delta^l_k \equiv \frac{\partial C}{\partial z^l_k}$</p>
-<p>又, $\frac{\partial z^l_k}{\partial w^l_{kj}} = a^{l-1}_j$</p>
-<p>所以,$\Delta W^l_{kj} = \delta^l_k a^{l-1}_j$</p>
-<p>同理，$\Delta b^l_k = \delta^l_k$</p>
-<p>$$ \delta^l_k = \frac{\partial C}{\partial z^l_k} = \sum_j \frac{\partial C}{\partial z^{l+1}_j} \frac{\partial z^{l+1}_j}{\partial z^l_k} =<br>\sum_j \delta^{l+1}_j \frac{\partial z^{l+1}_j}{\partial z^l_k} $$</p>
-<p>又，$ \frac{\partial z^{l+1}_j}{\partial z^l_k} = w^{l+1}_{jk} \sigma^\prime(z^l_k) $</p>
-<p>所以,<br>$ \delta^l_k = \sum_j \delta^{l+1}_j w^{l+1}_{jk} \sigma^\prime(z^l_k) $<br>$ \Downarrow $ vectorize<br>$ \delta^l = (w^{l+1})^T \delta^{l+1} \bigodot \sigma^\prime(z^l)  $</p>
-<p>对于最后一层L层，<br>$ \delta^L = \frac{\partial C}{\partial z^L} = (y - a^L) \bigodot a^\prime  $</p>
-<h2 id="Backpropagation-Algorithm"><a href="#Backpropagation-Algorithm" class="headerlink" title="Backpropagation Algorithm"></a>Backpropagation Algorithm</h2><ol>
-<li>Input x: Set the corresponding activetion $a$ for the input layer.</li>
-<li>Feedforward： For each l=2, 3, …, L compute $z^l = w^la^{l-1} + b^l$ and $a^l = \sigma(z^l)$.</li>
-<li>Output Error $\delta^L$: Compute the vector $\delta^L = \Delta_aC \bigodot \sigma\prime(z^L)$.</li>
-<li>Backpropagate the error: For each l=L-1, L-2, …, 2 compute $\delta^l = (w^{l+1})^T \delta^{l+1} \bigodot \sigma\prime(z^l)$.</li>
-<li>Output: The gradient of the cost function in given by $\frac{\partial C}{\partial w_{kj}^l} = a^{l-1}_j \delta_k^l$ and $ \frac{\partial C}{\partial b_k^l} = \delta_k^l$.</li>
-</ol>
+        <h2 id="为什么要引入非线性激活函数-non-linear-active-function-？"><a href="#为什么要引入非线性激活函数-non-linear-active-function-？" class="headerlink" title="为什么要引入非线性激活函数(non-linear active function)？"></a>为什么要引入非线性激活函数(non-linear active function)？</h2><p>增加神经网络模型的非线性映射。如果不用激活函数，那么每一层的输出与上一层都是线性相关，可以证明无论多少层神经网络，输出都是输入<br>的线性组合，只能模拟线性函数。所以通过使用非线性激活函数来使神经网络可以拟合任意函数。</p>
+<p>常见的激活函数有 sigmoid、tanh、ReLU 等，下面来分别讨论一下不同激活函数的优劣势。</p>
+<h2 id="sigmoid-激活函数"><a href="#sigmoid-激活函数" class="headerlink" title="sigmoid 激活函数"></a>sigmoid 激活函数</h2><p>sigmoid 激活函数为：<br>$ f(x) = \frac{1}{1 + e^{-x}}, $<br>其导数为：<br>$ f^\prime(x) = f(x)(1-f(x)), $<br>所以 sigmoid 函数的取值范围为[0, 1], 导数取值范围为[0, 0.25].</p>
+<h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h3><p>光滑S型曲线连续可导，函数阈值有上限</p>
+<h3 id="劣势"><a href="#劣势" class="headerlink" title="劣势"></a>劣势</h3><p>梯度消失/爆炸问题</p>
+<h2 id="tanh-激活函数"><a href="#tanh-激活函数" class="headerlink" title="tanh 激活函数"></a>tanh 激活函数</h2><p>tanh 激活函数为:<br>$ f(x) = \frac{e^x - e^{-x}}{e^z + e^{-z}}, $<br>其导数为：<br>$ f^\prime(x) = 1 - (f(x))^2, $<br>所以 tanh 函数的取值范围为[-1, 1], 导数的取值范围为[0, 1].</p>
+<h3 id="优势-1"><a href="#优势-1" class="headerlink" title="优势"></a>优势</h3><p>取值范围满足零中心化(zero-center), 防止了梯度偏差;当输入为0时，梯度值最大，相对于sigmoid函数梯度消失问题相对较轻</p>
+<h3 id="劣势-1"><a href="#劣势-1" class="headerlink" title="劣势"></a>劣势</h3><p>依然存在梯度消失/爆炸问题</p>
+<h2 id="ReLU-激活函数"><a href="#ReLU-激活函数" class="headerlink" title="ReLU 激活函数"></a>ReLU 激活函数</h2><p>ReLU 激活函数为:<br>$ f(x) = max(0, x), $<br>其为分段函数，当输入大于0时，导数为常数，小于0时，不可导。</p>
+<h3 id="优势-2"><a href="#优势-2" class="headerlink" title="优势"></a>优势</h3><p>当输入大于0时，梯度为常数，不存在梯度消失问题，学习速度更快；</p>
+<h3 id="劣势-2"><a href="#劣势-2" class="headerlink" title="劣势"></a>劣势</h3><p>当输入小于0时，函数不可导，无法进行梯度更新；激活函数阈值无上限</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2015/09/23/BP算法/" data-id="cj00yocv40000nbjg5dh9q3nm" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2017/03/08/常用激活函数优劣对比/" data-id="cj00yocvm0003nbjg4g9bfndu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NN/">NN</a></li></ul>
@@ -124,19 +117,10 @@ $ w_{kj}^l：l-1层j节点到l层k节点的权重；z_k^l: l层k节点的输入�
     
 <nav id="article-nav">
   
-    <a href="/2015/10/20/安装配置/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          安装配置
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/08/28/django快速搭建一个网站/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/02/26/如何衡量事件的相似性/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Django快速搭建一个网站</div>
+      <div class="article-nav-title">如何衡量事件的相似性</div>
     </a>
   
 </nav>

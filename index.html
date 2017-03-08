@@ -53,7 +53,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+        <a id="nav-search-btn" class="nav-icon" title="搜尋"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://zozoz.github.io"></form>
@@ -63,6 +63,55 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-常用激活函数优劣对比" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/08/常用激活函数优劣对比/" class="article-date">
+  <time datetime="2017-03-08T11:51:43.000Z" itemprop="datePublished">2017-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/08/常用激活函数优劣对比/">常用激活函数优劣对比</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="为什么要引入非线性激活函数-non-linear-active-function-？"><a href="#为什么要引入非线性激活函数-non-linear-active-function-？" class="headerlink" title="为什么要引入非线性激活函数(non-linear active function)？"></a>为什么要引入非线性激活函数(non-linear active function)？</h2><p>增加神经网络模型的非线性映射。如果不用激活函数，那么每一层的输出与上一层都是线性相关，可以证明无论多少层神经网络，输出都是输入<br>的线性组合，只能模拟线性函数。所以通过使用非线性激活函数来使神经网络可以拟合任意函数。</p>
+<p>常见的激活函数有 sigmoid、tanh、ReLU 等，下面来分别讨论一下不同激活函数的优劣势。</p>
+<h2 id="sigmoid-激活函数"><a href="#sigmoid-激活函数" class="headerlink" title="sigmoid 激活函数"></a>sigmoid 激活函数</h2><p>sigmoid 激活函数为：<br>$ f(x) = \frac{1}{1 + e^{-x}}, $<br>其导数为：<br>$ f^\prime(x) = f(x)(1-f(x)), $<br>所以 sigmoid 函数的取值范围为[0, 1], 导数取值范围为[0, 0.25].</p>
+<h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h3><p>光滑S型曲线连续可导，函数阈值有上限</p>
+<h3 id="劣势"><a href="#劣势" class="headerlink" title="劣势"></a>劣势</h3><p>梯度消失/爆炸问题</p>
+<h2 id="tanh-激活函数"><a href="#tanh-激活函数" class="headerlink" title="tanh 激活函数"></a>tanh 激活函数</h2><p>tanh 激活函数为:<br>$ f(x) = \frac{e^x - e^{-x}}{e^z + e^{-z}}, $<br>其导数为：<br>$ f^\prime(x) = 1 - (f(x))^2, $<br>所以 tanh 函数的取值范围为[-1, 1], 导数的取值范围为[0, 1].</p>
+<h3 id="优势-1"><a href="#优势-1" class="headerlink" title="优势"></a>优势</h3><p>取值范围满足零中心化(zero-center), 防止了梯度偏差;当输入为0时，梯度值最大，相对于sigmoid函数梯度消失问题相对较轻</p>
+<h3 id="劣势-1"><a href="#劣势-1" class="headerlink" title="劣势"></a>劣势</h3><p>依然存在梯度消失/爆炸问题</p>
+<h2 id="ReLU-激活函数"><a href="#ReLU-激活函数" class="headerlink" title="ReLU 激活函数"></a>ReLU 激活函数</h2><p>ReLU 激活函数为:<br>$ f(x) = max(0, x), $<br>其为分段函数，当输入大于0时，导数为常数，小于0时，不可导。</p>
+<h3 id="优势-2"><a href="#优势-2" class="headerlink" title="优势"></a>优势</h3><p>当输入大于0时，梯度为常数，不存在梯度消失问题，学习速度更快；</p>
+<h3 id="劣势-2"><a href="#劣势-2" class="headerlink" title="劣势"></a>劣势</h3><p>当输入小于0时，函数不可导，无法进行梯度更新；激活函数阈值无上限</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://zozoz.github.io/2017/03/08/常用激活函数优劣对比/" data-id="cj00yocvm0003nbjg4g9bfndu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NN/">NN</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-如何衡量事件的相似性" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -95,7 +144,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2016/02/26/如何衡量事件的相似性/" data-id="cil95hh180006w6jgkw1c4mnt" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2016/02/26/如何衡量事件的相似性/" data-id="cj00yocw60008nbjgdbuutcpe" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ML/">ML</a></li></ul>
@@ -138,7 +187,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2015/12/16/Kleinberg/" data-id="cil95hh1e000cw6jg6eokgqks" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2015/12/16/Kleinberg/" data-id="cj00yocwe000enbjghijp7reu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BurstDetection/">BurstDetection</a></li></ul>
@@ -181,7 +230,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2015/10/20/安装配置/" data-id="cil95hh150003w6jg6i2ii8we" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2015/10/20/安装配置/" data-id="cj00yocvz0005nbjg18bagi0h" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/运维/">运维</a></li></ul>
@@ -225,7 +274,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2015/09/23/BP算法/" data-id="cil95hh0o0000w6jgbzo2gp99" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2015/09/23/BP算法/" data-id="cj00yocv40000nbjg5dh9q3nm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NN/">NN</a></li></ul>
@@ -268,7 +317,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2015/08/28/django快速搭建一个网站/" data-id="cil95hh1c0009w6jgklrqdrg0" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2015/08/28/django快速搭建一个网站/" data-id="cj00yocwa000bnbjg3873gwec" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -290,7 +339,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
+    <h3 class="widget-title">標籤</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BurstDetection/">BurstDetection</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/">ML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NN/">NN</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/运维/">运维</a></li></ul>
     </div>
@@ -300,18 +349,18 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
+    <h3 class="widget-title">標籤雲</h3>
     <div class="widget tagcloud">
-      <a href="/tags/BurstDetection/" style="font-size: 10px;">BurstDetection</a> <a href="/tags/ML/" style="font-size: 10px;">ML</a> <a href="/tags/NN/" style="font-size: 10px;">NN</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/运维/" style="font-size: 10px;">运维</a>
+      <a href="/tags/BurstDetection/" style="font-size: 10px;">BurstDetection</a> <a href="/tags/ML/" style="font-size: 10px;">ML</a> <a href="/tags/NN/" style="font-size: 20px;">NN</a> <a href="/tags/Web/" style="font-size: 10px;">Web</a> <a href="/tags/运维/" style="font-size: 10px;">运维</a>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
+    <h3 class="widget-title">彙整</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a></li></ul>
     </div>
   </div>
 
@@ -322,6 +371,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/03/08/常用激活函数优劣对比/">常用激活函数优劣对比</a>
+          </li>
         
           <li>
             <a href="/2016/02/26/如何衡量事件的相似性/">如何衡量事件的相似性</a>
@@ -339,10 +392,6 @@
             <a href="/2015/09/23/BP算法/">BP算法</a>
           </li>
         
-          <li>
-            <a href="/2015/08/28/django快速搭建一个网站/">Django快速搭建一个网站</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -355,7 +404,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2016 ZOZOZ<br>
+      &copy; 2017 ZOZOZ<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
