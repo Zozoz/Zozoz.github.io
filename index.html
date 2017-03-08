@@ -88,20 +88,15 @@
       
         <h2 id="为什么要引入非线性激活函数-non-linear-active-function-？"><a href="#为什么要引入非线性激活函数-non-linear-active-function-？" class="headerlink" title="为什么要引入非线性激活函数(non-linear active function)？"></a>为什么要引入非线性激活函数(non-linear active function)？</h2><p>增加神经网络模型的非线性映射。如果不用激活函数，那么每一层的输出与上一层都是线性相关，可以证明无论多少层神经网络，输出都是输入<br>的线性组合，只能模拟线性函数。所以通过使用非线性激活函数来使神经网络可以拟合任意函数。</p>
 <p>常见的激活函数有 sigmoid、tanh、ReLU 等，下面来分别讨论一下不同激活函数的优劣势。</p>
-<h2 id="sigmoid-激活函数"><a href="#sigmoid-激活函数" class="headerlink" title="sigmoid 激活函数"></a>sigmoid 激活函数</h2><p>sigmoid 激活函数为：<br>$ f(x) = \frac{1}{1 + e^{-x}}, $<br>其导数为：<br>$ f^\prime(x) = f(x)(1-f(x)), $<br>所以 sigmoid 函数的取值范围为[0, 1], 导数取值范围为[0, 0.25].</p>
-<h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h3><p>光滑S型曲线连续可导，函数阈值有上限</p>
-<h3 id="劣势"><a href="#劣势" class="headerlink" title="劣势"></a>劣势</h3><p>梯度消失/爆炸问题</p>
-<h2 id="tanh-激活函数"><a href="#tanh-激活函数" class="headerlink" title="tanh 激活函数"></a>tanh 激活函数</h2><p>tanh 激活函数为:<br>$ f(x) = \frac{e^x - e^{-x}}{e^z + e^{-z}}, $<br>其导数为：<br>$ f^\prime(x) = 1 - (f(x))^2, $<br>所以 tanh 函数的取值范围为[-1, 1], 导数的取值范围为[0, 1].</p>
-<h3 id="优势-1"><a href="#优势-1" class="headerlink" title="优势"></a>优势</h3><p>取值范围满足零中心化(zero-center), 防止了梯度偏差;当输入为0时，梯度值最大，相对于sigmoid函数梯度消失问题相对较轻</p>
-<h3 id="劣势-1"><a href="#劣势-1" class="headerlink" title="劣势"></a>劣势</h3><p>依然存在梯度消失/爆炸问题</p>
-<h2 id="ReLU-激活函数"><a href="#ReLU-激活函数" class="headerlink" title="ReLU 激活函数"></a>ReLU 激活函数</h2><p>ReLU 激活函数为:<br>$ f(x) = max(0, x), $<br>其为分段函数，当输入大于0时，导数为常数，小于0时，不可导。</p>
-<h3 id="优势-2"><a href="#优势-2" class="headerlink" title="优势"></a>优势</h3><p>当输入大于0时，梯度为常数，不存在梯度消失问题，学习速度更快；</p>
-<h3 id="劣势-2"><a href="#劣势-2" class="headerlink" title="劣势"></a>劣势</h3><p>当输入小于0时，函数不可导，无法进行梯度更新；激活函数阈值无上限</p>
-
+        
+          <p class="article-more-link">
+            <a href="/2017/03/08/常用激活函数优劣对比/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2017/03/08/常用激活函数优劣对比/" data-id="cj00yocvm0003nbjg4g9bfndu" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2017/03/08/常用激活函数优劣对比/" data-id="cj00ys2r70003pbjgub9cih04" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NN/">NN</a></li></ul>
@@ -144,7 +139,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2016/02/26/如何衡量事件的相似性/" data-id="cj00yocw60008nbjgdbuutcpe" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2016/02/26/如何衡量事件的相似性/" data-id="cj00ys2ri0008pbjgfbrr9550" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ML/">ML</a></li></ul>
@@ -187,7 +182,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2015/12/16/Kleinberg/" data-id="cj00yocwe000enbjghijp7reu" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2015/12/16/Kleinberg/" data-id="cj00ys2rm000epbjgxc21dzd1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BurstDetection/">BurstDetection</a></li></ul>
@@ -230,7 +225,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2015/10/20/安装配置/" data-id="cj00yocvz0005nbjg18bagi0h" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2015/10/20/安装配置/" data-id="cj00ys2rf0005pbjg2w6b66g1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/运维/">运维</a></li></ul>
@@ -274,7 +269,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2015/09/23/BP算法/" data-id="cj00yocv40000nbjg5dh9q3nm" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2015/09/23/BP算法/" data-id="cj00ys2qk0000pbjgbihwjaku" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NN/">NN</a></li></ul>
@@ -317,7 +312,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2015/08/28/django快速搭建一个网站/" data-id="cj00yocwa000bnbjg3873gwec" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2015/08/28/django快速搭建一个网站/" data-id="cj00ys2rk000bpbjgdh951snw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>

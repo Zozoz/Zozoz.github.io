@@ -6,21 +6,18 @@
   <title>常用激活函数优劣对比 | Newbie</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="为什么要引入非线性激活函数(non-linear active function)？增加神经网络模型的非线性映射。如果不用激活函数，那么每一层的输出与上一层都是线性相关，可以证明无论多少层神经网络，输出都是输入的线性组合，只能模拟线性函数。所以通过使用非线性激活函数来使神经网络可以拟合任意函数。
-常见的激活函数有 sigmoid、tanh、ReLU 等，下面来分别讨论一下不同激活函数的优劣势。
-s">
+常见的激活函数有 sigmoid、tanh、ReLU 等，下面来分别讨论一下不同激活函数的优劣势。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="常用激活函数优劣对比">
 <meta property="og:url" content="http://zozoz.github.io/2017/03/08/常用激活函数优劣对比/index.html">
 <meta property="og:site_name" content="Newbie">
 <meta property="og:description" content="为什么要引入非线性激活函数(non-linear active function)？增加神经网络模型的非线性映射。如果不用激活函数，那么每一层的输出与上一层都是线性相关，可以证明无论多少层神经网络，输出都是输入的线性组合，只能模拟线性函数。所以通过使用非线性激活函数来使神经网络可以拟合任意函数。
-常见的激活函数有 sigmoid、tanh、ReLU 等，下面来分别讨论一下不同激活函数的优劣势。
-s">
-<meta property="og:updated_time" content="2017-03-08T12:49:06.000Z">
+常见的激活函数有 sigmoid、tanh、ReLU 等，下面来分别讨论一下不同激活函数的优劣势。">
+<meta property="og:updated_time" content="2017-03-08T12:52:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="常用激活函数优劣对比">
 <meta name="twitter:description" content="为什么要引入非线性激活函数(non-linear active function)？增加神经网络模型的非线性映射。如果不用激活函数，那么每一层的输出与上一层都是线性相关，可以证明无论多少层神经网络，输出都是输入的线性组合，只能模拟线性函数。所以通过使用非线性激活函数来使神经网络可以拟合任意函数。
-常见的激活函数有 sigmoid、tanh、ReLU 等，下面来分别讨论一下不同激活函数的优劣势。
-s">
+常见的激活函数有 sigmoid、tanh、ReLU 等，下面来分别讨论一下不同激活函数的优劣势。">
   
     <link rel="alternate" href="/atom.xml" title="Newbie" type="application/atom+xml">
   
@@ -93,6 +90,7 @@ s">
       
         <h2 id="为什么要引入非线性激活函数-non-linear-active-function-？"><a href="#为什么要引入非线性激活函数-non-linear-active-function-？" class="headerlink" title="为什么要引入非线性激活函数(non-linear active function)？"></a>为什么要引入非线性激活函数(non-linear active function)？</h2><p>增加神经网络模型的非线性映射。如果不用激活函数，那么每一层的输出与上一层都是线性相关，可以证明无论多少层神经网络，输出都是输入<br>的线性组合，只能模拟线性函数。所以通过使用非线性激活函数来使神经网络可以拟合任意函数。</p>
 <p>常见的激活函数有 sigmoid、tanh、ReLU 等，下面来分别讨论一下不同激活函数的优劣势。</p>
+<a id="more"></a>
 <h2 id="sigmoid-激活函数"><a href="#sigmoid-激活函数" class="headerlink" title="sigmoid 激活函数"></a>sigmoid 激活函数</h2><p>sigmoid 激活函数为：<br>$ f(x) = \frac{1}{1 + e^{-x}}, $<br>其导数为：<br>$ f^\prime(x) = f(x)(1-f(x)), $<br>所以 sigmoid 函数的取值范围为[0, 1], 导数取值范围为[0, 0.25].</p>
 <h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h3><p>光滑S型曲线连续可导，函数阈值有上限</p>
 <h3 id="劣势"><a href="#劣势" class="headerlink" title="劣势"></a>劣势</h3><p>梯度消失/爆炸问题</p>
@@ -106,7 +104,7 @@ s">
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2017/03/08/常用激活函数优劣对比/" data-id="cj00yocvm0003nbjg4g9bfndu" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2017/03/08/常用激活函数优劣对比/" data-id="cj00ys2r70003pbjgub9cih04" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NN/">NN</a></li></ul>
