@@ -21,7 +21,7 @@
 <meta property="og:image" content="http://7xnepc.com1.z0.glb.clouddn.com/drelu.jpg?imageView/2/w/200/h/200">
 <meta property="og:image" content="http://7xnepc.com1.z0.glb.clouddn.com/elu.jpg?imageView/2/w/200/h/200">
 <meta property="og:image" content="http://7xnepc.com1.z0.glb.clouddn.com/delu.jpg?imageView/2/w/200/h/200">
-<meta property="og:updated_time" content="2017-03-17T08:41:47.000Z">
+<meta property="og:updated_time" content="2017-03-17T08:48:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="常用激活函数优劣对比">
 <meta name="twitter:description" content="为什么要引入非线性激活函数(non-linear active function)？增加神经网络模型的非线性映射。如果不用激活函数，那么每一层的输出与上一层都是线性相关，可以证明无论多少层神经网络，输出都是输入\的线性组合，只能模拟线性函数。所以通过使用非线性激活函数来使神经网络可以拟合任意函数。
@@ -115,7 +115,7 @@
 <li>容易出现梯度消失问题</li>
 <li>幂运算相对来讲比较耗时</li>
 </ol>
-<h2 id="ReLU-激活函数"><a href="#ReLU-激活函数" class="headerlink" title="ReLU 激活函数"></a>ReLU 激活函数</h2><p>ReLU 激活函数为:<br>$ f(x) = max(0, x), $<br>其导数为:<br>$ f^\prime(x) = \begin{cases} 0, &amp; \text{x \le 0} \ 1, &amp; \text{x \gt 0} \ \end{cases} $<br><img src="http://7xnepc.com1.z0.glb.clouddn.com/relu.jpg?imageView/2/w/200/h/200" alt="fx"> <img src="http://7xnepc.com1.z0.glb.clouddn.com/drelu.jpg?imageView/2/w/200/h/200" alt="df(x)"><br>其为分段函数，当输入大于0时，导数为常数，小于0时，不可导。</p>
+<h2 id="ReLU-激活函数"><a href="#ReLU-激活函数" class="headerlink" title="ReLU 激活函数"></a>ReLU 激活函数</h2><p>ReLU 激活函数为:<br>$ f(x) = max(0, x), $<br>其导数为:<br>$$ f^\prime(x) =<br>\begin{cases} 0, &amp; \text{x \le 0} \<br>1, &amp; \text{x \gt 0}<br>\end{cases}<br>$$<br><img src="http://7xnepc.com1.z0.glb.clouddn.com/relu.jpg?imageView/2/w/200/h/200" alt="fx"> <img src="http://7xnepc.com1.z0.glb.clouddn.com/drelu.jpg?imageView/2/w/200/h/200" alt="df(x)"><br>其为分段函数，当输入大于0时，导数为常数，小于0时，不可导。</p>
 <h3 id="优势-2"><a href="#优势-2" class="headerlink" title="优势"></a>优势</h3><ol>
 <li>当输入大于0时，梯度为常数，不存在梯度消失问题，学习速度更快；</li>
 </ol>
@@ -123,9 +123,9 @@
 <li>函数输出不是zero-centered</li>
 <li>当输入小于0时，函数不可导，无法进行梯度更新，即 Dead ReLU Problem，指的是某些神经元可能永远不会激活，导致相应的参数永远不能被更新。\<br>需要注意初始化方式，一般使用 Xavier 初始化方式，同时避免将学习率设置过大或者使用 adagrad 等自动调节学习率的优化算法。</li>
 </ol>
-<h2 id="Leaky-ReLU-激活函数"><a href="#Leaky-ReLU-激活函数" class="headerlink" title="Leaky ReLU 激活函数"></a>Leaky ReLU 激活函数</h2><p>Leaky ReLU 激活函数为:<br>$ f(x) = max(0.01x, x)$<br>其导数为:<br>$ f^\prime(x) = \begin{cases} 0.01, &amp; \text{x \le 0} \ 1, &amp; \text{x \gt 0} \ \end{cases} $</p>
+<h2 id="Leaky-ReLU-激活函数"><a href="#Leaky-ReLU-激活函数" class="headerlink" title="Leaky ReLU 激活函数"></a>Leaky ReLU 激活函数</h2><p>Leaky ReLU 激活函数为:<br>$ f(x) = max(0.01x, x)$<br>其导数为:<br>$$ f^\prime(x) =<br>\begin{cases} 0.01, &amp; \text{x \le 0} \<br>1, &amp; \text{x \gt 0}<br>\end{cases}<br>$$</p>
 <p>为了解决 Dead ReLU Problem, 提出将 ReLU 的负半段设置为$0.01$，或者$\alpha x$。理论上讲，Leaky ReLU 有 ReLU 的所有优点并且没有\<br>Dead ReLU Problem 的问题，但在实际操作中，并没有完全证明 Leaky ReLU 总是好于 ReLU。</p>
-<h2 id="ELU-Exponential-Linear-Units-函数"><a href="#ELU-Exponential-Linear-Units-函数" class="headerlink" title="ELU(Exponential Linear Units) 函数"></a>ELU(Exponential Linear Units) 函数</h2><p>ELU 激活函数为:<br>$$<br>f(x) =<br>\begin{cases}<br>\alpha(e^x - 1), &amp; \text{x \le 0} \<br>x, &amp; \text{x \gt 0} \<br>\end{cases}<br>$$<br>其导数为:<br>$$<br>f(x) = \begin{cases}<br>        \alpha e^x, &amp; \text{x \le 0} \<br>        1, &amp; \text{x \gt 0} \<br>        \end{cases}<br>$$<br><img src="http://7xnepc.com1.z0.glb.clouddn.com/elu.jpg?imageView/2/w/200/h/200" alt="fx"> <img src="http://7xnepc.com1.z0.glb.clouddn.com/delu.jpg?imageView/2/w/200/h/200" alt="df(x)"></p>
+<h2 id="ELU-Exponential-Linear-Units-函数"><a href="#ELU-Exponential-Linear-Units-函数" class="headerlink" title="ELU(Exponential Linear Units) 函数"></a>ELU(Exponential Linear Units) 函数</h2><p>ELU 激活函数为:<br>$$<br>f(x) =<br>\begin{cases}<br>\alpha(e^x - 1), &amp;\text{x \le 0} \<br>x, &amp; \text{x \gt 0}<br>\end{cases}<br>$$<br>其导数为:<br>$$<br>f(x) = \begin{cases}<br>        \alpha e^x, &amp; \text{x \le 0} \\<br>        1, &amp; \text{x \gt 0}<br>        \end{cases}<br>$$<br><img src="http://7xnepc.com1.z0.glb.clouddn.com/elu.jpg?imageView/2/w/200/h/200" alt="fx"> <img src="http://7xnepc.com1.z0.glb.clouddn.com/delu.jpg?imageView/2/w/200/h/200" alt="df(x)"></p>
 <p>ELU 也是为了解决 ReLU 的缺点提出来的，ELU 有 ReLU 的有点并且没有 Dead ReLU Problem、函数输出为zero-centered。<br>计算量稍大，同时在实践中并没有明显的体现出优于 ReLU。</p>
 <h2 id="梯度消失-Gradient-Vanishing"><a href="#梯度消失-Gradient-Vanishing" class="headerlink" title="梯度消失(Gradient Vanishing)"></a>梯度消失(Gradient Vanishing)</h2><p>使用 Back Propagation 进行网络优化时，先计算输出层的损失，然后将损失以导数的形式不断向上一层网络进行传递，修正相应的参数，达到降低损失的目的。\<br>因为在求导的过程中使用链式法则，当前层的导数需要与之前层导数相乘，几个小数的乘积结果会很接近0，比如 sigmoid 函数，其导数最大值为0.25，意味着\<br>没经过一层导数最少被压缩为之前的1/4，并且 sigmoid 函数的导数值几乎都是接近0。</p>
 <h2 id="zero-centered"><a href="#zero-centered" class="headerlink" title="zero-centered"></a>zero-centered</h2><p>sigmoid 函数的输出恒大于0，会导致模型训练的收敛速度变慢。举例来讲，对于 sigmoid 函数，<br>$$<br>L(x) = \frac{1}{1 + e^{-f(x)}},<br>f(x) = wx + b,<br>\frac{df}{dw} = \frac{dL}{df} \frac{df}{dw} = \frac{dL}{df}x<br>$$<br>如果所有的x均为正数或负数，那么其对w的导数总是正数或负数，会导致w阶梯式更新。</p>
@@ -133,7 +133,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2017/03/08/常用激活函数优劣对比/" data-id="cj0dksul8000351jgu97x6syx" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2017/03/08/常用激活函数优劣对比/" data-id="cj0dl22dn000399jgi1phtd5k" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NN/">NN</a></li></ul>
