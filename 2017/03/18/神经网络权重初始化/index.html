@@ -6,21 +6,18 @@
   <title>神经网络权重初始化 | Newbie</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="在神经网络模型训练过程中需要对参数 weight 进行更新，在更新前需要进行初始化操作，当模型足够复杂时，一个好的初始化对模型优化至关重要。
-为什么不能全部初始化为0？如果所有参数都是0，那么所有神经元的输出都是相同的，在 forward 和 back 时每一层的神经元的值和梯度都是一样的，使模型过于简单。
-pre-trainingpre-training一般分两个阶段：① pre-trainin">
+为什么不能全部初始化为0？如果所有参数都是0，那么所有神经元的输出都是相同的，在 forward 和 back 时每一层的神经元的值和梯度都是一样的，使模型过于简单。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="神经网络权重初始化">
 <meta property="og:url" content="http://zozoz.github.io/2017/03/18/神经网络权重初始化/index.html">
 <meta property="og:site_name" content="Newbie">
 <meta property="og:description" content="在神经网络模型训练过程中需要对参数 weight 进行更新，在更新前需要进行初始化操作，当模型足够复杂时，一个好的初始化对模型优化至关重要。
-为什么不能全部初始化为0？如果所有参数都是0，那么所有神经元的输出都是相同的，在 forward 和 back 时每一层的神经元的值和梯度都是一样的，使模型过于简单。
-pre-trainingpre-training一般分两个阶段：① pre-trainin">
-<meta property="og:updated_time" content="2017-03-18T15:04:50.000Z">
+为什么不能全部初始化为0？如果所有参数都是0，那么所有神经元的输出都是相同的，在 forward 和 back 时每一层的神经元的值和梯度都是一样的，使模型过于简单。">
+<meta property="og:updated_time" content="2017-03-18T15:06:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="神经网络权重初始化">
 <meta name="twitter:description" content="在神经网络模型训练过程中需要对参数 weight 进行更新，在更新前需要进行初始化操作，当模型足够复杂时，一个好的初始化对模型优化至关重要。
-为什么不能全部初始化为0？如果所有参数都是0，那么所有神经元的输出都是相同的，在 forward 和 back 时每一层的神经元的值和梯度都是一样的，使模型过于简单。
-pre-trainingpre-training一般分两个阶段：① pre-trainin">
+为什么不能全部初始化为0？如果所有参数都是0，那么所有神经元的输出都是相同的，在 forward 和 back 时每一层的神经元的值和梯度都是一样的，使模型过于简单。">
   
     <link rel="alternate" href="/atom.xml" title="Newbie" type="application/atom+xml">
   
@@ -93,6 +90,7 @@ pre-trainingpre-training一般分两个阶段：① pre-trainin">
       
         <p>在神经网络模型训练过程中需要对参数 weight 进行更新，在更新前需要进行初始化操作，当模型足够复杂时，一个好的初始化对模型优化至关重要。</p>
 <h3 id="为什么不能全部初始化为0？"><a href="#为什么不能全部初始化为0？" class="headerlink" title="为什么不能全部初始化为0？"></a>为什么不能全部初始化为0？</h3><p>如果所有参数都是0，那么所有神经元的输出都是相同的，在 forward 和 back 时每一层的神经元的值和梯度都是一样的，使模型过于简单。</p>
+<a id="more"></a>
 <h3 id="pre-training"><a href="#pre-training" class="headerlink" title="pre-training"></a>pre-training</h3><p>pre-training一般分两个阶段：① pre-training 阶段，对神经网络的每一层取出构造一个 auto-encoder 做训练，使得输出层能够复现输出层，在这个过程中得到初始参数 ② fine-tuning 阶段，将上一步得到的参数作为初始化参数对模型进行整体调整。</p>
 <p>感觉现在不太流行这种做法，个人对此不太熟悉。</p>
 <h3 id="高斯分布初始化"><a href="#高斯分布初始化" class="headerlink" title="高斯分布初始化"></a>高斯分布初始化</h3><p>直接对参数进行高斯分布初始化，通常均值为0，标准差为0.01。</p>
@@ -118,7 +116,7 @@ pre-trainingpre-training一般分两个阶段：① pre-trainin">
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2017/03/18/神经网络权重初始化/" data-id="cj0fdxap30003bbjg1g06ben8" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2017/03/18/神经网络权重初始化/" data-id="cj0fdzosh0003f7jgkpkwjfzz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NN/">NN</a></li></ul>

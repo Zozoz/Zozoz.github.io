@@ -88,32 +88,15 @@
       
         <p>在神经网络模型训练过程中需要对参数 weight 进行更新，在更新前需要进行初始化操作，当模型足够复杂时，一个好的初始化对模型优化至关重要。</p>
 <h3 id="为什么不能全部初始化为0？"><a href="#为什么不能全部初始化为0？" class="headerlink" title="为什么不能全部初始化为0？"></a>为什么不能全部初始化为0？</h3><p>如果所有参数都是0，那么所有神经元的输出都是相同的，在 forward 和 back 时每一层的神经元的值和梯度都是一样的，使模型过于简单。</p>
-<h3 id="pre-training"><a href="#pre-training" class="headerlink" title="pre-training"></a>pre-training</h3><p>pre-training一般分两个阶段：① pre-training 阶段，对神经网络的每一层取出构造一个 auto-encoder 做训练，使得输出层能够复现输出层，在这个过程中得到初始参数 ② fine-tuning 阶段，将上一步得到的参数作为初始化参数对模型进行整体调整。</p>
-<p>感觉现在不太流行这种做法，个人对此不太熟悉。</p>
-<h3 id="高斯分布初始化"><a href="#高斯分布初始化" class="headerlink" title="高斯分布初始化"></a>高斯分布初始化</h3><p>直接对参数进行高斯分布初始化，通常均值为0，标准差为0.01。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">W = tf.Variable(np.random.randn(node_in, node_out)) * 0.01</span><br></pre></td></tr></table></figure>
-<h3 id="Xavier-初始化"><a href="#Xavier-初始化" class="headerlink" title="Xavier 初始化"></a>Xavier 初始化</h3><p>Xavier 初始化方法来自论文[1]，文章假设激活函数为线性且满足0点处导数为1.</p>
-<p>如果<br>$$<br>y = w_1x_1 + \cdots + w_nx_n + b<br>$$<br>根据概率统计知识有下面的方差公式：<br>$$<br>Var(w_ix_i) = E[w_i]^2Var(x_i) + Var(w_i)E(x_i)^2 + Var(w_i)Var(x_i)    \ \ \ \ \  \ \ \ \ (1)<br>$$<br>特别的，当我们假设输入和权重都是零均值时（可以通过Batch Normalization），上式可以简化为：<br>$$<br>Var(w_ix_i) = Var(w_i)Var(x_i)<br>$$<br>进一步假设输入x和权重w独立同分布，则有：<br>$$<br>Var(y) = nVar(w_i)Var(x_i)<br>$$<br>于是，为了保证输入输出方差一致，则应该有：<br>$$<br>Var(w_i) = \frac{1}{n}<br>$$<br>考虑前向和后向传播时每一层的方差一致，应该满足上式，最终我们的权重方差应该满足：<br>$$<br>Var(W) = \frac{2}{node_{in}+node_{out}}<br>$$<br>因为[a,b]区间均匀分布的方差为：<br>$$<br>Var = \frac{(b-a)^2}{12}, E = \frac{a+b}{2}<br>$$<br>因此，Xavier 初始化就是下面的均匀分布：<br>$$<br>W \sim U[-\frac{\sqrt{6}}{\sqrt{(node_{in}+node_{out})}}, \frac{\sqrt{6}}{\sqrt{(node_{in}+node_{out})}}]<br>$$</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">W = tf.Variable(np.random.uniform(-np.sqrt(6/(in+out))), np.sqrt(6/(in+out)))&#10;W = tf.Variable(np.random.randn(in, out)) * np.sqrt(2./(in+out))</span><br></pre></td></tr></table></figure>
-<h3 id="MSRA-权重初始化"><a href="#MSRA-权重初始化" class="headerlink" title="MSRA 权重初始化"></a>MSRA 权重初始化</h3><p>MASR 权重初始化方法来自论文[2]，因为 Xavier 推导的时候假设激活函数是线性的，显然常用的激活函数 ReLU 并不满足。推导过程与 Xavier 类似，在得到(1)式后，输入的均值不为0，所以：<br>$$<br>Var(w_ix_i) = Var(w_i)E(x_i)^2 + Var(w_i)Var(x_i) = Var(w_i) E({x_i}^2)<br>$$<br>所以有：<br>$$<br>Var(y) = nVar(w_i)E({x_i}^2)<br>$$<br>对于 ReLU 函数，<br>$$<br>x_l = f(y_{l-1}), \ \ \ \ \ \ \  E(x^2_l) = \frac{1}{2} Var(y_{l-1})<br>$$<br>带入上式得，<br>$$<br>Var(y_l) = \frac{1}{2}n_l Var(w_l)Var(y_{l-1})<br>$$<br>为了使得每一层数据的方差保持一致，则权重应该满足：<br>$$<br>\frac{1}{2}n_l Var(w_l) = 1, \forall l<br>$$<br>即<br>$$<br>Var(W) = \frac{2}{n}<br>$$</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">W = tf.Variable(np.random.randn(in, out)) * np.sqrt(4./(in+out))</span><br></pre></td></tr></table></figure>
-<h3 id="Batch-Normalization"><a href="#Batch-Normalization" class="headerlink" title="Batch Normalization"></a>Batch Normalization</h3><p>BN是在进行非线性激活函数前，对输入值做 normalize，来自论文[3]。<br>$$<br>\mu \leftarrow  \frac{1}{m}\sum_{i=1}^m{x_i}<br>$$</p>
-<p>$$<br>\sigma ^2 \leftarrow \frac{1}{m}\sum_{i=1}^m{(x_i-\mu)^2}<br>$$</p>
-<p>$$<br>x_i \leftarrow \frac{x_i-\mu}{\sqrt{\sigma^2+\epsilon}}<br>$$</p>
-<p>$$<br>y_i \leftarrow \gamma x_i + \beta<br>$$</p>
-<p>BN 中所有的操作都是平滑可导的，这使得反向传播可以有效运行并学到相应的参数。需要注意的一点是 BN 在训练和测试的时候有所差别。训练的时候由当前 batch 计算得出，在测试的时候应该使用训练时保存的均值或类似的经过处理的值，而不是由当前 batch 计算。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">layer = tf.contrib.layers.batch\_norm(layer, center=True, scale=True, is\_training=True)</span><br></pre></td></tr></table></figure>
-<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p>[1] Glorot X, Bengio Y. Understanding the difficulty of training deep feedforward neural networks[C]//Aistats. 2010, 9: 249-256.</p>
-<p>[2] He K, Zhang X, Ren S, et al. Delving deep into rectifiers: Surpassing human-level performance on imagenet classification[C]//Proceedings of the IEEE international conference on computer vision. 2015: 1026-1034.</p>
-<p>[3] Ioffe S, Szegedy C. Batch normalization: Accelerating deep network training by reducing internal covariate shift[J]. arXiv preprint arXiv:1502.03167, 2015.</p>
-<p>[4] <a href="http://blog.csdn.net/shuzfan/article/details/51338178" target="_blank" rel="external">http://blog.csdn.net/shuzfan/article/details/51338178</a></p>
-<p>[5] <a href="http://blog.csdn.net/shuzfan/article/details/51347572" target="_blank" rel="external">http://blog.csdn.net/shuzfan/article/details/51347572</a></p>
-<p>[6] <a href="http://www.leiphone.com/news/201703/3qMp45aQtbxTdzmK.html" target="_blank" rel="external">http://www.leiphone.com/news/201703/3qMp45aQtbxTdzmK.html</a></p>
-
+        
+          <p class="article-more-link">
+            <a href="/2017/03/18/神经网络权重初始化/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2017/03/18/神经网络权重初始化/" data-id="cj0fdxap30003bbjg1g06ben8" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2017/03/18/神经网络权重初始化/" data-id="cj0fdzosh0003f7jgkpkwjfzz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NN/">NN</a></li></ul>
@@ -157,7 +140,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2017/03/08/常用激活函数优劣对比/" data-id="cj0fdxapd0005bbjghj9133iy" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2017/03/08/常用激活函数优劣对比/" data-id="cj0fdzosr0005f7jg9ltf6idb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NN/">NN</a></li></ul>
@@ -200,7 +183,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2016/02/26/如何衡量事件的相似性/" data-id="cj0fdxapi000abbjg28hyu45m" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2016/02/26/如何衡量事件的相似性/" data-id="cj0fdzosv000af7jgdw6kkx7c" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ML/">ML</a></li></ul>
@@ -243,7 +226,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2015/12/16/Kleinberg/" data-id="cj0fdxapm000gbbjg6yhlpeyc" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2015/12/16/Kleinberg/" data-id="cj0fdzot0000gf7jghsauskma" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BurstDetection/">BurstDetection</a></li></ul>
@@ -286,7 +269,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2015/10/20/安装配置/" data-id="cj0fdxapg0007bbjgwvqbza8t" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2015/10/20/安装配置/" data-id="cj0fdzost0007f7jgupo24gap" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/运维/">运维</a></li></ul>
@@ -330,7 +313,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2015/09/23/BP算法/" data-id="cj0fdxaos0000bbjg4bhm86ad" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2015/09/23/BP算法/" data-id="cj0fdzos60000f7jghik8hg74" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NN/">NN</a></li></ul>
@@ -373,7 +356,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2015/08/28/django快速搭建一个网站/" data-id="cj0fdxapk000dbbjgiwe0fklc" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2015/08/28/django快速搭建一个网站/" data-id="cj0fdzosy000df7jgng157baz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
