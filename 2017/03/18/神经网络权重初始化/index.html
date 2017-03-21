@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="Newbie">
 <meta property="og:description" content="在神经网络模型训练过程中需要对参数 weight 进行更新，在更新前需要进行初始化操作，当模型足够复杂时，一个好的初始化对模型优化至关重要。
 为什么不能全部初始化为0？如果所有参数都是0，那么所有神经元的输出都是相同的，在 forward 和 back 时每一层的神经元的值和梯度都是一样的，使模型过于简单。">
-<meta property="og:updated_time" content="2017-03-18T15:07:42.000Z">
+<meta property="og:updated_time" content="2017-03-21T11:19:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="神经网络权重初始化">
 <meta name="twitter:description" content="在神经网络模型训练过程中需要对参数 weight 进行更新，在更新前需要进行初始化操作，当模型足够复杂时，一个好的初始化对模型优化至关重要。
@@ -105,7 +105,7 @@
 <p>$$<br>x_i \leftarrow \frac{x_i-\mu}{\sqrt{\sigma^2+\epsilon}}<br>$$</p>
 <p>$$<br>y_i \leftarrow \gamma x_i + \beta<br>$$</p>
 <p>BN 中所有的操作都是平滑可导的，这使得反向传播可以有效运行并学到相应的参数。需要注意的一点是 BN 在训练和测试的时候有所差别。训练的时候由当前 batch 计算得出，在测试的时候应该使用训练时保存的均值或类似的经过处理的值，而不是由当前 batch 计算。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">layer = tf.contrib.layers.batch\_norm(layer, center=True, scale=True, is\_training=True)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">layer = tf.contrib.layers.batch_norm(layer, center=True, scale=True, is_training=True)</span><br></pre></td></tr></table></figure>
 <h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p>[1] Glorot X, Bengio Y. Understanding the difficulty of training deep feedforward neural networks[C]//Aistats. 2010, 9: 249-256.</p>
 <p>[2] He K, Zhang X, Ren S, et al. Delving deep into rectifiers: Surpassing human-level performance on imagenet classification[C]//Proceedings of the IEEE international conference on computer vision. 2015: 1026-1034.</p>
 <p>[3] Ioffe S, Szegedy C. Batch normalization: Accelerating deep network training by reducing internal covariate shift[J]. arXiv preprint arXiv:1502.03167, 2015.</p>
@@ -116,7 +116,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2017/03/18/神经网络权重初始化/" data-id="cj0fe12sv0003i7jgjtsg6412" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2017/03/18/神经网络权重初始化/" data-id="cj0jg6jrw00035bjgi702mpxr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NN/">NN</a></li></ul>
