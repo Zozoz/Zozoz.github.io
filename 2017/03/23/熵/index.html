@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://zozoz.github.io/2017/03/23/熵/index.html">
 <meta property="og:site_name" content="Newbie">
 <meta property="og:description" content="0. 熵在信息论中，熵是对不确定性的测量，定义为概率分布的对数的相反数。香农把随机变量X的熵值H定义如下：$$H(X) = E[I(X) ] = E[-ln(P(X))]$$其中，P为X的概率质量函数(probability mass function)，E为期望函数，而I(X)是X的信息量(又称为自信息)。">
-<meta property="og:updated_time" content="2017-03-24T13:30:35.000Z">
+<meta property="og:updated_time" content="2017-05-11T04:23:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="熵">
 <meta name="twitter:description" content="0. 熵在信息论中，熵是对不确定性的测量，定义为概率分布的对数的相反数。香农把随机变量X的熵值H定义如下：$$H(X) = E[I(X) ] = E[-ln(P(X))]$$其中，P为X的概率质量函数(probability mass function)，E为期望函数，而I(X)是X的信息量(又称为自信息)。">
@@ -90,8 +90,11 @@
 <h3 id="1-交叉熵"><a href="#1-交叉熵" class="headerlink" title="1. 交叉熵"></a>1. 交叉熵</h3><p>交叉熵是描述两个概率分布P和Q差异的一种方法，记为 H(P, Q)。假设现在有样本集的两个概率分布P和Q，其中P为真实分布，Q为非真实分布。按照真实分布P来衡量识别一个样本的所需要的平均编码长度为：<br>$$<br>H(P) = \sum_iP(x_i)log\frac{1}{P(x_i)}<br>$$<br>如果使用错误分布Q来表示来自真实分布Q的平均编码长度，则应该为：<br>$$<br>H(P,Q) = \sum_iP(x_i)log\frac{1}{Q(x_i)}<br>$$<br>因为用Q来编码的样本来自真实分布P，所以期望H(P,Q)中乘的概率是P，后面的$log\frac{1}{Q(x_i)}$表示对$x_i$编码需要的长度。</p>
 <p>交叉熵被应用在机器学习中作为损失函数，P表示真实标记的分布，Q则为训练后的模型的预测标记分布，交叉熵损失函数可以衡量P与Q的相似性。</p>
 <h3 id="2-相对熵"><a href="#2-相对熵" class="headerlink" title="2. 相对熵"></a>2. 相对熵</h3><p>根据<a href="https://www.wikiwand.com/en/Gibbs%27\_inequality" target="_blank" rel="external">Gibbs’ inequality</a>可知，$H(P,Q) \geq H(P)$恒成立，当且仅当Q和P相等时取等号。我们将由拟合分布Q得到的平均编码长度比由真实分布P得到的平均编码长度多出的bit数称为<strong>相对熵</strong>.<br>$$<br>D(P||Q) = H(P,Q) - H(P) = \sum_iP(x_i)log\frac{P(x_i)}{Q(x_i)}<br>$$<br>其又被称为KL散度(Kullback-Leibler divergence, KLD)，它表示2个函数或概率分布的差异性：差异越大则相对熵越大，差异越小则相对熵越小，特别地，若二者相同则熵为0。KL散度具有<strong>非对称性</strong>。</p>
-<p>PS: 通常<strong>相对熵</strong>也可称为<strong>交叉熵</strong>，因为真实分布P是固定的，D(P||Q)由H(P,Q)决定。</p>
-<p>PPS: 相对熵又称为<strong>互熵</strong>、<strong>交叉熵</strong>、<strong>KL散度</strong>、<strong>信息增益</strong>。</p>
+<!-- PS: 通常**相对熵**也可称为**交叉熵**，因为真实分布P是固定的，D(P||Q)由H(P,Q)决定。
+
+PPS: 相对熵又称为**互熵**、**交叉熵**、**KL散度**、**信息增益**。
+-->
+<p>PS: <strong>交叉熵</strong>和<strong>相对熵</strong>一般针对的是同一随机变量的两个不同分布。</p>
 <h3 id="3-联合熵"><a href="#3-联合熵" class="headerlink" title="3. 联合熵"></a>3. 联合熵</h3><p>两个随机变量X和Y的联合分布可以形成联合熵，定义为联合自信息的数学期望，是二维随机变量XY的不确定性的度量，用H(X,Y)表示：<br>$$<br>H(X, Y) = - \sum_{i=1}^n\sum_{j=1}^nP(x_i, y_j)logP(x_i,y_j)<br>$$</p>
 <h3 id="4-条件熵"><a href="#4-条件熵" class="headerlink" title="4. 条件熵"></a>4. 条件熵</h3><p>在随机变量X发生的前提下，随机变量Y发生新带来的熵，定义为Y的条件熵，用H(Y|X)表示：<br>$$<br>H(Y|X) = -\sum_{x,y}P(x,y)log(y|x)<br>$$<br>条件熵用来衡量在已知随机变量X的条件下，随机变量Y的不确定性。</p>
 <p>实际上，熵、联合熵和条件熵之间存在以下关系：<br>$$<br>H(Y|X) = H(X,Y) - H(X)<br>$$</p>
@@ -108,7 +111,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://zozoz.github.io/2017/03/23/熵/" data-id="cj0nv763k00053pjgdjno500u" class="article-share-link">Share</a>
+      <a data-url="http://zozoz.github.io/2017/03/23/熵/" data-id="cj2jws94200052fjg22gvx9dx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ML/">ML</a></li></ul>
